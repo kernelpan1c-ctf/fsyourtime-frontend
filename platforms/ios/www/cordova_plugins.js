@@ -35,6 +35,13 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-datepicker/www/ios/DatePicker.js",
+        "id": "cordova-plugin-datepicker.DatePicker",
+        "clobbers": [
+            "datePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -43,7 +50,9 @@ module.exports.metadata =
     "cordova-plugin-console": "1.0.1",
     "cordova-plugin-device": "1.0.1",
     "cordova-plugin-splashscreen": "2.1.0",
-    "ionic-plugin-keyboard": "1.0.7"
+    "ionic-plugin-keyboard": "1.0.7",
+    "cordova-plugin-whitelist": "1.0.0",
+    "cordova-plugin-datepicker": "0.9.0"
 }
 // BOTTOM OF METADATA
 });
