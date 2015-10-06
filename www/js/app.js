@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controller_beispiele.js
 angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $window) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,26 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    $rootScope.show = function (text) {
+      $rootScope.loading = $ionicLoading.show({
+        template: text ? text : 'Loading..',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+    };
+
+    $rootScope.hide = function () {
+      $ionicLoading.hide();
+    };
+
+    $rootScope.notify = function (text) {
+      $rootScope.show(text);
+      $window.setTimeout(function () {
+        $rootScope.hide();
+      }, 1999);
+    };
   });
 })
 
@@ -73,5 +93,5 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/timemanagement');
+  $urlRouterProvider.otherwise('/login');
 });
