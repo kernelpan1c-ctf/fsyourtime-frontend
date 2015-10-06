@@ -1,0 +1,47 @@
+<ion-view title="Time Management">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Class
+          </div>
+          <select>
+            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Effort type
+          </div>
+          <select>
+            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+          </select>
+        </label>
+      </div>
+
+      <ion-item class="item-icon-right">
+        Date
+        <label type="text" ng-click="showDatePicker()" class="icon ion-ios-calendar-outline"></label>
+      </ion-item>
+
+
+      <ion-item class="item-icon-right">
+        Start
+        <label type="text" ng-click="showStartTime()" class="icon ion-ios-clock-outline"></label>
+      </ion-item>
+
+      <ion-item class="item-icon-right">
+        End
+        <label type="text" ng-click="showEndTime()" class="icon ion-ios-clock-outline"></label>
+      </ion-item>
+    </ion-list>
+
+    <button class="button button-block button-positive" ng-click="save()">save</button>
+  </ion-content>
+</ion-view>
+
