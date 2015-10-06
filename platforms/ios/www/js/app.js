@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controller_beispiele.js
-angular.module('app', ['ionic', 'ngRoute', 'ngResource'])
+angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -61,8 +61,17 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource'])
         }
       }
     })
+    .state('app.timemanagement', {
+      url: '/timemanagement',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/timerManagement/timerMView.html',
+          controller: 'timerMController'
+        }
+      }
+    })
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/app/timemanagement');
 });
