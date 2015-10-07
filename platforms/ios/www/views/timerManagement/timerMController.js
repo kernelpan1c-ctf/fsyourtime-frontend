@@ -23,6 +23,7 @@ angular.module('app')
 
       $ionicPlatform.ready(function() {
         $cordovaDatePicker.show(options).then(function(date){
+          $scope.date = date;
           alert(date);
         });
       });
@@ -33,13 +34,14 @@ angular.module('app')
         date: new Date(),
         mode: 'time',
         doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
+        doneButtonColor: '#000000',
         cancelButtonLabel: 'CANCEL',
         cancelButtonColor: '#000000'
       };
       $ionicPlatform.ready(function() {
         $cordovaDatePicker.show(timeOptions).then(function(date){
-          alert(date);
+          $scope.startTime = date;
+          //alert(date);
         });
       });
     };
@@ -49,13 +51,14 @@ angular.module('app')
         date: new Date(),
         mode: 'time',
         doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
+        doneButtonColor: '#000000',
         cancelButtonLabel: 'CANCEL',
         cancelButtonColor: '#000000'
       };
       $ionicPlatform.ready(function() {
         $cordovaDatePicker.show(timeOptions).then(function(date){
-          alert(date);
+          $scope.endTime = date;
+          //alert(date);
         });
       });
     };
