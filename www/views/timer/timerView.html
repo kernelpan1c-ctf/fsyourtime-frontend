@@ -1,43 +1,34 @@
-<html>
-<form>
-    <div>
-        <div>
-            <label for="courseSelect">Pick your course</label><br>
-            <select name="courseSelect" id="courseSelect" ng-model="data.courseSelect">
-                <option value="">---Select course---</option>
-                <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
-            </select>
-        </div>
-        <br>
+<ion-view title="Time Management">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
 
-        <div>
-            <label for="courseSelect">Pick your effort</label><br>
-            <select name="effortSelect" id="effortSelect" ng-model="data.effortSelect">
-                <option value="">---Select effort---</option>
-                <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
-            </select>
-        </div>
-    </div>
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Class:
+          </div>
+          <select>
+            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+          </select>
+        </label>
+      </div>
 
-    <div>
-        <br>
-        <button class="startButton" ng-click="startTimer()" ng-hide="timerRunning">Start</button>
-        <button class="stopButton" ng-click="stopTimer()" ng-hide="!timerRunning">Stop</button>
-        <br>
-        <label>Current Time:</label>
-        <br>
+      <div class="effort">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Effort type:
+          </div>
+          <select>
+            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+          </select>
+        </label>
+      </div>
+    </ion-list>
 
-        <div style="border:#ffffff; solid: 2px #ff0000;">
-            <h3>
-                <timer autostart="false" interval="1000">{{seconds}}</timer>
-            </h3>
-        </div>
-        <br>
-        <button type="submit"
-                style="background-color: midnightblue;color: white;border-color: midnightblue;border-radius: 4px">Submit
-        </button>
-    </div>
-    <br/>
-</form>
-</html>
+    <button class="button button-block button-positive" ng-click="save()">save</button>
+  </ion-content>
+</ion-view>
+
+
+
 
