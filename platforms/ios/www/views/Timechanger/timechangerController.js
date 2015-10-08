@@ -75,7 +75,7 @@ angular.module('app')
       var StartTime = $window.sessionStorage.StartTime;
       var EndTime = $window.sessionStorage.EndTime;
       var Date = $window.sessionStorage.Date;
-
+    alert(StartTime)
 
     };
 

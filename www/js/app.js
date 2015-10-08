@@ -91,11 +91,11 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       }
     })
     .state('app.timeChanger', {
-      url: '/timeChanger',
+      url: '/TimeChanger',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeChanger/timeChangerView.html',
-          controller: 'timeChangerController'
+          templateUrl: 'views/timeChanger/timechangerview.html',
+          controller: 'timechangerController'
         }
       }
     })
