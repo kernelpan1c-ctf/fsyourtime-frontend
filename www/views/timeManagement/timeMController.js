@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform, $window)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -65,19 +65,21 @@ angular.module('app')
       });
     };
 
-    $scope.save = function(){
+    $scope.save = function(startTime,endTime, date){
       //Date can only be selected as required -2weeks until today
       //already ensured through UI restrictions -> datepicker
-      alert("test");
-      var StartTime = element(by.model('StartTime')).value;
-      var EndTime = element(by.model('EndTime')).value;
-      var Class = element(by.model('Class')).value;
-      var Date = element(by.model('Date')).value;
-      localStorage.setItem('StartTime', $scope.StartTime);
-      localStorage.setItem('EndTime', $scope.EndTime);
-      localStorage.setItem('Class', $scope.Class);
-      localStorage.setItem('Date', $scope.Date);
-      alert("succeeded!");
+      // alert("test");
+      alert(startTime);
+      var effort ={};
+      effort.StartTime=startTime;
+      effort.EndTime=endTime;
+      //effort.Date=date;
+      $window.sessionStorage.StartTime = startTime;
+      $window.sessionStorage.EndTime = endTime;
+      //$window.sessionStorage.Class = Class;
+      $window.sessionStorage.Date = date;
+      //$window.sessionStorage.effort=effort;
+      alert(effort.StartTime);
     };
 
       // check startTime - endTime max 10h
