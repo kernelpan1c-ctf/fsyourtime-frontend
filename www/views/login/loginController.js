@@ -5,13 +5,25 @@ angular.module('app')
           $scope.signIn = function signIn(username, password) {
 
               $rootScope.show("Authenticating..");
+
+            // Test user to bypass real API Login
+            if (username == "user" && password == null){
+              $rootScope.hide();
+              $location.path('/privacy');
+            }
+            else{
+
               UserService.signIn(username, password).success(function (data) {
 
-                $window.sessionStorage.token = data.token;
-                $window.sessionStorage.userid = data.userid;
+                $window.sessionStorage.token = data.sessionid;
+                $window.sessionStorage.fullname = data.fullname;
 
                 $rootScope.hide();
+
+                //Check users privacy flag if not yet set
                 $location.path('/privacy');
+                //If privacy flag is set
+                //$location.path('/app/timer');
 
               }).error(function (status, data) {
                 $rootScope.hide();
@@ -21,5 +33,8 @@ angular.module('app')
                 console.log(data);
 
               });
+
+            }
+
           };
     });

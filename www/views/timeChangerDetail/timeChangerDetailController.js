@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timerMController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerDetailController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -64,23 +64,31 @@ angular.module('app')
     var coursearray = [
       {
         id: "1",
-        name: "Finance 1"
-      },
-      {
-        id: "2",
-        name: "Wirtschaftsprivatrecht"
+        name: localStorage.getItem('Class')
       }
-    ];
-    var effortarray = [
-      {
-        id: "1",
-        name: "Lesen"
-      },
-      {
-        id: "2",
-        name: "Übungen"
-      }
+
     ];
     $scope.courses = coursearray;
-    $scope.efforts = effortarray;
+
+    $scope.load = function() {
+      var StartTime = localStorage.getItem('StartTime');
+      var EndTime = localStorage.getItem('EndTime');
+      var Date = localStorage.getItem('Date');
+      element(by.model('StartTime')).value=StartTime;
+      element(by.model('EndTime')).value=EndTime;
+      element(by.model('Date')).value=Date;
+
+    };
+
+    $scope.save = function() {
+      var StartTime = element(by.model('StartTime')).value;
+      var EndTime = element(by.model('EndTime')).value;
+      var Class = element(by.model('Class')).value;
+      var Date = element(by.model('Date')).value;
+      localStorage.setItem('StartTime', $scope.StartTime);
+      localStorage.setItem('EndTime', $scope.EndTime);
+      localStorage.setItem('Class', $scope.Class);
+      localStorage.setItem('Date', $scope.Date);
+    };
+
   });

@@ -1,9 +1,11 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable">
+
+      <!--
       <ion-nav-back-button class="button-icon ion-ios-arrow-left">
       </ion-nav-back-button>
-
+-->
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -19,19 +21,19 @@
     <ion-content>
       <ion-list>
         <ion-item menu-close href="#/app/timer">
-          Home
-        </ion-item>
-        <ion-item menu-close href="#/app/timer">
           Live Tracking
         </ion-item>
-        <ion-item menu-close href="#/app/timer">
+        <ion-item menu-close href="#/app/timemanagement">
           New Effort
         </ion-item>
-        <ion-item menu-close href="#/app/timer">
-          Change booked Effort
+        <ion-item menu-close>
+          Change Efforts
         </ion-item>
         <ion-item menu-close href="#/app/settings">
           Settings
+        </ion-item>
+        <ion-item menu-close>
+          Logout
         </ion-item>
       </ion-list>
     </ion-content>

@@ -81,15 +81,34 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
-    .state('app.timemanagement', {
-      url: '/timemanagement',
+    .state('app.timeManagement', {
+      url: '/timeManagement',
       views: {
         'menuContent': {
-          templateUrl: 'views/timerManagement/timerMView.html',
-          controller: 'timerMController'
+          templateUrl: 'views/timeManagement/timeMView.html',
+          controller: 'timeMController'
         }
       }
     })
+    .state('app.timeChanger', {
+      url: '/timeChanger',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/timeChanger/timeChangerView.html',
+          controller: 'timeChangerController'
+        }
+      }
+    })
+    .state('app.timeChangerDetail', {
+      url: '/timeChangerDetail/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/timeChangerDetail/timeChangerDetailView.html',
+          controller: 'timeChangerDetailController'
+        }
+      }
+    })
+
 
   ;
   // if none of the above states are matched, use this as the fallback
