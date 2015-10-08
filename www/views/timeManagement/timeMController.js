@@ -65,20 +65,21 @@ angular.module('app')
       });
     };
 
-    $scope.save = function(){
+    $scope.save = function(startTime,endTime, date){
       //Date can only be selected as required -2weeks until today
       //already ensured through UI restrictions -> datepicker
-      alert("test");
-      var StartTime = $scope.StartTime;
-      alert(StartTime)
-      var EndTime = $scope.EndTime;
-      var Class = $scope.Class;
-      var Date = $scope.Date;
-      $window.sessionStorage.StartTime = StartTime;
-      $window.sessionStorage.EndTime = EndTime;
-      $window.sessionStorage.Class = Class;
-      l$window.sessionStorage.Date = Date;
-      alert("succeeded!");
+      // alert("test");
+      alert(startTime);
+      var effort ={};
+      effort.StartTime=startTime;
+      effort.EndTime=endTime;
+      //effort.Date=date;
+      $window.sessionStorage.StartTime = startTime;
+      $window.sessionStorage.EndTime = endTime;
+      //$window.sessionStorage.Class = Class;
+      $window.sessionStorage.Date = date;
+      //$window.sessionStorage.effort=effort;
+      alert(effort.StartTime);
     };
 
       // check startTime - endTime max 10h

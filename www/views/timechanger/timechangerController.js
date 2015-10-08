@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timechangerController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timechangerController', function ($scope, $cordovaDatePicker, $ionicPlatform, $window)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -71,24 +71,12 @@ angular.module('app')
     $scope.courses = coursearray;
 
     $scope.load = function() {
-      var StartTime = localStorage.getItem('StartTime');
-      var EndTime = localStorage.getItem('EndTime');
-      var Date = localStorage.getItem('Date');
-      element(by.model('StartTime')).value=StartTime;
-      element(by.model('EndTime')).value=EndTime;
-      element(by.model('Date')).value=Date;
 
-    };
+      var StartTime = $window.sessionStorage.StartTime;
+      var EndTime = $window.sessionStorage.EndTime;
+      var Date = $window.sessionStorage.Date;
 
-    $scope.save = function() {
-      var StartTime = element(by.model('StartTime')).value;
-      var EndTime = element(by.model('EndTime')).value;
-      var Class = element(by.model('Class')).value;
-      var Date = element(by.model('Date')).value;
-      localStorage.setItem('StartTime', $scope.StartTime);
-      localStorage.setItem('EndTime', $scope.EndTime);
-      localStorage.setItem('Class', $scope.Class);
-      localStorage.setItem('Date', $scope.Date);
+
     };
 
   });
