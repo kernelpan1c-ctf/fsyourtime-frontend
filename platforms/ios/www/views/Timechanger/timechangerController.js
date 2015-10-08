@@ -3,11 +3,7 @@
  */
 angular.module('app')
 
-<<<<<<< HEAD
-  .controller('timechangerController', function ($scope, $cordovaDatePicker, $ionicPlatform, $window)   {
-=======
   .controller('timeChangerController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
->>>>>>> alpha
 
     $scope.noEfforts = true;
 
