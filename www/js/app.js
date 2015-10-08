@@ -90,7 +90,15 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
-
+    .state('app.TimeChanger', {
+      url: '/TimeChanger',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/TimeChanger/timechangerview.html',
+          controller: 'timechangerController'
+        }
+      }
+    })
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
