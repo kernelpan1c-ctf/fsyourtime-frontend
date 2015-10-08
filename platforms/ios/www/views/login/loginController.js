@@ -15,8 +15,8 @@ angular.module('app')
 
               UserService.signIn(username, password).success(function (data) {
 
-                $window.sessionStorage.token = data.jsessionid;
-                //$window.sessionStorage.userid = data.userid;
+                $window.sessionStorage.token = data.sessionid;
+                $window.sessionStorage.fullname = data.fullname;
 
                 $rootScope.hide();
 

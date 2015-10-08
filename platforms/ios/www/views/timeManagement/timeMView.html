@@ -8,7 +8,7 @@
             Class:
           </div>
           <select>
-            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+            <option ng-model="Class" ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
           </select>
         </label>
       </div>
@@ -19,7 +19,7 @@
             Effort type:
           </div>
           <select>
-            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+            <option ng-model="Effort" ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
           </select>
         </label>
       </div>
@@ -32,12 +32,12 @@
 
       <ion-item class="item-icon-right">
         Start: {{startTime | date: 'HH:mm'}}
-        <label type="text" ng-click="showStartTime()" class="icon ion-ios-clock-outline"></label>
+        <label ng-model="StartTime" type="text" ng-click="showStartTime()" class="icon ion-ios-clock-outline"></label>
       </ion-item>
 
       <ion-item class="item-icon-right">
         End: {{endTime | date:'HH:mm'}}
-        <label type="text" ng-click="showEndTime()" class="icon ion-ios-clock-outline"></label>
+        <label ng-model="EndTime" type="text" ng-click="showEndTime()" class="icon ion-ios-clock-outline"></label>
       </ion-item>
     </ion-list>
 
