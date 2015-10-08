@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timerMController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -68,15 +68,23 @@ angular.module('app')
     $scope.save = function(){
       //Date can only be selected as required -2weeks until today
       //already ensured through UI restrictions -> datepicker
-      $scope.date;
+      alert("test");
+      var StartTime = element(by.model('StartTime')).value;
+      var EndTime = element(by.model('EndTime')).value;
+      var Class = element(by.model('Class')).value;
+      var Date = element(by.model('Date')).value;
+      localStorage.setItem('StartTime', $scope.StartTime);
+      localStorage.setItem('EndTime', $scope.EndTime);
+      localStorage.setItem('Class', $scope.Class);
+      localStorage.setItem('Date', $scope.Date);
+      alert("succeeded!");
+    };
 
       // check startTime - endTime max 10h
       //$scope.startTime
       //$scope.endTime
 
       //Call API Service
-
-    };
 
     // Dropdown Hardcoded Data
     var coursearray = [
