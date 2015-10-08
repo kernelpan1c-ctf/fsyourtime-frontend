@@ -1,36 +1,35 @@
-<ion-view title="TimeChanger">
+<ion-view title="Change Efforts">
   <ion-content padding="true" class="has-header">
+
     <ion-list>
 
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-            Choose Booked Effort
+            Module:
           </div>
           <select>
-            <option ng-select="load()" ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+            <option ng-model="module" ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
           </select>
         </label>
       </div>
+      </ion-list>
 
-      <ion-item class="item-icon-right">
-        Date
-        <label ng-model="Date" type="text" ng-click="showDatePicker()" class="icon ion-ios-calendar-outline"></label>
-      </ion-item>
+        <div class="card" ng-hide="noEfforts" ng-repeat="effort in efforts">
+          <div class="item item-text-wrap" ui-sref="app.timeChangerDetail({id:effort._id})">
+                <span>
+                {{ effort.name }}
+                </span>
+          </div>
+        </div>
 
-
-      <ion-item class="item-icon-right">
-        Start
-        <label type="text" ng-click="showStartTime()" class="icon ion-ios-clock-outline" ng-model="StartTime"></label>
-      </ion-item>
-
-      <ion-item class="item-icon-right">
-        End
-        <label type="text" ng-click="showEndTime()" class="icon ion-ios-clock-outline" ng-model="EndTime"></label>
-      </ion-item>
-    </ion-list>
-
-    <button class="button button-block button-positive" ng-click="save()">save</button>
-  </ion-content>
+        <div class="card">
+          <div class="item item-text-wrap" ng-show="noEfforts">
+                <span>
+                You have no efforts yet. Click  <a href="javascript:" ui-sref="app.timeManagement">Here</a> and create one
+                </span>
+          </div>
+        </div>
+      </ion-content>
 </ion-view>
 
