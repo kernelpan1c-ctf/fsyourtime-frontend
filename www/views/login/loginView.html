@@ -9,7 +9,8 @@
       </label>
     </div>
       <input type="checkbox" ng-model="user.credentials" class=""> Save credentials?<br><br>
-    <button class="button button-block button-positive" ng-click="signIn(user.username, user.password)">Login</button>
+      <input type="checkbox" ng-model="user.syncdata" class=""> Sync with Efiport?<br><br>
+    <button class="button button-block button-positive" ng-click="signIn(user.username, user.password, user.syncdata)">Login</button>
        <a href="https://campus.frankfurt-school.de/clicnetclm/sendUserData.do#position" class="button button-positive button-clear button-block ">Forgot matricularnumber or password? Click here</a>
   </ion-content>
 </ion-view>

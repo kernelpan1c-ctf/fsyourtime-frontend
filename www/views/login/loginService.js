@@ -2,10 +2,11 @@ angular.module('app')
 
   .factory('UserService', function ($http) {
     return {
-      signIn: function (username, password) {
-        return $http.post('http://backend-dev.kevinott.de/api/login', {
+      signIn: function (username, password, syncdata) {
+        return $http.post('http://10.9.11.133:3000/api/login', {
           username: username,
-          password: password
+          password: password,
+          syncdata: syncdata
         });
       },
 
