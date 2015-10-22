@@ -1,22 +1,10 @@
 <ion-view title="Timer">
   <ion-content padding="true" class="has-header">
 
-
-
-    <stopwatch title="Stopwatch #1" time="sharedTime"></stopwatch>
-    <div stopwatch title="Stopwatch #2" time="sharedTime"></div>
-
-    <label>{{sharedTime}}</label>
-
-    <h2>{{title}}</h2>
-
-
-    <div><strong>Current Time: </strong>{{currentTime | date:'h:mm:ss a'}}</div>
-    <div><strong>Elapsed Time: </strong>{{swctrl.getElapsedMs()}} ms</div>
-
-    <button class="button button-block button-positive" ng-click="swctrl.reset()">reset</button>
-    <button class="button button-block button-positive" ng-click="swctrl.start()">start</button>
-    <button class="button button-block button-positive" ng-click="swctrl.stop()">stop</button>
+    <h1>{{myStopwatch.data.hours | numberFixedLen:2}}:{{myStopwatch.data.minutes | numberFixedLen:2}}:{{myStopwatch.data.seconds | numberFixedLen:2}}</h1>
+    <button ng-click='myStopwatch.start()'>Start</button>
+    <button ng-click='myStopwatch.stop()'>Stop</button>
+    <button ng-click='myStopwatch.reset()'>Reset</button>
 
   </ion-content>
 </ion-view>

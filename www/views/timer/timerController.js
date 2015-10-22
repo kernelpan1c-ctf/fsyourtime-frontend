@@ -1,43 +1,23 @@
 angular.module('app')
 
-    .controller('timerController', function ($scope)   {
-        $scope.timerRunning = false;
+  .filter('numberFixedLen', function () {
+    return function (n, len) {
+      var num = parseInt(n, 10);
+      len = parseInt(len, 10);
+      if (isNaN(num) || isNaN(len)) {
+        return n;
+      }
+      num = ''+num;
+      while (num.length < len) {
+        num = '0'+num;
+      }
+      return num;
+    };
+  })
 
-        $scope.startTimer = function () {
-            $scope.$broadcast('timer-start');
-            $scope.timerRunning = true;
-        };
+  .constant('SW_DELAY', 1000)
 
-        $scope.stopTimer = function () {
-            $scope.$broadcast('timer-stop');
-            $scope.timerRunning = false;
-        };
 
-        $scope.$on('timer-stopped', function (event, data) {
-            console.log('Timer Stopped - data = ', data);
-        });
-
-        // Dropdown
-        var coursearray = [
-            {
-                id: "1",
-                name: "Finance 1"
-            },
-            {
-                id: "2",
-                name: "Wirtschaftsprivatrecht"
-            }
-        ];
-        var effortarray = [
-            {
-                id: "1",
-                name: "Lesen"
-            },
-            {
-                id: "2",
-                name: "Übungen"
-            }
-        ];
-        $scope.courses = coursearray;
-        $scope.efforts = effortarray;
-    });
+  .controller('MainCtrl', function($scope, $state, stepwatch) {
+    $scope.myStopwatch = stepwatch;
+  });
