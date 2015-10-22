@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform, Modules)   {
+  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform, Modules, Efforts)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -89,5 +89,7 @@ angular.module('app')
     // Dropdown Hardcoded Data
 
     $scope.courses = Modules.query();
+
+    $scope.efforts = Efforts.query();
 
   });
