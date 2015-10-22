@@ -7,8 +7,8 @@ angular.module('app')
               $rootScope.show("Authenticating..");
               UserService.signIn(username, password).success(function (data) {
 
-                $window.sessionStorage.token = data.token;
-                $window.sessionStorage.userid = data.userid;
+                $window.sessionStorage.token = data.id;
+
 
                 $rootScope.hide();
                 $location.path('/privacy');
