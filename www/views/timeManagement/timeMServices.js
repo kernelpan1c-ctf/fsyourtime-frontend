@@ -5,11 +5,11 @@
 angular.module('app')
 
   .factory('Efforts', function($resource){
-    return $resource('http://10.9.11.133:3000/api/Efforts');
+    return $resource('http://10.9.11.133:3000/api/efforts');
   })
 
   .factory('Modules', function($resource){
-    return $resource('http:/10.9.11.133:3000//api/Modules');
-  })
+    return $resource('http:/10.9.11.133:3000/api/modules');
+  });
 
 
