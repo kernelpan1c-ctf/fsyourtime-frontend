@@ -1,13 +1,21 @@
 angular.module('app')
 
-    .controller('privacyController', function($scope, $location){
+    .controller('privacyController', function($scope, UserService, $location){
     $scope.eror_message = '';
 
     $scope.privacy = function(){
-        $location.path('/app/settings');
+      $rootScope.hide();
+      $rootScope.show("Authenticating..");
+      UserService.accept();
+      $location.path('/app/settings');
+    };
+
+    $scope.decline = function() {
+      $rootScope.hide();
+      UserService.decline();
     };
     //TODO: Weiterleitung auf eine Fehler/Infoseite
-    $scope.decline = function(){
+    //$scope.decline = function(){
         //$location.path('/');
     };
 });
