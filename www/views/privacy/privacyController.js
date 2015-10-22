@@ -11,11 +11,11 @@ angular.module('app')
     };
 
     $scope.decline = function() {
-      $rootScope.hide();
-      UserService.decline();
+      //$rootScope.hide();
+      $location.path('/login');
     };
     //TODO: Weiterleitung auf eine Fehler/Infoseite
     //$scope.decline = function(){
         //$location.path('/');
-    };
+
 });
