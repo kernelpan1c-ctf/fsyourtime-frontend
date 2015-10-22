@@ -25,6 +25,16 @@
       </div>
     </ion-list>
 
+  <div class="timer" ng-controller="MainCtrl" >
+    <script type="text/ng-template" id="timerView.html">
+      <div><strong>Current Time: </strong>{{currentTime | date:'h:mm:ss a'}}</div>
+      <div><strong>Elapsed Time: </strong>{{swctrl.getElapsedMs()}} ms</div>
+      <button id="start" class="btn btn-success" ng-click="swctrl.start()">Start</button>
+      <button id="stop" class="btn btn-danger" ng-click="swctrl.stop()">Stop</button>
+      <button id="reset" class="btn btn-default" ng-click="swctrl.reset()">Reset</button>
+    </script>
+  </div>
+
     <button class="button button-block button-positive" ng-click="save()">save</button>
   </ion-content>
 </ion-view>
