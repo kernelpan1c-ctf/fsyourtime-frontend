@@ -6,7 +6,7 @@ angular.module('app')
         return $http.set('', {  //set accepted privacy in DB
 
         });
-      },
+      }
 
     };
   });

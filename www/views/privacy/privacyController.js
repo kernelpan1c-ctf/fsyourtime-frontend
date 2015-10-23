@@ -6,12 +6,15 @@ angular.module('app')
     $scope.privacy = function(){
       $rootScope.hide();
       $rootScope.show("Authenticating..");
-      UserService.accept();
-      $location.path('/app/settings');
+      UserService.accept().success(function(data) {
+        $location.path('/app/settings');
+      }).error(function(data){
+        $rootScope.notify('Server unavailable');  //set privacy statement true failed
+        $location.path('/login');
+      });
     };
 
     $scope.decline = function() {
-      //$rootScope.hide();
       $location.path('/login');
     };
     //TODO: Weiterleitung auf eine Fehler/Infoseite
