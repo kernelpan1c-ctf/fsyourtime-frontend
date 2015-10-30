@@ -1,6 +1,6 @@
 angular.module('app')
 
-.factory('stepwatch', function (SW_DELAY, $timeout) {
+.factory('stepwatch', function (SW_DELAY, $timeout, Efforts) {
   var data = {
       seconds: 0,
       minutes: 0,
@@ -19,19 +19,26 @@ angular.module('app')
           data.hours++;
         }
       }
-      start();
+      start()
+      $scope.timerRunning = true;
     }, SW_DELAY);
   };
 
   var stop = function () {
     $timeout.cancel(stopwatch);
     stopwatch = null;
+    $scope.timerRunning = false;
   };
 
   var reset = function () {
     stop()
     data.seconds = 0;
   };
+    var submit = function () {
+      submit()
+      data.seconds = 0
+      Efforts.save(data);
+    };
   return {
     data: data,
     start: start,
@@ -39,4 +46,13 @@ angular.module('app')
     reset: reset
   };
 
-});
+})
+
+.factory('Efforts' , function($resource){
+    return $resource('http://10.9.11.133:3000/api/efforts');
+  })
+
+  .factory('Modules' , function($resource){
+    return $resource('http://10.9.11.133:3000/api/modules');
+  });
+

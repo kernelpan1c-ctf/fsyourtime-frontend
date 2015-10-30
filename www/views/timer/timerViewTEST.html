@@ -1,10 +1,37 @@
 <ion-view title="Timer">
   <ion-content padding="true" class="has-header">
 
+    <ion-list>
+
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Class:
+          </div>
+          <select>
+            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="effort">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Effort type:
+          </div>
+          <select>
+            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+          </select>
+        </label>
+      </div>
+    </ion-list>
+
+
     <h1>{{myStopwatch.data.hours | numberFixedLen:2}}:{{myStopwatch.data.minutes | numberFixedLen:2}}:{{myStopwatch.data.seconds | numberFixedLen:2}}</h1>
     <button ng-click='myStopwatch.start()'>Start</button>
     <button ng-click='myStopwatch.stop()'>Stop</button>
     <button ng-click='myStopwatch.reset()'>Reset</button>
+    <button ng-click='myStopwatch.submit()'>Submit</button>
 
   </ion-content>
 </ion-view>

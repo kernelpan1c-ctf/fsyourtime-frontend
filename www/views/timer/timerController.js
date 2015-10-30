@@ -18,6 +18,12 @@ angular.module('app')
   .constant('SW_DELAY', 1000)
 
 
-  .controller('MainCtrl', function($scope, $state, stepwatch) {
+  .controller('MainCtrl', function($scope, $state, stepwatch, Modules, Efforts) {
     $scope.myStopwatch = stepwatch;
-  });
+
+
+// Dropdown Hardcoded Data
+$scope.courses = Modules.query();
+$scope.efforts = Efforts.query();
+
+});
