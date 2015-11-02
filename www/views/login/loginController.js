@@ -14,18 +14,15 @@ angular.module('app')
               UserService.signIn(username, password, syncdata).success(function (data) {
 
                 $window.sessionStorage.token = data.id;
+                $window.sessionStorage.privacy = data.privacy;
                 //alert(id);
                 //$window.sessionStorage.token = data.privacyCheck;         //submits if user accepted privacy (true/false)
-
-
                 $rootScope.hide();
-
-                if(data.privacyCheck = false) {  //Check if privacy was accepted == true
-                  $location.path('/privacy');
-                }else{
-
-                  $location.path('/app/timer');
-                }
+                  if(data.privacy = false) {  //Check if privacy was accepted == true
+                    $location.path('/privacy');
+                  }else{
+                    $location.path('/app/timer');
+                  }
 
               }).error(function (status, data) {
                // $rootScope.hide();
