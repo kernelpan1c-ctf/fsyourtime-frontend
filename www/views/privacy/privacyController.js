@@ -1,14 +1,13 @@
 angular.module('app')
 
-    .controller('privacyController', function($scope, $location, $state){
+    .controller('privacyController', function($scope, $location){
     $scope.eror_message = '';
 
     $scope.privacy = function(){
-       // $location.path('/app/timer');
-      $state.go('app.timer');
+        $location.path('/app/settings');
     };
     //TODO: Weiterleitung auf eine Fehler/Infoseite
     $scope.decline = function(){
-        $location.path('/login');
+        //$location.path('/');
     };
 });

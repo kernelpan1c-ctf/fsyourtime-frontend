@@ -2,39 +2,38 @@ angular.module('app')
 
     .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
 
-          $scope.signIn = function signIn(username, password) {
 
-              $rootScope.show("Authenticating..");
+          $scope.signIn = function (username, password, syncdata) {
 
-            // Test user to bypass real API Login
-            if (username == "user" && password == null){
-              $rootScope.hide();
-              $location.path('/privacy');
-            }
-            else{
+            $rootScope.show("Authenticating..");
 
-              UserService.signIn(username, password).success(function (data) {
 
-                $window.sessionStorage.token = data.sessionid;
-                $window.sessionStorage.fullname = data.fullname;
+            if (!syncdata)syncdata = false;
+            //alert(syncdata);
+
+              UserService.signIn(username, password, syncdata).success(function (data) {
+
+                $window.sessionStorage.token = data.id;
+                //alert(id);
+                //$window.sessionStorage.token = data.privacyCheck;         //submits if user accepted privacy (true/false)
+
 
                 $rootScope.hide();
 
-                //Check users privacy flag if not yet set
-                $location.path('/privacy');
-                //If privacy flag is set
-                //$location.path('/app/timer');
+                if(data.privacyCheck = false) {  //Check if privacy was accepted == true
+                  $location.path('/privacy');
+                }else{
+
+                  $location.path('/app/timer');
+                }
 
               }).error(function (status, data) {
-                $rootScope.hide();
+               // $rootScope.hide();
                 $rootScope.notify('Invalid Credentials');
 
                 console.log(status);
                 console.log(data);
 
               });
-
-            }
-
           };
     });
