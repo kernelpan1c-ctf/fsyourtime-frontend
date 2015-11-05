@@ -22,12 +22,21 @@ angular.module('app')
     $scope.myStopwatch = stepwatch;
 
 
+    $scope.submit = function () {
+      data.seconds = 0;
+
+      $scope.sessionId = $window.sessionStorage.token;
+      $scope.username = $window.sessionStorage.username;
+      $scope.moduleid = $scope.select.course;
+      $rootScope.notify($scope.moduleid);
+      Efforts.save(sessionId, username, amount, moduleid, studentid, efftypeid, performancedate);
+    };
 
     // Real API related Data
     $scope.sessionId = $window.sessionStorage.token;
     $scope.username = $window.sessionStorage.username;
 
-
+    //Get Modules
     $scope.modules = Modules.query(sessionId,username);
 
 

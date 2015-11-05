@@ -34,14 +34,7 @@ angular.module('app')
     stop()
     data.seconds = 0;
   };
-  var submit = function () {
-    data.seconds = 0;
 
-    $scope.sessionId = $window.sessionStorage.token;
-    $scope.username = $window.sessionStorage.username;
-    $scope.moduleid = $scope.courseSelect;
-    Efforts.save(sessionId, username, moduleid, studentid);
-    };
   return {
     data: data,
     start: start,
@@ -55,12 +48,18 @@ angular.module('app')
 
     return {
 
-      save: function (sessionId, username, moduleid, studentid) {
+      save: function (sessionId, username, amount, moduleid, studentid, efftypeid, performancedate) {
         return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
           query: {
             method: 'POST',
             headers: {'x-session': sessionId, 'x-key': username},
-            params: {moduleid: moduleid, studentid: studentid},
+            params: {
+              amount: amount,
+              moduleid: moduleid,
+              studentid: studentid,
+              efftypeid: efftypeid,
+              performancedate: performancedate,
+            },
             isArray: false
           }
         }).save();
