@@ -30,6 +30,7 @@ angular.module('app')
     $scope.timerRunning = false;
   };
 
+
   var reset = function () {
     stop()
     data.seconds = 0;
