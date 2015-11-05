@@ -9,7 +9,7 @@
             Class:
           </div>
           <select>
-            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+            <option ng-model="courseSelect" ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
           </select>
         </label>
       </div>
@@ -20,7 +20,7 @@
             Effort type:
           </div>
           <select>
-            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+            <option ng-model="effortSelect" ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
           </select>
         </label>
       </div>
@@ -32,6 +32,7 @@
     <button ng-click='myStopwatch.stop()'>Stop</button>
     <button ng-click='myStopwatch.reset()'>Reset</button>
     <button ng-click='myStopwatch.submit()'>Submit</button>
+
 
   </ion-content>
 </ion-view>

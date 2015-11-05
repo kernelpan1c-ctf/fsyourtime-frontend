@@ -35,7 +35,7 @@ angular.module('app')
         var elapsedMs = 0;
         //var time;
         var startTime;
-        /
+
         var timerPromise;
 
         self.start = function () {

@@ -6,6 +6,7 @@ angular.module('app')
           $scope.signIn = function (username, password, syncdata) {
 
             $rootScope.show("Authenticating..");
+            $window.sessionStorage.userID = username;
 
 
             if (!syncdata)syncdata = false;

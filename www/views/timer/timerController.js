@@ -18,12 +18,20 @@ angular.module('app')
   .constant('SW_DELAY', 1000)
 
 
-  .controller('MainCtrl', function($scope, $state, stepwatch, Modules, Efforts) {
+  .controller('MainCtrl', function($scope, $state, stepwatch, Modules, Efforts, $window) {
     $scope.myStopwatch = stepwatch;
 
 
-// Dropdown Hardcoded Data
-$scope.courses = Modules.query();
-$scope.efforts = Efforts.query();
+
+    // Real API related Data
+    $scope.sessionId = $window.sessionStorage.token;
+    $scope.username = $window.sessionStorage.username;
+
+
+    $scope.modules = Modules.query(sessionId,username);
+
 
 });
+
+
+

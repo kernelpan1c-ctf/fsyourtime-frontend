@@ -34,10 +34,13 @@ angular.module('app')
     stop()
     data.seconds = 0;
   };
-    var submit = function () {
-      submit()
-      data.seconds = 0
-      Efforts.save(data);
+  var submit = function () {
+    data.seconds = 0;
+
+    $scope.sessionId = $window.sessionStorage.token;
+    $scope.username = $window.sessionStorage.username;
+    $scope.moduleid = $scope.courseSelect;
+    Efforts.save(sessionId, username, moduleid, studentid);
     };
   return {
     data: data,
@@ -48,11 +51,40 @@ angular.module('app')
 
 })
 
-.factory('Efforts' , function($resource){
-    return $resource('http://10.9.11.133:3000/api/efforts');
+.factory('Efforts' , function($resource) {
+
+    return {
+
+      save: function (sessionId, username, moduleid, studentid) {
+        return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
+          query: {
+            method: 'POST',
+            headers: {'x-session': sessionId, 'x-key': username},
+            params: {moduleid: moduleid, studentid: studentid},
+            isArray: false
+          }
+        }).save();
+
+      }
+    }
   })
 
-  .factory('Modules' , function($resource){
-    return $resource('http://10.9.11.133:3000/api/modules');
-  });
+
+.factory('Modules' , function($resource) {
+
+      return {
+
+        query: function (sessionId, username) {
+          return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
+            query: {
+              method: 'GET',
+              headers: {'x-session': sessionId, 'x-key': username},
+              isArray: false
+            }
+          }).query();
+
+        }
+      };
+    })
+
 
