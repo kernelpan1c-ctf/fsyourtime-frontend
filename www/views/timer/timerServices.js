@@ -50,7 +50,7 @@ angular.module('app')
     return {
 
       save: function (sessionId, username, amount, moduleid, studentid, efftypeid, performancedate) {
-        return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
+        return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
           query: {
             method: 'POST',
             headers: {'x-session': sessionId, 'x-key': username},
@@ -61,6 +61,20 @@ angular.module('app')
               efftypeid: efftypeid,
               performancedate: performancedate,
             },
+            isArray: false
+          }
+        }).save();
+
+      }
+    }
+
+    return {
+
+      query: function (sessionId, username) {
+        return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
+          query: {
+            method: 'GET',
+            headers: {'x-session': sessionId, 'x-key': username},
             isArray: false
           }
         }).save();
