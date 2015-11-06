@@ -50,8 +50,7 @@ angular.module('app')
       $scope.performancedate = today;
       $rootScope.notify($scope.moduleid);
 
-
-      Efforts.save(sessionId, username, amount, moduleid, studentid, efftypeid, performancedate);
+      Efforts.save(sessionId, username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
     };
 
 

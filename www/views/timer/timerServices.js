@@ -28,6 +28,7 @@ angular.module('app')
     $timeout.cancel(stopwatch);
     stopwatch = null;
     $scope.timerRunning = false;
+    $scope.amount = data;
   };
 
 
