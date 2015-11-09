@@ -1,21 +1,9 @@
-/**
- * Created by kevingreb on 22.10.15.
- */
 angular.module('app')
-
-  .controller('MainCtrl', function($scope, $interval) {
-
-    // The main controller maintains the current time for all stopwatch instances.
-    $scope.sharedTime = new Date();
-    $interval(function() {
-      $scope.sharedTime = new Date();
-    }, 500);
-  })
 
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: '../timerViewTEST.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
@@ -35,7 +23,6 @@ angular.module('app')
         var elapsedMs = 0;
         //var time;
         var startTime;
-
         var timerPromise;
 
         self.start = function () {
@@ -73,6 +60,3 @@ angular.module('app')
       }
     }
   });
-
-
-
