@@ -4,12 +4,16 @@
 
 angular.module('app')
 
-  .factory('Efforts', function($resource){
-    return $resource('http://10.9.11.133:3000/api/efforts');
+  .factory('Efforts', function($window) {
+    return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
+      //headers: {'x-session': $window.sessionStorage.token, 'x-key': irgendwas},
+      //moduleid: $scope.course,
+     // studentid: irgendwas
+    });
   })
 
-  .factory('Modules', function($resource){
-    return $resource('http:/10.9.11.133:3000/api/modules');
-  });
-
-
+  .factory('Modules', function($window) {
+      return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
+        //headers: {'x-session': $window.sessionStorage.token, 'x-key': 0}
+      });
+    })
