@@ -18,13 +18,13 @@ angular.module('app')
                 //alert(data.id);
                 //alert("Data Privacy = " + data.privacy);
 
-                $window.sessionStorage.token = data.id;
-                //alert(data.id);
-                //alert(sessionStorage.token);
-
+                $window.sessionStorage.mySessionId = data.mySessionId;
+                $window.sessionStorage.userid = data.userid;
+                $window.sessionStorage.matricularnr = data.matricularnr;
                 $window.sessionStorage.privacy = data.privacy;
-                //alert(id);
-                //$window.sessionStorage.token = data.privacyCheck;         //submits if user accepted privacy (true/false)
+
+                alert(sessionStorage.privacy);
+
                 $rootScope.hide();
                   if(data.privacy = 'false') {  //Check if privacy was accepted == true
                     $location.path('/privacy');
