@@ -77,4 +77,27 @@ angular.module('app')
 
     $scope.efforts = Efforts.query();
 
+    $scope.save = function(){
+      $http.post('http://backend-dev.kevinott.de/api/efforts', {
+        headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid}},
+        amount = $scope.getDuration(startTime, endTime),
+        moduleid = $scope.course.id,
+        studentid = $window.sessionStorage.studentid,
+        efftypeid = $scope.efforttype,
+        performancedate= $scope.date
+        //place = $scope.place,
+        //material = $scope.marterial
+      );
+    }
+
+    $scope.getDuration = function(start, end) {
+
+        Difference = start.getTime() - end.getTime();
+        //Days = Math.floor (a / (1000 * 60 * 60 * 24)),
+        Hours = Math.floor (a / (1000 * 60 * 60)) % 24;
+        //Minutes = Math.floor (a / (1000 * 60 )) % 60,
+        return Hours;
+
+    };
+
   });
