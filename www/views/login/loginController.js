@@ -15,10 +15,13 @@ angular.module('app')
             //alert(syncdata);
 
               UserService.signIn(username, password, syncdata).success(function (data) {
-
-                alert("Data Privacy = " + data.privacy);
+                //alert(data.id);
+                //alert("Data Privacy = " + data.privacy);
 
                 $window.sessionStorage.token = data.id;
+                //alert(data.id);
+                //alert(sessionStorage.token);
+
                 $window.sessionStorage.privacy = data.privacy;
                 //alert(id);
                 //$window.sessionStorage.token = data.privacyCheck;         //submits if user accepted privacy (true/false)
