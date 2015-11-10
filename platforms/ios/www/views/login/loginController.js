@@ -1,40 +1,48 @@
 angular.module('app')
 
-    .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
+  .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
 
-          $scope.signIn = function signIn(username, password) {
 
-              $rootScope.show("Authenticating..");
+    $scope.signIn = function (username, password, syncdata) {
 
-            // Test user to bypass real API Login
-            if (username == "user" && password == null){
-              $rootScope.hide();
-              $location.path('/privacy');
-            }
-            else{
+      $rootScope.show("Authenticating..");
+      $window.sessionStorage.userID = username;
 
-              UserService.signIn(username, password).success(function (data) {
+      //alert(sessionStorage.userID);
 
-                $window.sessionStorage.token = data.sessionid;
-                $window.sessionStorage.fullname = data.fullname;
 
-                $rootScope.hide();
+      if (!syncdata)syncdata = false;
+      //alert(syncdata);
 
-                //Check users privacy flag if not yet set
-                $location.path('/privacy');
-                //If privacy flag is set
-                //$location.path('/app/timer');
+      UserService.signIn(username, password, syncdata).success(function (data) {
 
-              }).error(function (status, data) {
-                $rootScope.hide();
-                $rootScope.notify('Invalid Credentials');
+        $window.sessionStorage.mySessionId = data.mySessionId;
+        $window.sessionStorage.userid = data.userid;
+        $window.sessionStorage.matricularnr = data.matricularnr;
+        $window.sessionStorage.privacy = data.privacy;
 
-                console.log(status);
-                console.log(data);
+        //alert(sessionStorage.privacy);
+        UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
+          $window.sessionStorage.modulesArray = data;
+          alert(sessionStorage.modulesArray);
 
-              });
+          $rootScope.hide();
+          if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
+            $location.path('/privacy');
+          }else{
+            $location.path('/app/timer');
+          }
+        }).error(function(data){
+          $rootScope.notify('Could not fetch data from backend');
+          $location.path('/login');
+        });
+      }).error(function (status, data) {
+        // $rootScope.hide();
+        $rootScope.notify('Invalid Credentials');
 
-            }
+        console.log(status);
+        console.log(data);
 
-          };
-    });
+      });
+    };
+  });

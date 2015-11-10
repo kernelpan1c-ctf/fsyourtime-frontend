@@ -3,12 +3,15 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeMController', function ($window, $scope, $cordovaDatePicker, $ionicPlatform, Modules, Efforts)   {
 
+    angular.element(document).ready(function () {
+      document.getElementById('test');
+    });
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
-     // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
         date: new Date(),
         mode: 'date', // or 'time'
@@ -65,48 +68,37 @@ angular.module('app')
       });
     };
 
-    $scope.save = function(){
-      //Date can only be selected as required -2weeks until today
-      //already ensured through UI restrictions -> datepicker
-      alert("test");
-      var StartTime = element(by.model('StartTime')).value;
-      var EndTime = element(by.model('EndTime')).value;
-      var Class = element(by.model('Class')).value;
-      var Date = element(by.model('Date')).value;
-      localStorage.setItem('StartTime', $scope.StartTime);
-      localStorage.setItem('EndTime', $scope.EndTime);
-      localStorage.setItem('Class', $scope.Class);
-      localStorage.setItem('Date', $scope.Date);
-      alert("succeeded!");
-    };
+    // check startTime - endTime max 10h
+    //$scope.startTime
+    //$scope.endTime
 
-      // check startTime - endTime max 10h
-      //$scope.startTime
-      //$scope.endTime
-
-      //Call API Service
+    //Call API Service
 
     // Dropdown Hardcoded Data
-    var coursearray = [
-      {
-        id: "1",
-        name: "Finance 1"
-      },
-      {
-        id: "2",
-        name: "Wirtschaftsprivatrecht"
-      }
-    ];
-    var effortarray = [
-      {
-        id: "1",
-        name: "Lesen"
-      },
-      {
-        id: "2",
-        name: "Übungen"
-      }
-    ];
-    $scope.courses = coursearray;
-    $scope.efforts = effortarray;
+
+    $scope.save = function () {
+      $http.post('http://backend-dev.kevinott.de/api/efforts', {
+        headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid},
+        amount : $scope.getDuration(startTime, endTime),
+        moduleid : $scope.course.id,
+        studentid : $window.sessionStorage.studentid,
+        efftypeid : $scope.efforttype,
+        performancedate : $scope.date,
+        //place : $scope.place
+        //material: $scope.material
+      })
+    }
+
+    $scope.getDuration = function(start, end){
+      Difference= start.getTime() - end.getTime();
+      //Days = Math.floor (Difference / (1000*60*60*24));
+      Hours = Math.floor(Difference / (1000*60*60)) % 24;
+      // Minutes = Math.floor ( Difference / (1000*60)) % 60;
+      return Hours;
+    };
+
+    $scope.courses = Modules.query();
+
+    $scope.efforts = Efforts.query();
+
   });
