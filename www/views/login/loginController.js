@@ -7,10 +7,7 @@ angular.module('app')
 
       $rootScope.show("Authenticating..");
       $window.sessionStorage.userID = username;
-
-      //alert(sessionStorage.userID);
-
-
+      
       if (!syncdata)syncdata = false;
       //alert(syncdata);
 
