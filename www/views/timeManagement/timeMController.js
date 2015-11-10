@@ -5,10 +5,13 @@ angular.module('app')
 
   .controller('timeMController', function ($window, $scope, $cordovaDatePicker, $ionicPlatform, Modules, Efforts)   {
 
+    angular.element(document).ready(function () {
+      document.getElementById('test');
+    });
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
-     // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
         date: new Date(),
         mode: 'date', // or 'time'
@@ -65,13 +68,34 @@ angular.module('app')
       });
     };
 
-      // check startTime - endTime max 10h
-      //$scope.startTime
-      //$scope.endTime
+    // check startTime - endTime max 10h
+    //$scope.startTime
+    //$scope.endTime
 
-      //Call API Service
+    //Call API Service
 
     // Dropdown Hardcoded Data
+
+    $scope.save = function () {
+      $http.post('http://backend-dev.kevinott.de/api/efforts', {
+        headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid},
+        amount : $scope.getDuration(startTime, endTime),
+        moduleid : $scope.course.id,
+        studentid : $window.sessionStorage.studentid,
+        efftypeid : $scope.efforttype,
+        performancedate : $scope.date,
+        //place : $scope.place
+        //material: $scope.material
+      })
+    }
+
+    $scope.getDuration = function(start, end){
+      Difference= start.getTime() - end.getTime();
+      //Days = Math.floor (Difference / (1000*60*60*24));
+      Hours = Math.floor(Difference / (1000*60*60)) % 24;
+      // Minutes = Math.floor ( Difference / (1000*60)) % 60;
+      return Hours;
+    };
 
     $scope.courses = Modules.query();
 
