@@ -108,9 +108,17 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
-
+    .state('app.timerViewTest', {
+      url: '/timerViewTEST',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/timer/timerViewTEST.html',
+          controller: 'MainCtrl'
+        }
+      }
+    })
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/app/timerViewTEST');
 });
