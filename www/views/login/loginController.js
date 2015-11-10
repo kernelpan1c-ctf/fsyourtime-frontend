@@ -24,7 +24,7 @@ angular.module('app')
                 //alert(sessionStorage.privacy);
                 UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
                   $window.sessionStorage.modulesArray = data;
-                  alert(sessionStorage.modulesArray);
+           //       alert(sessionStorage.modulesArray);
 
                   $rootScope.hide();
                   if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
