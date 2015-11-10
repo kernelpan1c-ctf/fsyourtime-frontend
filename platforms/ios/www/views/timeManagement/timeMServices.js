@@ -4,16 +4,16 @@
 
 angular.module('app')
 
-  .factory('Efforts', function() {
+  .factory('Efforts', function($http, $window) {
     return $http.get('http://backend-dev.kevinott.de/api/efforts/module/:moduleid/:studentid', {
-      headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid},
-      moduleid: $scope.courses.id,
-      studentid: $window.sessionStorage.token.matricularnr
+      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
+      //moduleid: $scope.courses.id,
+      studentid: $window.sessionStorage.matricularnr
     });
   })
 
-  .factory('Modules', function() {
-      return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
-        headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid}
-      });
-    })
+  .factory('Modules', function($http, $window) {
+    return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
+      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid}
+    });
+  })

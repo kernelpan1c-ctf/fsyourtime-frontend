@@ -5,10 +5,13 @@ angular.module('app')
 
   .controller('timeMController', function ($window, $scope, $cordovaDatePicker, $ionicPlatform, Modules, Efforts)   {
 
+    angular.element(document).ready(function () {
+      document.getElementById('test');
+    });
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
-     // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
         date: new Date(),
         mode: 'date', // or 'time'
@@ -65,11 +68,11 @@ angular.module('app')
       });
     };
 
-      // check startTime - endTime max 10h
-      //$scope.startTime
-      //$scope.endTime
+    // check startTime - endTime max 10h
+    //$scope.startTime
+    //$scope.endTime
 
-      //Call API Service
+    //Call API Service
 
     // Dropdown Hardcoded Data
 

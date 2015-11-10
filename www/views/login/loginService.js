@@ -15,5 +15,5 @@ angular.module('app')
           headers: {'x-session': mySessionId, 'x-key': userid}
         });
       }
-    };
+    }
   });

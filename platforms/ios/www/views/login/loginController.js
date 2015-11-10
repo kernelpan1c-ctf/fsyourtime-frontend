@@ -1,44 +1,48 @@
 angular.module('app')
 
-    .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
+  .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
 
 
-          $scope.signIn = function (username, password, syncdata) {
+    $scope.signIn = function (username, password, syncdata) {
 
-            $rootScope.show("Authenticating..");
-            $window.sessionStorage.userID = username;
+      $rootScope.show("Authenticating..");
+      $window.sessionStorage.userID = username;
 
-            //alert(sessionStorage.userID);
+      //alert(sessionStorage.userID);
 
 
-            if (!syncdata)syncdata = false;
-            //alert(syncdata);
+      if (!syncdata)syncdata = false;
+      //alert(syncdata);
 
-              UserService.signIn(username, password, syncdata).success(function (data) {
-                //alert(data.id);
-                //alert("Data Privacy = " + data.privacy);
+      UserService.signIn(username, password, syncdata).success(function (data) {
 
-                $window.sessionStorage.token = data.id;
-                //alert(data.id);
-                //alert(sessionStorage.token);
+        $window.sessionStorage.mySessionId = data.mySessionId;
+        $window.sessionStorage.userid = data.userid;
+        $window.sessionStorage.matricularnr = data.matricularnr;
+        $window.sessionStorage.privacy = data.privacy;
 
-                $window.sessionStorage.privacy = data.privacy;
-                //alert(id);
-                //$window.sessionStorage.token = data.privacyCheck;         //submits if user accepted privacy (true/false)
-                $rootScope.hide();
-                  if(data.privacy = 'false') {  //Check if privacy was accepted == true
-                    $location.path('/privacy');
-                  }else{
-                    $location.path('/app/timer');
-                  }
+        //alert(sessionStorage.privacy);
+        UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
+          $window.sessionStorage.modulesArray = data;
+          alert(sessionStorage.modulesArray);
 
-              }).error(function (status, data) {
-               // $rootScope.hide();
-                $rootScope.notify('Invalid Credentials');
+          $rootScope.hide();
+          if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
+            $location.path('/privacy');
+          }else{
+            $location.path('/app/timer');
+          }
+        }).error(function(data){
+          $rootScope.notify('Could not fetch data from backend');
+          $location.path('/login');
+        });
+      }).error(function (status, data) {
+        // $rootScope.hide();
+        $rootScope.notify('Invalid Credentials');
 
-                console.log(status);
-                console.log(data);
+        console.log(status);
+        console.log(data);
 
-              });
-          };
-    });
+      });
+    };
+  });

@@ -112,5 +112,5 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/timeManagement');
+  $urlRouterProvider.otherwise('/login');
 });
