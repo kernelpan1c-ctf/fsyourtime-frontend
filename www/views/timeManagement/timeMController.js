@@ -97,8 +97,7 @@ angular.module('app')
     $scope.modules = [$window.sessionStorage.modulesArray];
 
 
-    //$scope.courses = $window.sessionStorage.modulesArray.query();
 
-    $scope.efforts = Efforts.getEfforts($scope.module);
+    //$scope.efforts = Efforts.getEfforts($scope.module);
 
   });

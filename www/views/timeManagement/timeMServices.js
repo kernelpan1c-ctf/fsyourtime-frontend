@@ -18,4 +18,4 @@ angular.module('app')
    // return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
    //   headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid}
    // });
- // })
+ // }
