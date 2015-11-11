@@ -1,20 +1,19 @@
 angular.module('app')
 
-  .factory('UserService', function ($http) {
+  .factory('UserService', function ($http, $window) {
     return {
-      signIn: function (username, password) {
-        return $http.post('https://cert-campus.frankfurt-school.de/clicnetclm/loginService.do', {
-          xaction: 'login',
+      signIn: function (username, password, syncdata) {
+        return $http.post('http://backend-dev.kevinott.de/login', {
           username: username,
           password: password,
-          language: 'en'
+          syncdata: syncdata
         });
       },
 
-      logOut: function () {
-        return $http.get('https://cert-campus.frankfurt-school.de/clicnetclm/loginService.do', {
-          xaction: 'logout'
+      getModules: function (mySessionId, userid) {
+        return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
+          headers: {'x-session': mySessionId, 'x-key': userid}
         });
       }
-    };
+    }
   });
