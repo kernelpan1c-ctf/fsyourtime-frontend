@@ -1,43 +1,140 @@
 angular.module('app')
 
-    .controller('timerController', function ($scope)   {
-        $scope.timerRunning = false;
+  .controller('MainCtrl2', function ($scope, $interval) {
 
-        $scope.startTimer = function () {
-            $scope.$broadcast('timer-start');
-            $scope.timerRunning = true;
+    // The main controller maintains the current time for all stopwatch instances.
+    $scope.sharedTime = new Date();
+    $interval(function () {
+      $scope.sharedTime = new Date();
+    }, 500);
+  })
+
+  .directive('stopwatch', function () {
+    return {
+      restrict: 'AE',
+      templateUrl: 'views/timer/timerViewTEST.html',
+      scope: {
+        // Set title in the isolate scope from the title attribute on the directive's element.
+        title: '@title',
+        // Set up a bi-directional binding between currentTime on the local scope and the parent
+        // scope's variable containing the current time that's the value of the time attribute.
+        currentTime: '=time'
+      },
+
+      link: function (scope, element, attrs, ctrl) {
+      },
+
+      controllerAs: 'swctrl',
+      controller: function ($scope, $interval) {
+        console.log("Creating the directive's controller");
+        var self = this;
+        var totalElapsedMs = 0;
+        var elapsedMs = 0;
+        //var time;
+        var startTime;
+        var timerPromise;
+
+        self.start = function () {
+          if (!timerPromise) {
+            startTime = new Date();
+            timerPromise = $interval(function () {
+              var now = new Date();
+              //$scope.time = now;
+              elapsedMs = now.getTime() - startTime.getTime();
+            }, 31);
+          }
         };
 
-        $scope.stopTimer = function () {
-            $scope.$broadcast('timer-stop');
-            $scope.timerRunning = false;
+        self.stop = function () {
+          if (timerPromise) {
+            $interval.cancel(timerPromise);
+            timerPromise = undefined;
+            totalElapsedMs += elapsedMs;
+            elapsedMs = 0;
+          }
         };
 
-        $scope.$on('timer-stopped', function (event, data) {
-            console.log('Timer Stopped - data = ', data);
-        });
+        self.reset = function () {
+          startTime = new Date();
+          totalElapsedMs = elapsedMs = 0;
+        };
 
-        // Dropdown
-        var coursearray = [
-            {
-                id: "1",
-                name: "Finance 1"
-            },
-            {
-                id: "2",
-                name: "Wirtschaftsprivatrecht"
-            }
-        ];
-        var effortarray = [
-            {
-                id: "1",
-                name: "Lesen"
-            },
-            {
-                id: "2",
-                name: "Übungen"
-            }
-        ];
-        $scope.courses = coursearray;
-        $scope.efforts = effortarray;
-    });
+        self.getTime = function () {
+          return time;
+        };
+
+        self.getElapsedMs = function () {
+          return totalElapsedMs + elapsedMs;
+        };
+      }
+    }
+  })
+
+  .filter('numberFixedLen', function () {
+    return function (n, len) {
+      var num = parseInt(n, 10);
+      len = parseInt(len, 10);
+      if (isNaN(num) || isNaN(len)) {
+        return n;
+      }
+      num = '' + num;
+      while (num.length < len) {
+        num = '0' + num;
+      }
+      return num;
+    };
+  })
+
+  .constant('SW_DELAY', 1000)
+
+
+  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
+    $scope.myStopwatch = stepwatch;
+
+    //get Perofrmance Date
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+
+    //Submit Data
+    $scope.submit = function () {
+
+    //data.seconds = 0; ??????? keine ahnung was das hier soll
+
+    var sessionId = $window.sessionStorage.token;
+    var moduleid = $scope.select.course;
+
+    //$rootScope.notify($scope.moduleid);
+
+      Efforts.save(sessionId, $window.sessionStorage.username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
+    };
+
+
+    /* Was hat das hier verloren?!
+
+    //Get Modules und Efforts for dropdown
+    // Real API related Data
+    $scope.sessionId = $window.sessionStorage.token;
+    $scope.username = $window.sessionStorage.username;
+
+    //Get Modules
+    $scope.modules = Modules.query(sessionId, username);
+
+     */
+
+  });
+
+
+
