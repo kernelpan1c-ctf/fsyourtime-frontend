@@ -24,13 +24,13 @@ angular.module('app')
     }, SW_DELAY);
   };
 
+
   var stop = function () {
     $timeout.cancel(stopwatch);
     stopwatch = null;
     $scope.timerRunning = false;
     $scope.amount = data;
   };
-
 
   var reset = function () {
     stop()
@@ -50,11 +50,11 @@ angular.module('app')
 
     return {
 
-      save: function (sessionId, username, amount, moduleid, studentid, efftypeid, performancedate) {
+      save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
           query: {
             method: 'POST',
-            headers: {'x-session': sessionId, 'x-key': username},
+            headers: {'x-session': sessionId, 'x-key': userid},
             params: {
               amount: amount,
               moduleid: moduleid,
@@ -71,11 +71,11 @@ angular.module('app')
 
     return {
 
-      query: function (sessionId, username) {
+      query: function (sessionId, userid) {
         return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
           query: {
             method: 'GET',
-            headers: {'x-session': sessionId, 'x-key': username},
+            headers: {'x-session': sessionId, 'x-key': userid},
             isArray: false
           }
         }).save();
@@ -89,11 +89,11 @@ angular.module('app')
 
       return {
 
-        query: function (sessionId, username) {
+        query: function (sessionId, userid) {
           return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
             query: {
               method: 'GET',
-              headers: {'x-session': sessionId, 'x-key': username},
+              headers: {'x-session': sessionId, 'x-key': userid},
               isArray: false
             }
           }).query();
