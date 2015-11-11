@@ -5,7 +5,7 @@ angular.module('app')
 
     $scope.privacy = function(){
 
-      $rootScope.hide();
+      //$rootScope.hide();
       //$rootScope.show("Authenticating..");
       //UserService.accept().success(function(data) {
       //  $location.path('/app/settings');
@@ -14,7 +14,8 @@ angular.module('app')
       //  $location.path('/login');
 
       //});
-      $location.path('/app/timer');
+      //alert(sessionstorage.mySessionId);
+      $location.path('/app/settings');
     };
 
     $scope.decline = function() {

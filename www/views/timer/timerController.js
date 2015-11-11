@@ -129,10 +129,11 @@ angular.module('app')
     $scope.sessionId = $window.sessionStorage.token;
     $scope.username = $window.sessionStorage.username;
 
-    //Get Modules
-    $scope.modules = Modules.query(sessionId, username);
-
+     Get Modules
      */
+    $scope.modules = sessionStorage.modulesArray;
+
+
 
   });
 
