@@ -12,7 +12,7 @@ angular.module('app')
           amount: amount,
           moduleid: moduleid,
           studentid: studentid,
-          efftypeid: efftypeid,
+          efforttypeid: efftypeid,
           performancedate: performancedate
         }, config);
       }

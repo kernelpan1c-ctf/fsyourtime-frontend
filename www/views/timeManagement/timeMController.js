@@ -3,30 +3,30 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules)   {
+  .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules) {
 
     $scope.select = {};
 
     $scope.efforts = [
       {
-        id: "1",
-        name: "Lesen"
-      },
-      {id:"2",
-        name:"Assignment"
+        id: "56257c4c1f7b6687091d2c06",
+        name: "Pruefungsvorbereitung"
       },
       {
-        id:"3",
-        name:"Vorbereitung Präsentation"
+        id: null,
+        name: "Assignment"
+      },
+      {
+        id: "3",
+        name: "Vorbereitung Präsentation"
       }
     ];
 
     $scope.modules = Modules.query();
 
 
-
     //Picker only testable in emulator/on device
-    $scope.showDatePicker = function() {
+    $scope.showDatePicker = function () {
 
       // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
@@ -41,15 +41,15 @@ angular.module('app')
         cancelButtonColor: '#000000'
       };
 
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(options).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(options).then(function (date) {
           $scope.date = date;
           //alert(date);
         });
       });
     };
 
-    $scope.showStartTime = function(){
+    $scope.showStartTime = function () {
       var timeOptions = {
         date: new Date(),
         mode: 'time',
@@ -59,15 +59,15 @@ angular.module('app')
         cancelButtonColor: '#000000',
         minuteInterval: 5
       };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(timeOptions).then(function (date) {
           $scope.startTime = date;
           //alert(date);
         });
       });
     };
 
-    $scope.showEndTime = function(){
+    $scope.showEndTime = function () {
       var timeOptions = {
         date: new Date(),
         mode: 'time',
@@ -77,8 +77,8 @@ angular.module('app')
         cancelButtonColor: '#000000',
         minuteInterval: 5
       };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(timeOptions).then(function (date) {
           $scope.endTime = date;
           //alert(date);
         });
@@ -92,12 +92,12 @@ angular.module('app')
     //Call API Service
 
     // Dropdown Hardcoded Data
-    $scope.getDuration = function(start, end){
+    $scope.getDuration = function (start, end) {
       //start=Date.parse(start)
       //end=Date.parse(end)
-      Difference= start- end;
+      Difference = start - end;
       //Days = Math.floor (Difference / (1000*60*60*24));
-      Hours = Math.floor(Difference / (1000*60*60)) % 24;
+      Hours = Math.floor(Difference / (1000 * 60 * 60)) % 24;
       // Minutes = Math.floor ( Difference / (1000*60)) % 60;
       return Hours;
     };
@@ -106,28 +106,28 @@ angular.module('app')
     var amount = $scope.getDuration($scope.startTime, $scope.endTime);
 
 
-
-    $scope.save = function() {
-      alert("module: " + $scope.select.module);
-      alert("effort: " + $scope.select.effort);
-      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, $scope.date)
+    $scope.save = function () {
+      //alert("module: " + $scope.select.module);
+      //alert("effort: " + $scope.select.effort);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, $scope.date).error(function (status, data) {
+          console.log(status);
+          console.log(data);
+        });
     };
 
-  //  $scope.save = function () {
-  //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
-  //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-   //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
-  //      moduleid : $scope.modules.id,
-  //      studentid : $window.sessionStorage.matricularnr,
-  //      efftypeid : $scope.efforts.id,
-  //      performancedate : $scope.date,
-        //place : $scope.place
-        //material: $scope.material
-  //    })
-  //  }
-
-
-
+    //  $scope.save = function () {
+    //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
+    //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
+    //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
+    //      moduleid : $scope.modules.id,
+    //      studentid : $window.sessionStorage.matricularnr,
+    //      efftypeid : $scope.efforts.id,
+    //      performancedate : $scope.date,
+    //place : $scope.place
+    //material: $scope.material
+    //    })
+    //  }
 
 
     //$scope.efforts = Efforts.query();
