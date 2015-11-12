@@ -5,6 +5,26 @@ angular.module('app')
 
   .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules)   {
 
+    $scope.select = {};
+
+    $scope.efforts = [
+      {
+        id: "1",
+        name: "Lesen"
+      },
+      {id:"2",
+        name:"Assignment"
+      },
+      {
+        id:"3",
+        name:"Vorbereitung Präsentation"
+      }
+    ];
+
+    $scope.modules = Modules.query();
+
+
+
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
@@ -83,12 +103,15 @@ angular.module('app')
     };
 
 
-    var amount = $scope.getDuration($scope.startTime, $scope.endTime)
+    var amount = $scope.getDuration($scope.startTime, $scope.endTime);
 
-    $scope.save = function(module) {
-      alert(module)
-      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount, $scope.module, sessionStorage.matricularnr, $scope.effort, $scope.date)
-    }
+
+
+    $scope.save = function() {
+      alert("module: " + $scope.select.module);
+      alert("effort: " + $scope.select.effort);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, $scope.date)
+    };
 
   //  $scope.save = function () {
   //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
@@ -106,21 +129,6 @@ angular.module('app')
 
 
 
-    $scope.efforts = [
-      {
-        id: "1",
-        name: "Lesen"
-      },
-      {id:"2",
-        name:"Assignment"
-      },
-      {
-        id:"3",
-        name:"Vorbereitung Präsentation"
-      }
-    ];
-
-    $scope.modules = Modules.query();
 
     //$scope.efforts = Efforts.query();
 
