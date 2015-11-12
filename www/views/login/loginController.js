@@ -25,7 +25,7 @@ angular.module('app')
 
           $rootScope.hide();
           if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
-            $location.path('/privacy');
+            $location.path('/app/timerViewTEST');
           }else{
             $location.path('/app/timer');
           }
