@@ -56,8 +56,3 @@ angular.module('app')
       }
     };
   })
-// .factory('Modules', function($http, $window) {
-//  return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
-//    headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid}
-// })
-// })

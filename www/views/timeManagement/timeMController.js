@@ -72,20 +72,6 @@ angular.module('app')
     //Call API Service
 
     // Dropdown Hardcoded Data
-
-    $scope.save = function () {
-      $http.post('http://backend-dev.kevinott.de/api/efforts', {
-        headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-        amount : $scope.getDuration($scope.startTime, $scope.endTime),
-        moduleid : $scope.module,
-        studentid : $window.sessionStorage.matricularnr,
-        efftypeid : $scope.effort,
-        performancedate : $scope.date,
-        //place : $scope.place
-        //material: $scope.material
-      })
-    }
-
     $scope.getDuration = function(start, end){
       //start=Date.parse(start)
       //end=Date.parse(end)
@@ -95,6 +81,29 @@ angular.module('app')
       // Minutes = Math.floor ( Difference / (1000*60)) % 60;
       return Hours;
     };
+
+
+    var amount = $scope.getDuration($scope.startTime, $scope.endTime)
+
+    $scope.save = function(module) {
+      alert(module)
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount, $scope.module, sessionStorage.matricularnr, $scope.effort, $scope.date)
+    }
+
+  //  $scope.save = function () {
+  //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
+  //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
+   //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
+  //      moduleid : $scope.modules.id,
+  //      studentid : $window.sessionStorage.matricularnr,
+  //      efftypeid : $scope.efforts.id,
+  //      performancedate : $scope.date,
+        //place : $scope.place
+        //material: $scope.material
+  //    })
+  //  }
+
+
 
 
     $scope.efforts = [
