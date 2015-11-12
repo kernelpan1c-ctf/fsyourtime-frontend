@@ -19,20 +19,14 @@ angular.module('app')
         $window.sessionStorage.privacy = data.privacy;
 
         //alert(sessionStorage.privacy);
-        UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
-          $window.sessionStorage.modulesArray = data;
-          //alert(sessionStorage.modulesArray);
-
+        if(sessionStorage.privacy === 'false') {  //Check if privacy was accepted == true
           $rootScope.hide();
-          if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
-            $location.path('/privacy');
-          }else{
-            $location.path('/app/timer');
-          }
-        }).error(function(data){
-          $rootScope.notify('Could not fetch data from backend');
-          $location.path('/login');
-        });
+          $location.path('/privacy');
+        }else{
+          $rootScope.hide();
+          $location.path('/app/timer');
+        }
+
       }).error(function (status, data) {
         // $rootScope.hide();
         $rootScope.notify('Invalid Credentials');

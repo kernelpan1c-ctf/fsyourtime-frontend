@@ -4,10 +4,10 @@ angular.module('app')
     return {
 
       acceptPrivacy: function (mySessionId, userid) {
-        return $http.put('http://backend-dev.kevinott.de/api/updateStudent/:studentid', {
-          headers: {'x-session': mySessionId, 'x-key': userid},
-          params: {privacyflag: true, studentid: userid}
-        });
+        var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
+        return $http.put('http://backend-dev.kevinott.de/api/updateStudent/'+ userid, {
+          privacyflag: true,
+        }, config);
       },
 
       logOut: function (mySessionId) {
