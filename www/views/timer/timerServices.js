@@ -1,6 +1,6 @@
 angular.module('app')
 
-.factory('stepwatch', function (SW_DELAY, $timeout, Efforts) {
+.factory('stepwatch', function (SW_DELAY, $timeout) {
   var data = {
       seconds: 0,
       minutes: 0,

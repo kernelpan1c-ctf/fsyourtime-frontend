@@ -114,11 +114,15 @@ angular.module('app')
     //data.seconds = 0; ??????? keine ahnung was das hier soll
 
     var sessionId = $window.sessionStorage.mySessionId;
-    var moduleid = $scope.select.course;
+    var moduleid = $scope.select.module;
+    var amount = $scope.amount;
+    var studentid = $window.sessionStorage.userid;
+    var efftypeid = $scope.select.effort;
+    var performancedate = today;
 
     //$rootScope.notify($scope.moduleid);
 
-      Efforts.save(sessionId, $window.sessionStorage.username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
+      Efforts.save(sessionId, studentid, amount, moduleid, studentid, efftypeid, performancedate);
     };
 
 
