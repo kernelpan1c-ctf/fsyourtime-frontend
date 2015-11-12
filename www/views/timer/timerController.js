@@ -113,7 +113,7 @@ angular.module('app')
 
     //data.seconds = 0; ??????? keine ahnung was das hier soll
 
-    var sessionId = $window.sessionStorage.token;
+    var sessionId = $window.sessionStorage.mySessionId;
     var moduleid = $scope.select.course;
 
     //$rootScope.notify($scope.moduleid);
@@ -122,18 +122,10 @@ angular.module('app')
     };
 
 
-    /* Was hat das hier verloren?!
-
-    //Get Modules und Efforts for dropdown
-    // Real API related Data
-    $scope.sessionId = $window.sessionStorage.token;
-    $scope.username = $window.sessionStorage.username;
-
-    //Get Modules
-    $scope.modules = Modules.query(sessionId, username);
-
-     */
-
+    //$scope.modules = $window.sessionStorage.modulesArray;
+    $scope.modules = Modules.query();
+   // $scope.efforts = Efforts.query($window.sessionStorage.mySessionId, $window.sessionStorage.userid);
+    $scope.efforts = Efforts.query();
   });
 
 
