@@ -22,6 +22,7 @@ angular.module('app')
   .factory('Efforts' , function($resource) {
 
     return {
+
       save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         return $resource('http://backend-dev.kevinott.de/api/efforts', {}, {
           query: {
