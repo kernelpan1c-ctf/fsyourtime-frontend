@@ -20,7 +20,6 @@ angular.module('app')
         }
       }
       start()
-      $scope.timerRunning = true;
     }, SW_DELAY);
   };
 
@@ -28,8 +27,6 @@ angular.module('app')
   var stop = function () {
     $timeout.cancel(stopwatch);
     stopwatch = null;
-    $scope.timerRunning = false;
-    $scope.amount = data;
   };
 
   var reset = function () {

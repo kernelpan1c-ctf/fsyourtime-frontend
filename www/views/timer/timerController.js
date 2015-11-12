@@ -114,12 +114,13 @@ angular.module('app')
     //data.seconds = 0; ??????? keine ahnung was das hier soll
 
     var sessionId = $window.sessionStorage.mySessionId;
+    var userid = $window.sessionStorage.userid;
+    var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
     var moduleid = $scope.select.module;
-    var amount = $scope.amount;
     var studentid = $window.sessionStorage.matricularnr;
     var efftypeid = $scope.select.effort;
     var performancedate = today;
-    var userid = $window.sessionStorage.userid;
+
 
     //$rootScope.notify($scope.moduleid);
 
