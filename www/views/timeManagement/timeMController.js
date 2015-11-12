@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts)   {
+  .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -76,7 +76,7 @@ angular.module('app')
     $scope.save = function () {
       $http.post('http://backend-dev.kevinott.de/api/efforts', {
         headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-        amount : $scope.getDuration($scope.StartTime, $scope.EndTime),
+        amount : $scope.getDuration($scope.startTime, $scope.endTime),
         moduleid : $scope.module,
         studentid : $window.sessionStorage.matricularnr,
         efftypeid : $scope.effort,
@@ -87,15 +87,24 @@ angular.module('app')
     }
 
     $scope.getDuration = function(start, end){
-      Difference= start.getTime() - end.getTime();
+      start=Date.parse(start)
+      end=Date.parse(end)
+      Difference= start- end;
       //Days = Math.floor (Difference / (1000*60*60*24));
       Hours = Math.floor(Difference / (1000*60*60)) % 24;
       // Minutes = Math.floor ( Difference / (1000*60)) % 60;
       return Hours;
     };
 
-    $scope.modules = [$window.sessionStorage.modulesArray];
 
+    $scope.modules= $window.sessionStorage.modulesArray;
+
+    JSON.stringify($scope.modules)
+
+    alert($scope.modules)
+
+
+  //alert($scope.modules)
 
 
     //$scope.efforts = Efforts.getEfforts($scope.module);

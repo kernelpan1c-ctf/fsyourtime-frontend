@@ -3,12 +3,12 @@
  */
 angular.module('app')
 
-  .controller('timeChangerController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerController', function ($window, $scope, $cordovaDatePicker, $ionicPlatform)   {
 
     $scope.noEfforts = true;
 
     // Dropdown
-    var coursearray = [
+    var effortarray = [
       {
         id: "1",
         name: localStorage.getItem('Class')

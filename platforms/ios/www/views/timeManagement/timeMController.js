@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function (Efforts, $window, $scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeMController', function ($http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts)   {
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
@@ -76,7 +76,7 @@ angular.module('app')
     $scope.save = function () {
       $http.post('http://backend-dev.kevinott.de/api/efforts', {
         headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-        amount : $scope.getDuration(startTime, endTime),
+        amount : $scope.getDuration($scope.StartTime, $scope.EndTime),
         moduleid : $scope.module,
         studentid : $window.sessionStorage.matricularnr,
         efftypeid : $scope.effort,
@@ -94,11 +94,10 @@ angular.module('app')
       return Hours;
     };
 
-    $scope.modules = [$window.sessionStorage.modulesArray];
+    $scope.modules = $window.sessionStorage.modulesArray.id;
 
 
-    //$scope.courses = $window.sessionStorage.modulesArray.query();
 
-    $scope.efforts = Efforts.getEfforts($scope.module);
+    //$scope.efforts = Efforts.getEfforts($scope.module);
 
   });
