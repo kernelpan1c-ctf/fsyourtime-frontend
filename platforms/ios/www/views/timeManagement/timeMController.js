@@ -3,11 +3,8 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($window, $scope, $cordovaDatePicker, $ionicPlatform, Modules, Efforts)   {
+  .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules)   {
 
-    angular.element(document).ready(function () {
-      document.getElementById('test');
-    });
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
@@ -75,30 +72,55 @@ angular.module('app')
     //Call API Service
 
     // Dropdown Hardcoded Data
-
-    $scope.save = function () {
-      $http.post('http://backend-dev.kevinott.de/api/efforts', {
-        headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid},
-        amount : $scope.getDuration(startTime, endTime),
-        moduleid : $scope.course.id,
-        studentid : $window.sessionStorage.studentid,
-        efftypeid : $scope.efforttype,
-        performancedate : $scope.date,
-        //place : $scope.place
-        //material: $scope.material
-      })
-    }
-
     $scope.getDuration = function(start, end){
-      Difference= start.getTime() - end.getTime();
+      //start=Date.parse(start)
+      //end=Date.parse(end)
+      Difference= start- end;
       //Days = Math.floor (Difference / (1000*60*60*24));
       Hours = Math.floor(Difference / (1000*60*60)) % 24;
       // Minutes = Math.floor ( Difference / (1000*60)) % 60;
       return Hours;
     };
 
-    $scope.courses = Modules.query();
 
-    $scope.efforts = Efforts.query();
+    var amount = $scope.getDuration($scope.startTime, $scope.endTime)
+
+    $scope.save = function() {
+      Efforts.save($window.sessionStorage.mySessionId, $window.sessionStorage.userid, amount, $scope.module, $window.sessionStorage.matricularnr, $scope.effort, $scope.date)
+    }
+
+  //  $scope.save = function () {
+  //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
+  //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
+   //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
+  //      moduleid : $scope.modules.id,
+  //      studentid : $window.sessionStorage.matricularnr,
+  //      efftypeid : $scope.efforts.id,
+  //      performancedate : $scope.date,
+        //place : $scope.place
+        //material: $scope.material
+  //    })
+  //  }
+
+
+
+
+    $scope.efforts = [
+      {
+        id: "1",
+        name: "Lesen"
+      },
+      {id:"2",
+        name:"Assignment"
+      },
+      {
+        id:"3",
+        name:"Vorbereitung Präsentation"
+      }
+    ];
+
+    $scope.modules = Modules.query();
+
+    //$scope.efforts = Efforts.query();
 
   });
