@@ -87,8 +87,8 @@ angular.module('app')
     }
 
     $scope.getDuration = function(start, end){
-      start=Date.parse(start)
-      end=Date.parse(end)
+      //start=Date.parse(start)
+      //end=Date.parse(end)
       Difference= start- end;
       //Days = Math.floor (Difference / (1000*60*60*24));
       Hours = Math.floor(Difference / (1000*60*60)) % 24;
@@ -97,16 +97,22 @@ angular.module('app')
     };
 
 
-    $scope.modules= $window.sessionStorage.modulesArray;
+    $scope.efforts = [
+      {
+        id: "1",
+        name: "Lesen"
+      },
+      {id:"2",
+        name:"Assignment"
+      },
+      {
+        id:"3",
+        name:"Vorbereitung Präsentation"
+      }
+    ];
 
-    JSON.stringify($scope.modules)
+    $scope.modules = Modules.query();
 
-    alert($scope.modules)
-
-
-  //alert($scope.modules)
-
-
-    //$scope.efforts = Efforts.getEfforts($scope.module);
+    //$scope.efforts = Efforts.query();
 
   });

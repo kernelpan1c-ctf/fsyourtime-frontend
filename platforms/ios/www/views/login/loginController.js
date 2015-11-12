@@ -20,6 +20,7 @@ angular.module('app')
 
         //alert(sessionStorage.privacy);
         UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
+          alert(data);
           $window.sessionStorage.modulesArray = data;
           //alert(sessionStorage.modulesArray);
 

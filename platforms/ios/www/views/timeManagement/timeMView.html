@@ -9,7 +9,7 @@
             Class:
           </div>
           <select>
-            <option ng-model="module" ng-repeat="module in modules">{{moduleid}}</option>
+            <option ng-model="module" ng-repeat="module in modules" value="{{module._id}}">{{module.name}}</option>
           </select>
         </label>
       </div>
@@ -20,7 +20,7 @@
             Effort type:
           </div>
           <select>
-            <option ng-model="effort" ng-repeat="effort in efforts">{{effort._id}}</option>
+            <option ng-model="effort" ng-repeat="effort in efforts">{{effort.name}}</option>
           </select>
         </label>
       </div>
@@ -45,5 +45,3 @@
     <button class="button button-block button-positive" ng-click="save()">save</button>
   </ion-content>
 </ion-view>
-
-<a></a>
