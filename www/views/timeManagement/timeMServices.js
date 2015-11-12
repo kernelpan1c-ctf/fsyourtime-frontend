@@ -4,6 +4,21 @@
 
 angular.module('app')
 
+  .factory('Efforts', function($http) {
+    return {
+      save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
+        var config = { headers: {'x-session': sessionId, 'x-key': userid}};
+        return $http.post('http://backend-dev.kevinott.de/api/efforts', {
+          amount: amount,
+          moduleid: moduleid,
+          studentid: studentid,
+          efftypeid: efftypeid,
+          performancedate: performancedate
+        }, config);
+      }
+    }
+  })
+/*
   .factory('Efforts' , function($resource) {
 
     return {
@@ -18,7 +33,7 @@ angular.module('app')
               moduleid: moduleid,
               studentid: studentid,
               efftypeid: efftypeid,
-              performancedate: performancedate,
+              performancedate: performancedate
             },
             isArray: false
           }
@@ -38,7 +53,7 @@ angular.module('app')
       }
     }
   })
-
+*/
 
   .factory('Modules' , function($resource) {
 
@@ -55,7 +70,7 @@ angular.module('app')
 
       }
     };
-  })
+  });
  // .factory('Modules', function($http, $window) {
  //  return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
  //    headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid}
