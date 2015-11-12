@@ -91,6 +91,26 @@ angular.module('app')
   .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
     $scope.myStopwatch = stepwatch;
 
+    $scope.select = {};
+
+    $scope.efforts = [
+      {
+        id: "1",
+        name: "Lesen"
+      },
+      {
+        id: "2",
+        name: "Assignment"
+      },
+      {
+        id: "3",
+        name: "Vorbereitung Präsentation"
+      }
+    ];
+
+    $scope.modules = Modules.query();
+
+
     //get Perofrmance Date
     var today = new Date();
     var dd = today.getDate();
@@ -110,41 +130,12 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
+      //data.seconds = 0;
+      var sessionId = $window.sessionStorage.mySessionId;
+      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-    //data.seconds = 0; ??????? keine ahnung was das hier soll
-
-    var sessionId = $window.sessionStorage.mySessionId;
-    var userid = $window.sessionStorage.userid;
-    var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
-    var moduleid = $scope.select.module;
-    var studentid = $window.sessionStorage.matricularnr;
-    var efftypeid = $scope.select.effort;
-    var performancedate = today;
-
-
-    //$rootScope.notify($scope.moduleid);
-
-      Efforts.save(sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate);
+      Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
     };
-
-
-    $scope.modules = Modules.query();
-
-    //Live Efforts
-    //$scope.efforts = Efforts.query();
-
-    //Folgendes Array wird genutzt da EffortTyps noch nicht verfügbar
-
-    var effortTypes = new Array()
-    effortTypes[0] = new Object();
-    effortTypes[0]["name"] = "Präsentationserstellung";
-    effortTypes[0]["_id"] = "1";
-
-    effortTypes[1] = new Object();
-    effortTypes[1]["name"] = "Klausurvorbereitung";
-    effortTypes[1]["_id"] = "2";
-
-    $scope.effortTypes = effortTypes;
   });
 
 
