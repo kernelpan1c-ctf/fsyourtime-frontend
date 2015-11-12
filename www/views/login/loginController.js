@@ -18,6 +18,7 @@ angular.module('app')
         $window.sessionStorage.matricularnr = data.matricularnr;
         $window.sessionStorage.privacy = data.privacy;
 
+
         //alert(sessionStorage.privacy);
         if(sessionStorage.privacy === 'false') {  //Check if privacy was accepted == true
           $rootScope.hide();
