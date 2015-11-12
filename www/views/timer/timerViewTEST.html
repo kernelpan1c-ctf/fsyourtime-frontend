@@ -20,7 +20,7 @@
             Effort type:
           </div>
           <select>
-            <option ng-model="select.effort" ng-repeat="effort in efforts" value="{{effort._id}}">{{effort._id}}</option>
+            <option ng-model="select.effort" ng-repeat="effort in effortTypes" value="{{effort._id}}">{{effort.name}}</option>
           </select>
         </label>
       </div>

@@ -37,7 +37,7 @@ angular.module('app')
     data.seconds = 0;
   };
 
-    
+
   return {
     data: data,
     start: start,

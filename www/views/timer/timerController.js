@@ -116,20 +116,34 @@ angular.module('app')
     var sessionId = $window.sessionStorage.mySessionId;
     var moduleid = $scope.select.module;
     var amount = $scope.amount;
-    var studentid = $window.sessionStorage.userid;
+    var studentid = $window.sessionStorage.matricularnr;
     var efftypeid = $scope.select.effort;
     var performancedate = today;
+    var userid = $window.sessionStorage.userid;
 
     //$rootScope.notify($scope.moduleid);
 
-      Efforts.save(sessionId, studentid, amount, moduleid, studentid, efftypeid, performancedate);
+      Efforts.save(sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate);
     };
 
 
-    //$scope.modules = $window.sessionStorage.modulesArray;
     $scope.modules = Modules.query();
-   // $scope.efforts = Efforts.query($window.sessionStorage.mySessionId, $window.sessionStorage.userid);
-    $scope.efforts = Efforts.query();
+
+    //Live Efforts
+    //$scope.efforts = Efforts.query();
+
+    //Folgendes Array wird genutzt da EffortTyps noch nicht verfügbar
+
+    var effortTypes = new Array()
+    effortTypes[0] = new Object();
+    effortTypes[0]["name"] = "Präsentationserstellung";
+    effortTypes[0]["_id"] = "1";
+
+    effortTypes[1] = new Object();
+    effortTypes[1]["name"] = "Klausurvorbereitung";
+    effortTypes[1]["_id"] = "2";
+
+    $scope.effortTypes = effortTypes;
   });
 
 
