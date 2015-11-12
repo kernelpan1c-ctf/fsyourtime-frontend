@@ -91,6 +91,26 @@ angular.module('app')
   .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
     $scope.myStopwatch = stepwatch;
 
+    $scope.select = {};
+
+    $scope.efforts = [
+      {
+        id: "1",
+        name: "Lesen"
+      },
+      {
+        id: "2",
+        name: "Assignment"
+      },
+      {
+        id: "3",
+        name: "Vorbereitung Präsentation"
+      }
+    ];
+
+    $scope.modules = Modules.query();
+
+
     //get Perofrmance Date
     var today = new Date();
     var dd = today.getDate();
@@ -110,30 +130,14 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
+      //data.seconds = 0;
+      var sessionId = $window.sessionStorage.mySessionId;
+      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-    //data.seconds = 0; ??????? keine ahnung was das hier soll
+      alert (amount);
 
-    var sessionId = $window.sessionStorage.token;
-    var moduleid = $scope.select.course;
-
-    //$rootScope.notify($scope.moduleid);
-
-      Efforts.save(sessionId, $window.sessionStorage.username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
+      //Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
     };
-
-
-    /* Was hat das hier verloren?!
-
-    //Get Modules und Efforts for dropdown
-    // Real API related Data
-    $scope.sessionId = $window.sessionStorage.token;
-    $scope.username = $window.sessionStorage.username;
-
-    //Get Modules
-    $scope.modules = Modules.query(sessionId, username);
-
-     */
-
   });
 
 

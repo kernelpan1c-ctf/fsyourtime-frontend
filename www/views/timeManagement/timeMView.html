@@ -1,5 +1,4 @@
 <ion-view title="Time Management">
-  <ion-nav-view ng-controller="timeMController" name="other" ng-init=""></ion-nav-view>
   <ion-content padding="true" class="has-header">
     <ion-list>
 
@@ -8,8 +7,7 @@
           <div class="input-label">
             Class:
           </div>
-          <select>
-            <option ng-model="course" ng-repeat="course in courses">{{course._id}}</option>
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules">
           </select>
         </label>
       </div>
@@ -19,8 +17,7 @@
           <div class="input-label">
             Effort type:
           </div>
-          <select>
-            <option ng-model="effort" ng-repeat="effort in efforts">{{effort._id}}</option>
+          <select ng-model="select.effort" ng-options="effort.id as effort.name for effort in efforts">
           </select>
         </label>
       </div>
@@ -45,4 +42,3 @@
     <button class="button button-block button-positive" ng-click="save()">save</button>
   </ion-content>
 </ion-view>
-
