@@ -24,13 +24,13 @@ angular.module('app')
     }, SW_DELAY);
   };
 
+
   var stop = function () {
     $timeout.cancel(stopwatch);
     stopwatch = null;
     $scope.timerRunning = false;
     $scope.amount = data;
   };
-
 
   var reset = function () {
     stop()
@@ -50,11 +50,11 @@ angular.module('app')
 
     return {
 
-      save: function (sessionId, username, amount, moduleid, studentid, efftypeid, performancedate) {
+      save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
           query: {
             method: 'POST',
-            headers: {'x-session': sessionId, 'x-key': username},
+            headers: {'x-session': sessionId, 'x-key': userid},
             params: {
               amount: amount,
               moduleid: moduleid,
@@ -66,19 +66,16 @@ angular.module('app')
           }
         }).save();
 
-      }
-    }
+      },
 
-    return {
-
-      query: function (sessionId, username) {
-        return $resource('http:/backend-dev.kevinott.de/api/efforts', {}, {
+      query: function ($http, $window) {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/student', {}, {
           query: {
             method: 'GET',
-            headers: {'x-session': sessionId, 'x-key': username},
-            isArray: false
+            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            isArray: true
           }
-        }).save();
+        }).query();
 
       }
     }
@@ -89,12 +86,12 @@ angular.module('app')
 
       return {
 
-        query: function (sessionId, username) {
-          return $resource('http:/backend-dev.kevinott.de/api/modules', {}, {
+        query: function ($http, $window) {
+          return $resource('http://backend-dev.kevinott.de/api/modules/student', {}, {
             query: {
               method: 'GET',
-              headers: {'x-session': sessionId, 'x-key': username},
-              isArray: false
+              headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+              isArray: true
             }
           }).query();
 

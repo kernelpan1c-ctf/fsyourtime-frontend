@@ -8,9 +8,6 @@ angular.module('app')
       $rootScope.show("Authenticating..");
       $window.sessionStorage.userID = username;
 
-      //alert(sessionStorage.userID);
-
-
       if (!syncdata)syncdata = false;
       //alert(syncdata);
 
@@ -23,8 +20,9 @@ angular.module('app')
 
         //alert(sessionStorage.privacy);
         UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
+          alert(data);
           $window.sessionStorage.modulesArray = data;
-          alert(sessionStorage.modulesArray);
+          //alert(sessionStorage.modulesArray);
 
           $rootScope.hide();
           if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
