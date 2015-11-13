@@ -87,7 +87,6 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-
   .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
     $scope.myStopwatch = stepwatch;
 

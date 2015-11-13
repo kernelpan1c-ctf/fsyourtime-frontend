@@ -3,10 +3,12 @@
  */
 angular.module('app')
 
-  .controller('timeMController', function ($filter, $http, $window, $scope, $cordovaDatePicker, $ionicPlatform, Efforts, Modules) {
+  .controller('timeManagementController', function ($filter, $http, $window, $scope, $cordovaDatePicker,
+                                                    $ionicPlatform, Efforts, Modules, EffortTypes) {
 
     $scope.select = {};
 
+    /*
     $scope.efforts = [
       {
         id: "56257c4c1f7b6687091d2c06",
@@ -20,8 +22,9 @@ angular.module('app')
         id: "3",
         name: "Vorbereitung Präsentation"
       }
-    ];
+    ];*/
 
+    $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
 
 
