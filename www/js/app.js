@@ -60,7 +60,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'views/menu.html'
+    templateUrl: 'views/menu/menu.html',
+    controller: 'menuController'
   })
 
   .state('app.settings', {
@@ -76,7 +77,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timer',
       views: {
         'menuContent': {
-          templateUrl: 'views/timer/timerViewTEST.html',
+          templateUrl: 'views/timer/timerView.html',
           controller: 'MainCtrl'
         }
       }
@@ -105,15 +106,6 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         'menuContent': {
           templateUrl: 'views/timeChangerDetail/timeChangerDetailView.html',
           controller: 'timeChangerDetailController'
-        }
-      }
-    })
-    .state('app.timerViewTest', {
-      url: '/timerViewTEST',
-      views: {
-        'menuContent': {
-          templateUrl: 'views/timer/timerViewTEST.html',
-          controller: 'MainCtrl'
         }
       }
     })

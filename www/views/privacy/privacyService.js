@@ -1,12 +1,11 @@
 angular.module('app')
 
-  .factory('UserService2', function ($http, $window) {
+  .factory('PrivacyService', function ($http) {
     return {
-
       acceptPrivacy: function (mySessionId, userid) {
         var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
         return $http.put('http://backend-dev.kevinott.de/api/updateStudent/'+ userid, {
-          privacyflag: true,
+          privacyflag: true
         }, config);
       },
 
