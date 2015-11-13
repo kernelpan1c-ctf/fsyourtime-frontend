@@ -12,7 +12,7 @@ angular.module('app')
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: 'views/timer/timerView.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
@@ -87,9 +87,28 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-
   .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
     $scope.myStopwatch = stepwatch;
+
+    $scope.select = {};
+
+    $scope.efforts = [
+      {
+        id: "56257c4c1f7b6687091d2c06",
+        name: "Pruefungsvorbereitung"
+      },
+      {
+        id: null,
+        name: "Assignment"
+      },
+      {
+        id: "3",
+        name: "Vorbereitung Präsentation"
+      }
+    ];
+
+    $scope.modules = Modules.query();
+
 
     //get Perofrmance Date
     var today = new Date();
@@ -110,22 +129,12 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
+      //data.seconds = 0;
+      var sessionId = $window.sessionStorage.mySessionId;
+      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-    //data.seconds = 0; ??????? keine ahnung was das hier soll
-
-    var sessionId = $window.sessionStorage.mySessionId;
-    var moduleid = $scope.select.course;
-
-    //$rootScope.notify($scope.moduleid);
-
-      Efforts.save(sessionId, $window.sessionStorage.username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
+      Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
     };
-
-
-    //$scope.modules = $window.sessionStorage.modulesArray;
-    $scope.modules = Modules.query();
-   // $scope.efforts = Efforts.query($window.sessionStorage.mySessionId, $window.sessionStorage.userid);
-    $scope.efforts = Efforts.query();
   });
 
 
