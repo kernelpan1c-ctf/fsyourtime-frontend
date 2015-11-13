@@ -1,6 +1,6 @@
 angular.module('app')
 
-    .controller('privacyController', function($scope, PrivacyService, $location, $rootScope){
+  .controller('privacyController', function($scope, PrivacyService, $location, $rootScope){
     $scope.privacy = function(){
       $rootScope.show("Authenticating..");
       PrivacyService.acceptPrivacy(sessionStorage.mySessionId, sessionStorage.userid).success(function() {
@@ -16,11 +16,11 @@ angular.module('app')
     $scope.decline = function() {
       $rootScope.hide();
       PrivacyService.logOut(sessionStorage.mySessionId).success(function(data) {
-       $rootScope.hide();
-       $location.path('/login');
+        $rootScope.hide();
+        $location.path('/login');
       }).error(function(data) {
         $rootScope.notify(data);
       });
       $location.path('/app/timeManagmentTEST');
     };
-});
+  });

@@ -60,7 +60,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'views/menu.html'
+    templateUrl: 'views/menu/menu.html',
+    controller: 'menuController'
   })
 
   .state('app.settings', {
