@@ -19,10 +19,23 @@ angular.module('app')
     }
   })
 
-  .factory('Modules', function ($resource) {
-
+  .factory('EffortTypes', function ($resource) {
     return {
-      query: function ($http, $window) {
+      query: function () {
+        return $resource('http://backend-dev.kevinott.de/api/efforttypes', {}, {
+          query: {
+            method: 'GET',
+            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            isArray: true
+          }
+        }).query();
+      }
+    }
+  })
+
+  .factory('Modules', function ($resource) {
+    return {
+      query: function () {
         return $resource('http://backend-dev.kevinott.de/api/modules/student', {}, {
           query: {
             method: 'GET',

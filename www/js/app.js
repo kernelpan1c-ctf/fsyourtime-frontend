@@ -86,8 +86,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timeManagement',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeManagement/timeMView.html',
-          controller: 'timeMController'
+          templateUrl: 'views/timeManagement/timeManagementView.html',
+          controller: 'timeManagementController'
         }
       }
     })
