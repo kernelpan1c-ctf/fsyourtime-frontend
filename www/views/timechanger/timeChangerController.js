@@ -3,19 +3,15 @@
  */
 angular.module('app')
 
-  .controller('timeChangerController', function (Modules, Efforts, $window, $scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerController', function (Modules, Efforts, $window, $scope)   {
 
-
-
-    // Dropdown
-
-
+    $scope.select = {};
+    if (!$scope.efforts) {$scope.noEfforts = true;} else $scope.noEfforts = false;
 
     $scope.modules = Modules.query();
 
-    $scope.efforts = Efforts.query();
-
-    if ($scope.efforts == "") {$scope.noEfforts = true;} else $scope.noEfforts = false;
-
-    alert($scope.efforts)
+    $scope.effortquery = function (moduleid) {
+      $scope.efforts = Efforts.query(moduleid);
+      if ($scope.efforts) $scope.noEfforts=false;
+    };
   });
