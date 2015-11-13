@@ -8,8 +8,7 @@
           <div class="input-label">
             Class:
           </div>
-          <select>
-            <option ng-model="select.module" ng-repeat="module in modules" value="{{module._id}}">{{module.name}}</option>
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules">
           </select>
         </label>
       </div>
@@ -19,8 +18,7 @@
           <div class="input-label">
             Effort type:
           </div>
-          <select>
-            <option ng-model="select.effort" ng-repeat="effort in efforts" value="{{effort._id}}">{{effort._id}}</option>
+          <select ng-model="select.effort" ng-options="effort.id as effort.name for effort in efforts">
           </select>
         </label>
       </div>
@@ -31,7 +29,6 @@
     <button ng-click='myStopwatch.stop()'>Stop</button>
     <button ng-click='myStopwatch.reset()'>Reset</button>
     <button ng-click='submit()'>Submit</button>
-
 
   </ion-content>
 </ion-view>

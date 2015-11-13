@@ -5,7 +5,6 @@ angular.module('app')
     $scope.signIn = function (username, password, syncdata) {
 
       $rootScope.show("Authenticating..");
-      $window.sessionStorage.userID = username;
 
       // syncdata checkbox = undefined workaround
       if (!syncdata)syncdata = false;

@@ -95,11 +95,11 @@ angular.module('app')
 
     $scope.efforts = [
       {
-        id: "1",
-        name: "Lesen"
+        id: "56257c4c1f7b6687091d2c06",
+        name: "Pruefungsvorbereitung"
       },
       {
-        id: "2",
+        id: null,
         name: "Assignment"
       },
       {
@@ -134,9 +134,7 @@ angular.module('app')
       var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      alert (amount);
-
-      //Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
+      Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
     };
   });
 
