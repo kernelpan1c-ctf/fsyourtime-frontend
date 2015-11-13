@@ -77,7 +77,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timer',
       views: {
         'menuContent': {
-          templateUrl: 'views/timer/timerViewTEST.html',
+          templateUrl: 'views/timer/timerView.html',
           controller: 'MainCtrl'
         }
       }

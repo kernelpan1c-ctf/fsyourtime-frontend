@@ -12,7 +12,7 @@ angular.module('app')
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: 'views/timer/timerView.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
