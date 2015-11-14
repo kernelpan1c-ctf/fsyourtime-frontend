@@ -4,7 +4,7 @@
 
 angular.module('app')
 
-  .factory('Efforts', function ($http) {
+  .factory('Efforts', function ($http, $resource) {
     return {
       save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         var config = {headers: {'x-session': sessionId, 'x-key': userid}};
@@ -15,6 +15,16 @@ angular.module('app')
           efforttypeid: efftypeid,
           performancedate: performancedate
         }, config);
+      },
+
+      query: function (moduleid) {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/module/' + moduleid , {}, {
+          query: {
+            method: 'GET',
+            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            isArray: true
+          }
+        }).query();
       }
     }
   })
