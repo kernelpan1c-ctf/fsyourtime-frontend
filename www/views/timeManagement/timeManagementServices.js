@@ -25,6 +25,27 @@ angular.module('app')
             isArray: true
           }
         }).query();
+      },
+
+      update: function (effortid, amount, efforttypeid) {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
+          query: {
+            method: 'PUT',
+            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            amount : amount,
+            efforttypeid : efforttypeid,
+            isArray: true
+          }
+        }).query();
+      },
+      getbyid: function (effortid) {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
+          query: {
+            method: 'GET',
+            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            isArray: true
+          }
+        }).query();
       }
     }
   })
