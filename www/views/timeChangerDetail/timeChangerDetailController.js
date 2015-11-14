@@ -3,21 +3,19 @@
  */
 angular.module('app')
 
-  .controller('timeChangerDetailController', function ($stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerDetailController', function (EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform)   {
 
-
+    $scope.select = {};
     var effortid = $stateParams.id;
 
-
-    $scope.effort = Efforts.getbyid(effortid);
-
-    $scope.Date = new Date($scope.effort.performancedate);
+    $scope.userseffort = Efforts.getbyid(effortid);
+    $scope.efforts = EffortTypes.query();
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
       minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
-        date: $scope.effort.performancedate,
+        date: $scope.userseffort.performancedate,
         mode: 'date', // or 'time'
         minDate: minDate,
         allowOldDates: true,
@@ -68,10 +66,8 @@ angular.module('app')
     };
 
 
-
-
-    $scope.save = function(){
-
+    $scope.save = function(amount){
+      Efforts.update($stateParams.id, amount, $scope.select.effort);
     }
 
   });

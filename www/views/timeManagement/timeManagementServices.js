@@ -28,16 +28,20 @@ angular.module('app')
       },
 
       update: function (effortid, amount, efforttypeid) {
-        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
-          query: {
-            method: 'PUT',
-            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
-            amount : amount,
-            efforttypeid : efforttypeid,
-            isArray: true
-          }
-        }).query();
-      },
+       /* return $http.put('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
+          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+            amount: amount,
+            efforttypeid: efforttypeid
+        });
+      },*/
+
+       return $http({
+          url: 'http://backend-dev.kevinott.de/api/efforts/' + effortid,
+          method: "PUT",
+          data: {amount: amount, efforttypeid: efforttypeid},
+          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
+        })},
+
       getbyid: function (effortid) {
         return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
           query: {
