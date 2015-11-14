@@ -1,18 +1,23 @@
 /**
  * Created by justus on 06.10.15.
  */
-angular.module('app',[], function($locationProvider){
-  $locationProvider.html5Mode(true);
-})
+angular.module('app')
 
   .controller('timeChangerDetailController', function ($stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform)   {
 
+
+    var effortid = $stateParams.id;
+
+
+    $scope.effort = Efforts.getbyid(effortid);
+
+    $scope.Date = new Date($scope.effort.performancedate);
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function() {
 
       minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
-        date: new Date(),
+        date: $scope.effort.performancedate,
         mode: 'date', // or 'time'
         minDate: minDate,
         allowOldDates: true,
@@ -62,11 +67,7 @@ angular.module('app',[], function($locationProvider){
       });
     };
 
-    var effortid = $stateParams.effort._id;
-    alert(effortid);
 
-
-    $scope.efforts = Efforts.getbyid(effortid);
 
 
     $scope.save = function(){

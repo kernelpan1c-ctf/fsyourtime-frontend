@@ -4,7 +4,7 @@
 
 angular.module('app')
 
-  .factory('Efforts', function ($http, $resource) {
+  .factory('Efforts', function ($http, $resource, $filter) {
     return {
       save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         var config = {headers: {'x-session': sessionId, 'x-key': userid}};
@@ -43,7 +43,7 @@ angular.module('app')
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
-            isArray: true
+            isArray: false
           }
         }).query();
       }

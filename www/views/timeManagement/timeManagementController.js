@@ -108,12 +108,26 @@ angular.module('app')
 
     var amount = $scope.getDuration($scope.startTime, $scope.endTime);
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
+    today = mm + '-' + dd + '-' + yyyy;
 
     $scope.save = function () {
       //alert("module: " + $scope.select.module);
       //alert("effort: " + $scope.select.effort);
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
-        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, $scope.date).error(function (status, data) {
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
           console.log(status);
           console.log(data);
         });
