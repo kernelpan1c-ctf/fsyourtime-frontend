@@ -9,7 +9,7 @@ angular.module('app')
       save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         var config = {headers: {'x-session': sessionId, 'x-key': userid}};
         return $http.post('http://backend-dev.kevinott.de/api/efforts', {
-          amount: 5,//amount,
+          amount: amount,
           moduleid: moduleid,
           studentid: studentid,
           efforttypeid: efftypeid,
