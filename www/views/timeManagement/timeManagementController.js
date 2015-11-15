@@ -105,7 +105,7 @@ angular.module('app')
     today = mm + '-' + dd + '-' + yyyy;
 
     $scope.save = function () {
-      if (amount <= 10) {
+      if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
             $rootScope.notify(data);
