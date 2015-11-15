@@ -7,23 +7,6 @@ angular.module('app')
                                                     $ionicPlatform, Efforts, Modules, EffortTypes) {
 
     $scope.select = {};
-
-    /*
-    $scope.efforts = [
-      {
-        id: "56257c4c1f7b6687091d2c06",
-        name: "Pruefungsvorbereitung"
-      },
-      {
-        id: null,
-        name: "Assignment"
-      },
-      {
-        id: "3",
-        name: "Vorbereitung Präsentation"
-      }
-    ];*/
-
     $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
 
@@ -105,7 +88,6 @@ angular.module('app')
       return Hours;
     };
 
-
     var amount = $scope.getDuration($scope.startTime, $scope.endTime);
 
     var today = new Date();
@@ -132,21 +114,4 @@ angular.module('app')
           console.log(data);
         });
     };
-
-    //  $scope.save = function () {
-    //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
-    //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-    //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
-    //      moduleid : $scope.modules.id,
-    //      studentid : $window.sessionStorage.matricularnr,
-    //      efftypeid : $scope.efforts.id,
-    //      performancedate : $scope.date,
-    //place : $scope.place
-    //material: $scope.material
-    //    })
-    //  }
-
-
-    //$scope.efforts = Efforts.query();
-
   });

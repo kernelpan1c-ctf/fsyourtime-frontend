@@ -18,7 +18,7 @@ angular.module('app')
       },
 
       query: function (moduleid) {
-        return $resource('http://backend-dev.kevinott.de/api/efforts/module/' + moduleid , {}, {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/module/' + moduleid, {}, {
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
@@ -28,22 +28,23 @@ angular.module('app')
       },
 
       update: function (effortid, amount, efforttypeid) {
-       /* return $http.put('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
-          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
-            amount: amount,
-            efforttypeid: efforttypeid
-        });
-      },*/
+        /* return $http.put('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
+         headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+         amount: amount,
+         efforttypeid: efforttypeid
+         });
+         },*/
 
-       return $http({
+        return $http({
           url: 'http://backend-dev.kevinott.de/api/efforts/' + effortid,
           method: "PUT",
           data: {amount: amount, efforttypeid: efforttypeid},
           headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
-        })},
+        })
+      },
 
       getbyid: function (effortid) {
-        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
+        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid, {}, {
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
@@ -55,17 +56,13 @@ angular.module('app')
   })
 
   .factory('EffortTypes', function ($resource) {
-    return {
-      query: function () {
-        return $resource('http://backend-dev.kevinott.de/api/efforttypes', {}, {
-          query: {
-            method: 'GET',
-            headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
-            isArray: true
-          }
-        }).query();
+    return $resource('http://backend-dev.kevinott.de/api/efforttypes', {}, {
+      query: {
+        method: 'GET',
+        headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+        isArray: true
       }
-    }
+    })
   })
 
   .factory('Modules', function ($resource) {

@@ -3,9 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeChangerController', function (Modules, Efforts, $window, $scope)   {
-
-
+  .controller('timeChangerController', function (Modules, Efforts, $window, $scope, EffortService)   {
 
     $scope.select = {};
     if (!$scope.efforts) {$scope.noEfforts = true;} else $scope.noEfforts = false;
@@ -15,6 +13,9 @@ angular.module('app')
     $scope.effortquery = function (moduleid) {
       $scope.efforts = Efforts.query(moduleid);
       if ($scope.efforts) $scope.noEfforts=false;
+      if (!$scope.noEfforts) {
+        EffortService.efforts = $scope.efforts;
+      }
     };
 
   });
