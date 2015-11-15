@@ -3,14 +3,28 @@
  */
 angular.module('app')
 
-  .controller('timeChangerDetailController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerDetailController', function (EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform, effort) {
+
+    $scope.select = {};
+
+    $scope.userseffort = effort;
+    $scope.efforts = EffortTypes.query(function () {
+
+      $scope.efforts.forEach(function (searchEffort) {
+        if (searchEffort._id === effort._id) $scope.select.effort = searchEffort._id;
+      });
+    });
+
+    $scope.save = function (amount) {
+      Efforts.update($stateParams.id, amount, $scope.select.effort);
+    };
 
     //Picker only testable in emulator/on device
-    $scope.showDatePicker = function() {
+    $scope.showDatePicker = function () {
 
       minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
-        date: new Date(),
+        date: $scope.userseffort.performancedate,
         mode: 'date', // or 'time'
         minDate: minDate,
         allowOldDates: true,
@@ -21,14 +35,14 @@ angular.module('app')
         cancelButtonColor: '#000000'
       };
 
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(options).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(options).then(function (date) {
           alert(date);
         });
       });
     };
 
-    $scope.showStartTime = function(){
+    $scope.showStartTime = function () {
       var timeOptions = {
         date: new Date(),
         mode: 'time',
@@ -37,14 +51,14 @@ angular.module('app')
         cancelButtonLabel: 'CANCEL',
         cancelButtonColor: '#000000'
       };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(timeOptions).then(function (date) {
           //alert(date);
         });
       });
     };
 
-    $scope.showEndTime = function(){
+    $scope.showEndTime = function () {
       var timeOptions = {
         date: new Date(),
         mode: 'time',
@@ -53,42 +67,10 @@ angular.module('app')
         cancelButtonLabel: 'CANCEL',
         cancelButtonColor: '#000000'
       };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(timeOptions).then(function (date) {
           //alert(date);
         });
       });
     };
-
-    // Dropdown
-    var coursearray = [
-      {
-        id: "1",
-        name: localStorage.getItem('Class')
-      }
-
-    ];
-    $scope.courses = coursearray;
-
-    $scope.load = function() {
-      var StartTime = localStorage.getItem('StartTime');
-      var EndTime = localStorage.getItem('EndTime');
-      var Date = localStorage.getItem('Date');
-      element(by.model('StartTime')).value=StartTime;
-      element(by.model('EndTime')).value=EndTime;
-      element(by.model('Date')).value=Date;
-
-    };
-
-    $scope.save = function() {
-      var StartTime = element(by.model('StartTime')).value;
-      var EndTime = element(by.model('EndTime')).value;
-      var Class = element(by.model('Class')).value;
-      var Date = element(by.model('Date')).value;
-      localStorage.setItem('StartTime', $scope.StartTime);
-      localStorage.setItem('EndTime', $scope.EndTime);
-      localStorage.setItem('Class', $scope.Class);
-      localStorage.setItem('Date', $scope.Date);
-    };
-
   });

@@ -4,29 +4,11 @@
 angular.module('app')
 
   .controller('timeManagementController', function ($filter, $http, $window, $scope, $cordovaDatePicker,
-                                                    $ionicPlatform, Efforts, Modules, EffortTypes) {
+                                                    $ionicPlatform, Efforts, Modules, EffortTypes, $rootScope) {
 
     $scope.select = {};
-
-    /*
-    $scope.efforts = [
-      {
-        id: "56257c4c1f7b6687091d2c06",
-        name: "Pruefungsvorbereitung"
-      },
-      {
-        id: null,
-        name: "Assignment"
-      },
-      {
-        id: "3",
-        name: "Vorbereitung Präsentation"
-      }
-    ];*/
-
     $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
-
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function () {
@@ -47,7 +29,6 @@ angular.module('app')
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
           $scope.date = date;
-          //alert(date);
         });
       });
     };
@@ -65,7 +46,6 @@ angular.module('app')
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(timeOptions).then(function (date) {
           $scope.startTime = date;
-          //alert(date);
         });
       });
     };
@@ -83,7 +63,6 @@ angular.module('app')
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(timeOptions).then(function (date) {
           $scope.endTime = date;
-          //alert(date);
         });
       });
     };
@@ -99,40 +78,43 @@ angular.module('app')
       //start=Date.parse(start)
       //end=Date.parse(end)
       Difference = start - end;
-      //Days = Math.floor (Difference / (1000*60*60*24));
-      Hours = Math.floor(Difference / (1000 * 60 * 60)) % 24;
-      // Minutes = Math.floor ( Difference / (1000*60)) % 60;
-      return Hours;
-    };
+      //Days
+      //Math.floor (Difference / (1000*60*60*24));
+      //Hours
+      //Math.floor(Difference / (1000 * 60 * 60)) % 24;
+      //Minutes
+      return Math.floor(Difference / (1000 * 60)) % 60;
 
+    };
 
     var amount = $scope.getDuration($scope.startTime, $scope.endTime);
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
+    today = mm + '-' + dd + '-' + yyyy;
 
     $scope.save = function () {
-      //alert("module: " + $scope.select.module);
-      //alert("effort: " + $scope.select.effort);
-      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
-        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, $scope.date).error(function (status, data) {
-          console.log(status);
-          console.log(data);
-        });
+      if (amount <= 600) {
+        Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+          $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
+            $rootScope.notify(data);
+          }).error(function (status, data) {
+            console.log(status);
+            console.log(data);
+          });
+      }else {
+        $rootScope.notify('Maximum 10h per booking');
+      }
     };
-
-    //  $scope.save = function () {
-    //    $http.post('http://backend-dev.kevinott.de/api/efforts', {
-    //      headers: {'x-session': $window.sessionStorage.mySessionId, 'x-key': $window.sessionStorage.userid},
-    //     amount : $scope.getDuration($scope.startTime, $scope.endTime),
-    //      moduleid : $scope.modules.id,
-    //      studentid : $window.sessionStorage.matricularnr,
-    //      efftypeid : $scope.efforts.id,
-    //      performancedate : $scope.date,
-    //place : $scope.place
-    //material: $scope.material
-    //    })
-    //  }
-
-
-    //$scope.efforts = Efforts.query();
-
   });
