@@ -119,8 +119,8 @@ angular.module('app')
       var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      alert($scope.select.effort);
-      alert($scope.select.module);
+      //alert($scope.select.effort);
+      //alert($scope.select.module);
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
           console.log(status);

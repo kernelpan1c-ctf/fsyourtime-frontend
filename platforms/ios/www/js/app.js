@@ -95,7 +95,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timeChanger',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeChanger/timeChangerView.html',
+          templateUrl: 'views/timechanger/timeChangerview.html',
           controller: 'timeChangerController'
         }
       }
@@ -105,7 +105,12 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'views/timeChangerDetail/timeChangerDetailView.html',
-          controller: 'timeChangerDetailController'
+          controller: 'timeChangerDetailController',
+          resolve: {
+            effort: function($stateParams, EffortService) {
+              return EffortService.getEffort($stateParams.id)
+            }
+          }
         }
       }
     })

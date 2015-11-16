@@ -87,26 +87,12 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
+  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
 
     $scope.select = {};
 
-    $scope.efforts = [
-      {
-        id: "56257c4c1f7b6687091d2c06",
-        name: "Pruefungsvorbereitung"
-      },
-      {
-        id: null,
-        name: "Assignment"
-      },
-      {
-        id: "3",
-        name: "Vorbereitung Präsentation"
-      }
-    ];
-
+    $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
 
 
@@ -124,7 +110,7 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = mm + '-' + dd + '-' + yyyy;
 
 
     //Submit Data
@@ -133,7 +119,13 @@ angular.module('app')
       var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
+      //alert($scope.select.effort);
+      //alert($scope.select.module);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
+          console.log(status);
+          console.log(data);
+        });
     };
   });
 

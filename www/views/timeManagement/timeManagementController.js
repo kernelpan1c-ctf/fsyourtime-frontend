@@ -78,6 +78,7 @@ angular.module('app')
       //start=Date.parse(start)
       //end=Date.parse(end)
       Difference = start - end;
+      alert(start + " " + " " + end + " " + Difference);
       //Days
       //Math.floor (Difference / (1000*60*60*24));
       //Hours
@@ -105,6 +106,7 @@ angular.module('app')
     today = mm + '-' + dd + '-' + yyyy;
 
     $scope.save = function () {
+      alert(amount);
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){

@@ -95,7 +95,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timeChanger',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeChanger/timeChangerView.html',
+          templateUrl: 'views/timechanger/timeChangerview.html',
           controller: 'timeChangerController'
         }
       }
