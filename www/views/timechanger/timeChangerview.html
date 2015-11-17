@@ -19,7 +19,7 @@
       </div>
       <div class="item item-text-wrap" ui-sref="app.timeChangerDetail({id:effort._id})">
                 <span>
-                 Minutes: {{effort.amount}}
+                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}}
                 </span>
         <br>
         <span>Type: {{effort.type.name}}</span>
