@@ -2,9 +2,9 @@ angular.module('app')
 
   .factory('PrivacyService', function ($http) {
     return {
-      acceptPrivacy: function (mySessionId, userid, matricularnr) {
+      acceptPrivacy: function (mySessionId, userid) {
         var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
-        return $http.put(options.api.base_url + 'api/updateStudent/'+ matricularnr, {
+        return $http.put(options.api.base_url + 'api/updateStudent/'+ userid, {
           privacyflag: true
         }, config);
       },

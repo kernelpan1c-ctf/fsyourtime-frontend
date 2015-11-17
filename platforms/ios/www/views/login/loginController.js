@@ -7,7 +7,7 @@ angular.module('app')
       $rootScope.show("Authenticating..");
 
       // syncdata checkbox = undefined workaround
-      if (!syncdata)syncdata = false;
+      if (syncdata)syncdata = false;
 
       UserService.signIn(username, password, syncdata).success(function (data) {
         $window.sessionStorage.mySessionId = data.mySessionId;
@@ -15,7 +15,7 @@ angular.module('app')
         $window.sessionStorage.matricularnr = data.matricularnr;
         $window.sessionStorage.privacy = data.privacy;
 
-        if(!sessionStorage.privacy) {
+        if(sessionStorage.privacy == 'false') {
           $rootScope.hide();
           $location.path('/privacy');
         }else{

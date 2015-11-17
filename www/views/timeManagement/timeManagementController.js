@@ -35,7 +35,7 @@ angular.module('app')
 
     $scope.showStartTime = function () {
       var timeOptions = {
-        date: new Date(),
+        date: new Date(),//$scope.date,
         mode: 'time',
         doneButtonLabel: 'Select',
         doneButtonColor: '#000000',
@@ -67,20 +67,13 @@ angular.module('app')
       });
     };
 
-    //Call API Service
 
-    // Dropdown Hardcoded Data
      function getDuration (start, end) {
-      //start=Date.parse(start)
-      //end=Date.parse(end)
-      Difference = end - start;
-      //alert(start + " " + " " + end + " " + Difference);
-      //Days
-      //Math.floor (Difference / (1000*60*60*24));
-      //Hours
-      //Math.floor(Difference / (1000 * 60 * 60)) % 24;
+      start.getTime();
+      end.getTime();
+       var Difference = end - start;
       //Minutes
-      return Math.floor(Difference / (100 * 60)) % 60;
+      return Math.floor(Difference / (1000 * 60));
     }
 
     function transformDate (date) {
@@ -95,29 +88,14 @@ angular.module('app')
         mm = '0' + mm
       }
 
-      date = mm + '-' + dd + '-' + yyyy;
+      date =  yyyy + '-' + mm + '-' + dd;
+      return date;
     }
 
     $scope.save = function () {
-      var amount = $scope.getDuration($scope.startTime, $scope.endTime);
+      var amount = getDuration($scope.startTime, $scope.endTime);
+      var today = transformDate(new Date());
 
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1; //January is 0!
-      var yyyy = today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-
-      today = mm + '-' + dd + '-' + yyyy;
-
-
-      alert(amount);
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
