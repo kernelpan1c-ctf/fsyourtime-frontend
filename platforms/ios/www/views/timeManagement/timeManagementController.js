@@ -72,7 +72,6 @@ angular.module('app')
       start.getTime();
       end.getTime();
        var Difference = end - start;
-      alert('get duration');
       //Minutes
       return Math.floor(Difference / (1000 * 60));
     }
@@ -94,11 +93,9 @@ angular.module('app')
     }
 
     $scope.save = function () {
-      alert('ruft save auf');
       var amount = getDuration($scope.startTime, $scope.endTime);
       var today = transformDate(new Date());
 
-      alert(amount);
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){

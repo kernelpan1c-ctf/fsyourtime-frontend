@@ -1,24 +1,28 @@
 <ion-view title="Change Efforts">
   <ion-content padding="true" class="has-header">
-
     <ion-list>
-
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
             Module:
           </div>
-          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules"
+                  ng-change="effortquery(select.module)">
           </select>
         </label>
       </div>
     </ion-list>
 
     <div class="card" ng-hide="noEfforts" ng-repeat="effort in efforts">
+      <div class="item item-divider">
+        {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
+      </div>
       <div class="item item-text-wrap" ui-sref="app.timeChangerDetail({id:effort._id})">
                 <span>
-                {{(effort.performanceDate) | date:'yyyy-MM-dd HH:mm'}} Booked: {{effort.amount}}
+                 Minutes: {{effort.amount}}
                 </span>
+        <br>
+        <span>Type: {{effort.type.name}}</span>
       </div>
     </div>
   </ion-content>
