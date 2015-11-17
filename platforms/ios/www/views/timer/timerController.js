@@ -12,7 +12,7 @@ angular.module('app')
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: 'views/timer/timerView.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
@@ -87,9 +87,14 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-
-  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
+  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
+
+    $scope.select = {};
+
+    $scope.efforts = EffortTypes.query();
+    $scope.modules = Modules.query();
+
 
     //get Perofrmance Date
     var today = new Date();
@@ -105,27 +110,23 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = mm + '-' + dd + '-' + yyyy;
 
 
     //Submit Data
     $scope.submit = function () {
+      //data.seconds = 0;
+      var sessionId = $window.sessionStorage.mySessionId;
+      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-    //data.seconds = 0; ??????? keine ahnung was das hier soll
-
-    var sessionId = $window.sessionStorage.mySessionId;
-    var moduleid = $scope.select.course;
-
-    //$rootScope.notify($scope.moduleid);
-
-      Efforts.save(sessionId, $window.sessionStorage.username, $scope.amount, moduleid, studentid, efftypeid, performancedate);
+      //alert($scope.select.effort);
+      //alert($scope.select.module);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
+          console.log(status);
+          console.log(data);
+        });
     };
-
-
-    //$scope.modules = $window.sessionStorage.modulesArray;
-    $scope.modules = Modules.query();
-   // $scope.efforts = Efforts.query($window.sessionStorage.mySessionId, $window.sessionStorage.userid);
-    $scope.efforts = Efforts.query();
   });
 
 

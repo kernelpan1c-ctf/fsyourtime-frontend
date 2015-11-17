@@ -1,13 +1,18 @@
 angular.module('app')
 
-  .factory('UserService', function ($http) {
+  .factory('PrivacyService', function ($http) {
     return {
-      accept: function () {
-        //return $http.set('', {  //set accepted privacy in DB//not yet implemented by backend
+      acceptPrivacy: function (mySessionId, userid, matricularnr) {
+        var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
+        return $http.put(options.api.base_url + 'api/updateStudent/'+ matricularnr, {
+          privacyflag: true
+        }, config);
+      },
 
+      logOut: function (mySessionId) {
+        return $http.post(options.api.base_url + 'logout', {
+          headers: {'x-session': mySessionId}
         });
       }
-
-
     };
   });

@@ -12,7 +12,7 @@ angular.module('app')
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: 'views/timer/timerView.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
@@ -87,27 +87,12 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-
-  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
+  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
 
     $scope.select = {};
 
-    $scope.efforts = [
-      {
-        id: "1",
-        name: "Lesen"
-      },
-      {
-        id: "2",
-        name: "Assignment"
-      },
-      {
-        id: "3",
-        name: "Vorbereitung Präsentation"
-      }
-    ];
-
+    $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
 
 
@@ -125,7 +110,7 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = mm + '-' + dd + '-' + yyyy;
 
 
     //Submit Data
@@ -134,9 +119,13 @@ angular.module('app')
       var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      alert (amount);
-
-      //Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
+      //alert($scope.select.effort);
+      //alert($scope.select.module);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
+          console.log(status);
+          console.log(data);
+        });
     };
   });
 

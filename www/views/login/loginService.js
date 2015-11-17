@@ -3,7 +3,7 @@ angular.module('app')
   .factory('UserService', function ($http, $window) {
     return {
       signIn: function (username, password, syncdata) {
-        return $http.post('http://backend-dev.kevinott.de/login', {
+        return $http.post(options.api.base_url + 'login', {
           username: username,
           password: password,
           syncdata: syncdata
@@ -11,7 +11,7 @@ angular.module('app')
       },
 
       getModules: function (mySessionId, userid) {
-        return $http.get('http://backend-dev.kevinott.de/api/modules/student/', {
+        return $http.get(options.api.base_url + 'api/modules/student/', {
           headers: {'x-session': mySessionId, 'x-key': userid}
         });
       }
