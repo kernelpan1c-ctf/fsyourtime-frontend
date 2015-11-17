@@ -32,27 +32,6 @@ angular.module('app')
         });
       });
     };
-    $scope.showEndDatePicker = function () {
-
-      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
-      var options = {
-        date: $scope.date,
-        mode: 'date', // or 'time'
-        allowOldDates: true,
-        allowFutureDates: false,
-        minDate: new Date(+new Date - 12096e5),
-        doneButtonLabel: 'Select',
-        doneButtonColor: '#000000',
-        cancelButtonLabel: 'Cancel',
-        cancelButtonColor: '#000000'
-      };
-
-      $ionicPlatform.ready(function () {
-        $cordovaDatePicker.show(options).then(function (date) {
-          $scope.EndDate = date;
-        });
-      });
-    };
 
     $scope.showStartTime = function () {
       var timeOptions = {
@@ -91,10 +70,10 @@ angular.module('app')
     //Call API Service
 
     // Dropdown Hardcoded Data
-    $scope.getDuration = function (start, end) {
+     function getDuration (start, end) {
       //start=Date.parse(start)
       //end=Date.parse(end)
-      Difference = start - end;
+      Difference = end - start;
       //alert(start + " " + " " + end + " " + Difference);
       //Days
       //Math.floor (Difference / (1000*60*60*24));
@@ -102,7 +81,22 @@ angular.module('app')
       //Math.floor(Difference / (1000 * 60 * 60)) % 24;
       //Minutes
       return Math.floor(Difference / (100 * 60)) % 60;
-    };
+    }
+
+    function transformDate (date) {
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1;//January is 0!
+      var yyyy = date.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+
+      date = mm + '-' + dd + '-' + yyyy;
+    }
 
     $scope.save = function () {
       var amount = $scope.getDuration($scope.startTime, $scope.endTime);
@@ -127,7 +121,7 @@ angular.module('app')
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
-            $rootScope.notify(data);
+            $rootScope.notify(status);
           }).error(function (status, data) {
             console.log(status);
             console.log(data);
