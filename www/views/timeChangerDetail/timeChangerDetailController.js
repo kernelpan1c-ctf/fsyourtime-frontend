@@ -18,7 +18,7 @@ angular.module('app')
     });
     $scope.efforttype= $scope.userseffort.type.name;
     $scope.save = function (amount) {
-      Efforts.update($stateParams.id, amount, $scope.select.effort);
+      Efforts.update($stateParams.id, amount, $scope.efforttype);
     };
 
 
@@ -41,7 +41,7 @@ angular.module('app')
 
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
-          alert(date);
+          $scope.date = date;
         });
       });
     };
@@ -57,7 +57,7 @@ angular.module('app')
       };
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(timeOptions).then(function (date) {
-          //alert(date);
+          $scope.date=date;
         });
       });
     };
@@ -73,7 +73,7 @@ angular.module('app')
       };
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(timeOptions).then(function (date) {
-          //alert(date);
+          $scope.date=date;
         });
       });
     };
