@@ -4,7 +4,7 @@ angular.module('app')
     return {
       acceptPrivacy: function (mySessionId, userid) {
         var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
-        return $http.put(options.api.base_url + 'api/updateStudent/'+ userid, {
+        return $http.put(options.api.base_url + 'api/students/'+ userid, {
           privacyflag: true
         }, config);
       },
