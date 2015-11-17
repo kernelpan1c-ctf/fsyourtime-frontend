@@ -50,8 +50,17 @@ angular.module('app')
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
             isArray: false
           }
-        }).query();
-      }
+        })
+      },
+      delete: function (effortid){
+        //alert("test");
+        return $http({
+          url: options.api.base_url + 'api/efforts/' + effortid,
+          method: "DELETE",
+          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
+        })
+      },
+
     }
   })
 
