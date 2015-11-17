@@ -25,7 +25,7 @@ angular.module('app')
     return {
       query: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         var config = {headers: {'x-session': sessionId, 'x-key': userid}};
-        return $http.get('http://backend-dev.kevinott.de/api/efforts/' + effortid, {
+        return $http.get(options.api.base_url + 'api/efforts/' + effortid, {
           amount: 5,//amount,
           moduleid: moduleid,
           studentid: studentid,
@@ -41,7 +41,7 @@ angular.module('app')
   .factory('updateEfforts', function ($http, $window) {
     return {
       do: function (amount, moduleid, studentid, efftypeid, performancedate) {
-        return $http.put('http://backend-dev.kevinott.de/api/efforts', {
+        return $http.put(options.api.base_url + 'api/efforts', {
           headers: {'x-session': $window.sessionStorage.token, 'x-key': $window.sessionStorage.userid},
           amount: amount,
           stundentid: $window.sessionStorage.matricularnr,

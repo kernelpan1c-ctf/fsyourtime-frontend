@@ -32,6 +32,27 @@ angular.module('app')
         });
       });
     };
+    $scope.showEndDatePicker = function () {
+
+      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      var options = {
+        date: $scope.date,
+        mode: 'date', // or 'time'
+        allowOldDates: true,
+        allowFutureDates: false,
+        minDate: new Date(+new Date - 12096e5),
+        doneButtonLabel: 'Select',
+        doneButtonColor: '#000000',
+        cancelButtonLabel: 'Cancel',
+        cancelButtonColor: '#000000'
+      };
+
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(options).then(function (date) {
+          $scope.EndDate = date;
+        });
+      });
+    };
 
     $scope.showStartTime = function () {
       var timeOptions = {
@@ -67,10 +88,6 @@ angular.module('app')
       });
     };
 
-    // check startTime - endTime max 10h
-    //$scope.startTime
-    //$scope.endTime
-
     //Call API Service
 
     // Dropdown Hardcoded Data
@@ -78,34 +95,34 @@ angular.module('app')
       //start=Date.parse(start)
       //end=Date.parse(end)
       Difference = start - end;
-      alert(start + " " + " " + end + " " + Difference);
+      //alert(start + " " + " " + end + " " + Difference);
       //Days
       //Math.floor (Difference / (1000*60*60*24));
       //Hours
       //Math.floor(Difference / (1000 * 60 * 60)) % 24;
       //Minutes
-      return Math.floor(Difference / (1000 * 60)) % 60;
-
+      return Math.floor(Difference / (100 * 60)) % 60;
     };
 
-    var amount = $scope.getDuration($scope.startTime, $scope.endTime);
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-
-    today = mm + '-' + dd + '-' + yyyy;
-
     $scope.save = function () {
+      var amount = $scope.getDuration($scope.startTime, $scope.endTime);
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+
+      today = mm + '-' + dd + '-' + yyyy;
+
+
       alert(amount);
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,

@@ -114,8 +114,38 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
+    .state('app.help', {
+      url: '/help',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/help/helpView.html',
+          controller: 'timeChangerController'
+        }
+      }
+    })
+    .state('app.contact', {
+      url: '/contact',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/contact/contactView.html',
+          controller: ''
+        }
+      }
+    })
+    .state('app.privacy', {
+      url: '/privacy',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/privacyInfo/privacyInfoView.html'
+        }
+      }
+    })
 
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });
+
+var options = {};
+options.api = {};
+options.api.base_url = "http://backend-dev.kevinott.de/";

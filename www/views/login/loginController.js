@@ -15,7 +15,7 @@ angular.module('app')
         $window.sessionStorage.matricularnr = data.matricularnr;
         $window.sessionStorage.privacy = data.privacy;
 
-        if(sessionStorage.privacy == 'false') {
+        if(!sessionStorage.privacy) {
           $rootScope.hide();
           $location.path('/privacy');
         }else{
@@ -24,7 +24,7 @@ angular.module('app')
         }
       }).error(function (status, data) {
         $rootScope.hide();
-        $rootScope.notify(data);
+        $rootScope.notify(status);
 
         console.log(status);
         console.log(data);

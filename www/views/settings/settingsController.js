@@ -5,15 +5,17 @@ angular.module('app')
         $scope.deleteAccount = function () {
           $rootScope.hide();
 
-          UserService.deleteAccount().success(function(data){
-            UserService.logOut().success(function(data){
+          UserService.deleteAccount().success(function(){
+            UserService.logOut().success(function(){
               $location.path('/login');
-            }).error(function(data){
-              $rootScope.show("Logout failed! - Deletion was completed!");
+            }).error(function(status, data){
+              $rootScope.show(status);
             });
-          }).error(function(data){
+          }).error(function(status, data){
             $rootScope.hide();
-            $rootScope.show("Server is not available - Deletion could not be completed!");
+            $rootScope.show(status);
+            console.log(status);
+            console.log(data);
           });
         };
 

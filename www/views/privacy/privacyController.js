@@ -2,7 +2,7 @@ angular.module('app')
 
   .controller('privacyController', function ($scope, PrivacyService, $location, $rootScope) {
     $scope.privacy = function () {
-      PrivacyService.acceptPrivacy(sessionStorage.mySessionId, sessionStorage.userid).success(function () {
+      PrivacyService.acceptPrivacy(sessionStorage.mySessionId, sessionStorage.userid, sessionStorage.matricularnr).success(function () {
         $rootScope.hide();
         $location.path('/app/timer');
       }).error(function (data) {

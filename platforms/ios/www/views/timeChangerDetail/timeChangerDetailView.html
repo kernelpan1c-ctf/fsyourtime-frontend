@@ -1,9 +1,9 @@
-<ion-view title="TimeChanger">
+<ion-view title="Change Effort">
   <ion-content padding="true" class="has-header">
     <ion-list>
 
           <div class="item item-text-wrap">
-            Modulname
+            Module
           <div class="right">{{userseffort.module.name}}</div>
         </label>
       </div>
@@ -24,14 +24,14 @@
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-           Type of Effort:
+           Effort Type:
           </div>
           <select ng-model="select.effort" ng-options="effort._id as effort.name for effort in efforts">
           </select>
         </label>
       </div>
 
-    <button class="button button-block button-positive" ng-click="save(amount)">save</button>
+    <button class="button button-block button-positive" ng-click="save(amount)">Save</button>
   </ion-content>
 </ion-view>
 

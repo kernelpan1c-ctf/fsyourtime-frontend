@@ -2,15 +2,15 @@ angular.module('app')
 
   .factory('PrivacyService', function ($http) {
     return {
-      acceptPrivacy: function (mySessionId, userid) {
+      acceptPrivacy: function (mySessionId, userid, matricularnr) {
         var config = { headers: {'x-session': mySessionId, 'x-key': userid}};
-        return $http.put('http://backend-dev.kevinott.de/api/updateStudent/'+ userid, {
+        return $http.put(options.api.base_url + 'api/updateStudent/'+ matricularnr, {
           privacyflag: true
         }, config);
       },
 
       logOut: function (mySessionId) {
-        return $http.post('http://backend-dev.kevinott.de/logout', {
+        return $http.post(options.api.base_url + 'logout', {
           headers: {'x-session': mySessionId}
         });
       }

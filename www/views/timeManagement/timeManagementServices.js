@@ -8,7 +8,7 @@ angular.module('app')
     return {
       save: function (sessionId, userid, amount, moduleid, studentid, efftypeid, performancedate) {
         var config = {headers: {'x-session': sessionId, 'x-key': userid}};
-        return $http.post('http://backend-dev.kevinott.de/api/efforts', {
+        return $http.post(options.api.base_url + 'api/efforts', {
           amount: amount,
           moduleid: moduleid,
           studentid: studentid,
@@ -18,7 +18,7 @@ angular.module('app')
       },
 
       query: function (moduleid) {
-        return $resource('http://backend-dev.kevinott.de/api/efforts/module/' + moduleid, {}, {
+        return $resource(options.api.base_url + 'api/efforts/module/' + moduleid, {}, {
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
@@ -36,7 +36,7 @@ angular.module('app')
          },*/
 
         return $http({
-          url: 'http://backend-dev.kevinott.de/api/efforts/' + effortid,
+          url: options.api.base_url + 'api/efforts/' + effortid,
           method: "PUT",
           data: {amount: amount, efforttypeid: efforttypeid},
           headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
@@ -44,7 +44,7 @@ angular.module('app')
       },
 
       getbyid: function (effortid) {
-        return $resource('http://backend-dev.kevinott.de/api/efforts/' + effortid, {}, {
+        return $resource(options.api.base_url + 'api/efforts/' + effortid, {}, {
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
@@ -56,7 +56,7 @@ angular.module('app')
   })
 
   .factory('EffortTypes', function ($resource) {
-    return $resource('http://backend-dev.kevinott.de/api/efforttypes', {}, {
+    return $resource(options.api.base_url + 'api/efforttypes', {}, {
       query: {
         method: 'GET',
         headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
@@ -68,7 +68,7 @@ angular.module('app')
   .factory('Modules', function ($resource) {
     return {
       query: function () {
-        return $resource('http://backend-dev.kevinott.de/api/modules/student', {}, {
+        return $resource(options.api.base_url + 'api/modules/student', {}, {
           query: {
             method: 'GET',
             headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
