@@ -33,7 +33,6 @@ angular.module('app')
         //var time;
         var startTime;
         var timerPromise;
-
         self.start = function () {
           if (!timerPromise) {
             startTime = new Date();
@@ -89,7 +88,7 @@ angular.module('app')
 
   .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
-
+    $scope.timerRunning = false;
     $scope.select = {};
 
     $scope.efforts = EffortTypes.query();
@@ -127,7 +126,14 @@ angular.module('app')
           console.log(data);
         });
     };
+
+    $scope.timerstart = function () {
+      $scope.myStopwatch.start();
+      $scope.timerRunning = true;
+    };
+    $scope.timerstop = function() {
+      $scope.myStopwatch.stop();
+      $scope.timerRunning = false;
+    };
   });
-
-
 

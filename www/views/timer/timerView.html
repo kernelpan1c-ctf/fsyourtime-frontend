@@ -26,10 +26,12 @@
 
     <h1>{{myStopwatch.data.hours | numberFixedLen:2}}:{{myStopwatch.data.minutes | numberFixedLen:2}}:{{myStopwatch.data.seconds | numberFixedLen:2}}</h1>
 
-    <button class="button button-block button-balanced" ng-click='myStopwatch.start()'>Start</button>
-    <button class="button button-block button-energized" ng-click='myStopwatch.stop()'>Stop</button>
-    <button class="button button-block button-assertive" ng-click='myStopwatch.reset()'>Reset</button>
+    <button class="button button-block button-balanced"  ng-hide="timerRunning" ng-click='timerstart()'>Start</button>
+    <button class="button button-block button-assertive"  ng-hide="!timerRunning" ng-click='timerstop()'>Stop</button>
+    <button class="button button-block button-energized" ng-click='myStopwatch.reset()'>Reset</button>
     <button class="button button-block button-positive" ng-click='submit()'>Submit</button>
 
   </ion-content>
 </ion-view>
+
+
