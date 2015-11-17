@@ -1,0 +1,34 @@
+<ion-view title="Settings">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+
+      <ion-item class="item item-toggle">
+        GPS data
+        <label class="toggle">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+
+      <ion-item class="item item-toggle">
+        Allow push messages
+        <label class="toggle">
+          <input type="checkbox">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+
+    </ion-list>
+    <button class="button button-block button-positive" ng-click="save()">save</button>
+    <label>
+      Note: By deleting your account, your personal data gets deleted.<br>
+      You are not able to use the app anymore.<br>
+      If you want to use the app again, you need to sign in at the login page again
+    </label>
+    <button class="button button-block button-assertive" ng-click="deleteAccount()">Delete your account</button>
+  </ion-content>
+</ion-view>

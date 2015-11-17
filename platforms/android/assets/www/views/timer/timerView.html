@@ -1,0 +1,37 @@
+<ion-view title="Timer">
+  <ion-content padding="true" class="has-header">
+
+    <ion-list>
+
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Class:
+          </div>
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules">
+          </select>
+        </label>
+      </div>
+
+      <div class="effort">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Effort type:
+          </div>
+          <select ng-model="select.effort" ng-options="effort._id as effort.name for effort in efforts">
+          </select>
+        </label>
+      </div>
+    </ion-list>
+
+    <h1>{{myStopwatch.data.hours | numberFixedLen:2}}:{{myStopwatch.data.minutes | numberFixedLen:2}}:{{myStopwatch.data.seconds | numberFixedLen:2}}</h1>
+
+    <button class="button button-block button-balanced"  ng-hide="timerRunning" ng-click='timerstart()'>Start</button>
+    <button class="button button-block button-assertive"  ng-hide="!timerRunning" ng-click='timerstop()'>Stop</button>
+    <button class="button button-block button-energized" ng-click='myStopwatch.reset()'>Reset</button>
+    <button class="button button-block button-positive" ng-click='submit()'>Submit</button>
+
+  </ion-content>
+</ion-view>
+
+
