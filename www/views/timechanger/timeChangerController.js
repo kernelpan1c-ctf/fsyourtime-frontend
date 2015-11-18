@@ -5,7 +5,7 @@ angular.module('app')
 
   .controller('timeChangerController', function ($http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory)   {
 
-
+    $scope.totalamount = 0;
     $scope.shouldShowDelete = false;
     $scope.listCanSwipe = true
     $scope.select = {};
@@ -14,6 +14,15 @@ angular.module('app')
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
+    };
+
+
+    $scope.getTotal = function(efforts){
+      var totalamount = 0;
+      efforts.forEach(function (effort) {
+        totalamount = totalamount + effort.amount;
+      });
+      return $scope.efforts.totalamount = totalamount;
     };
 
     if (!$scope.efforts) {$scope.noEfforts = true;} else $scope.noEfforts = false;
@@ -30,6 +39,7 @@ angular.module('app')
       if (!$scope.noEfforts) {
         EffortService.efforts = $scope.efforts;
       }
+      $scope.getTotal($scope.efforts);
     };
 
     $scope.removeItem = function(index){
