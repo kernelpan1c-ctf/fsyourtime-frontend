@@ -17,3 +17,9 @@ body {
   text-align:right !important;
   vertical-align: top;
 }
+
+.privacytext{
+  align: center;
+  width: auto;
+  height: auto;
+}
