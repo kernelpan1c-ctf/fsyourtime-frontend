@@ -15,10 +15,10 @@ angular.module('app')
         $window.sessionStorage.matricularnr = data.matricularnr;
         $window.sessionStorage.privacy = data.privacy;
 
-        if(sessionStorage.privacy == 'false') {
+        if (sessionStorage.privacy == 'false') {
           $rootScope.hide();
           $location.path('/privacy');
-        }else{
+        } else {
           $rootScope.hide();
           $location.path('/app/timer');
         }

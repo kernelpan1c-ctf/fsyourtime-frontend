@@ -9,7 +9,7 @@
       </div>
 
       <ion-item class="item">
-        Date
+        Date & Time
         <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd HH:mm' }}</div>
       </ion-item>
 
@@ -17,7 +17,7 @@
 
         <div class="ion-list">
           <label class="item item-input">
-          Amount  <input  ng-model="amount" type="text" placeholder="{{userseffort.amount}}" class="right">
+          Amount  <input  ng-model="amount" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh mmm':false}}" class="right">
           </label>
         </div>
 
@@ -26,7 +26,8 @@
           <div class="input-label">
            Effort Type:
           </div>
-          <select ng-model="select.effort" ng-options="effort._id as effort.name for effort in efforts">
+          <select ng-model="efforttype">
+            <option ng-selected="{{effort.name == efforttype}}" ng-repeat="effort in efforts">{{effort.name}}</option>
           </select>
         </label>
       </div>
