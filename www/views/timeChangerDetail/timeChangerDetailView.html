@@ -1,10 +1,14 @@
 <ion-view title="Change Effort">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ng-click="save(amount)">Save
+    </button>
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <ion-list>
 
-          <div class="item item-text-wrap">
-            Module
-          <div class="right">{{userseffort.module.name}}</div>
+      <div class="item item-text-wrap">
+        Module
+        <div class="right">{{userseffort.module.name}}</div>
         </label>
       </div>
 
@@ -13,18 +17,17 @@
         <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd HH:mm' }}</div>
       </ion-item>
 
-
-
-        <div class="ion-list">
-          <label class="item item-input">
-          Amount  <input  ng-model="amount" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh mmm':false}}" class="right">
-          </label>
-        </div>
+      <div class="ion-list">
+        <label class="item item-input">
+          Amount <input ng-model="amount" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh mmm':false}}"
+                        class="right">
+        </label>
+      </div>
 
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-           Effort Type:
+            Effort Type:
           </div>
           <select ng-model="efforttype">
             <option ng-selected="{{effort.name == efforttype}}" ng-repeat="effort in efforts">{{effort.name}}</option>
@@ -32,7 +35,6 @@
         </label>
       </div>
 
-    <button class="button button-block button-positive" ng-click="save(amount)">Save</button>
   </ion-content>
 </ion-view>
 
