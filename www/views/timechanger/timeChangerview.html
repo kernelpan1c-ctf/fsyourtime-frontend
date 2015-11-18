@@ -21,21 +21,18 @@
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
       </div>
-      <ion-item class="item item-remove-animate"
-      "ui-sref="app.timeChangerDetail({id:effort._id})"">
-      <ion-option-button class="button-info"
-                         ui-sref="app.timeChangerDetail({id:effort._id})">
-        Edit
-      </ion-option-button>
-      <ion-option-button class="button-info"
-                         ng-click="removeItem($index)">
-        Delete
-      </ion-option-button>
-                <span>
-                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}}
-                </span>
-      <br>
-      <span>Type: {{effort.type.name}}</span>
+      <ion-item class="item item-remove-animate">
+        <ion-option-button class="button-info" ui-sref="app.timeChangerDetail({id:effort._id})">
+          Edit
+        </ion-option-button>
+        <ion-option-button class="button-info" ng-click="removeItem($index)">
+          Delete
+        </ion-option-button>
+        <span>
+         Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}}
+        </span>
+        <br>
+        <span>Type: {{effort.type.name}}</span>
       </ion-item>
     </ion-list>
   </ion-content>
