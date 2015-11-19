@@ -10,7 +10,7 @@ angular.module('app')
       if (syncdata)syncdata = false;
 
       UserService.signIn(username, password, syncdata).success(function (data) {
-        $window.sessionStorage.mySessionId = data.mySessionId;
+        $window.sessionStorage.mySessionId = data.token;
         $window.sessionStorage.userid = data.userid;
         $window.sessionStorage.matricularnr = data.matricularnr;
         $window.sessionStorage.privacy = data.privacy;

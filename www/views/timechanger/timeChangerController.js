@@ -35,11 +35,13 @@ angular.module('app')
 
     $scope.effortquery = function (moduleid) {
       $scope.efforts = Efforts.query(moduleid);
+      var totalamount = 0;
+        totalamount = totalamount + effort.amount;
+      return $scope.efforts.totalamount = totalamount;
       if ($scope.efforts) $scope.noEfforts=false;
       if (!$scope.noEfforts) {
         EffortService.efforts = $scope.efforts;
       }
-      $scope.getTotal($scope.efforts);
     };
 
     $scope.removeItem = function(index){
