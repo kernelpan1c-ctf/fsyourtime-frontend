@@ -109,7 +109,8 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '-' + dd + '-' + yyyy;
+    today = yyyy + '-' + mm + '-' + dd;
+
 
 
     //Submit Data
