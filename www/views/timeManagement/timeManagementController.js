@@ -107,5 +107,5 @@ angular.module('app')
       } else {
         $rootScope.notify('Maximum 10h per booking');
       }
-    };
+    }
   });

@@ -86,7 +86,7 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
+  .controller('MainCtrl', function ($rootScope, $scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
     $scope.timerRunning = false;
     $scope.select = {};
@@ -121,8 +121,8 @@ angular.module('app')
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
           console.log(status);
           console.log(data);
-        });
-    };
+        })
+      };
 
     $scope.timerstart = function () {
       $scope.myStopwatch.start();

@@ -1,8 +1,13 @@
 <ion-view title="Change Effort">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
   <ion-nav-buttons side="secondary">
-    <button class="button button-clear" ng-click="save(amount.hour, amount.minute)">Save
+    <button class="button button-clear" ng-click="save(select.hours, select.minutes)">Save
     </button>
   </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-content padding="true" class="has-header">
     <ion-list>
 
@@ -19,8 +24,20 @@
       <div class="ion-list">
         <label class="item item-input item-text-wrap">
           Amount
-          <input ng-model="amount.hour" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh':false}}" class="right">
-          <input ng-model="amount.minute" type="text" placeholder="{{userseffort.amount | time:'mm':'mmm':false}}" class="right">
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper">
+                <input ng-model="select.hours" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh':false}}" class="one">
+              </label>
+              </div>
+            </div>
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper" class="right">
+                <input ng-model="select.minutes" type="text" placeholder="{{userseffort.amount | time:'mm':'mmm':false}}" class="two">
+              </label>
+              </div>
+            </div>
         </label>
       </div>
 
