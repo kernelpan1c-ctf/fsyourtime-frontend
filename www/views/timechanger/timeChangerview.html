@@ -10,14 +10,14 @@
           <div class="input-label">
             Module:
           </div>
-          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)" ng-change="getTotal(efforts)">
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
           </select>
         </label>
       </div>
     </ion-list>
-    <ion-item ng-hide="true" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
+    <ion-item ng-hide="false" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
     <progress max="8400" value="{{efforts.totalamount}}"></progress>
-    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts">
+    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
       </div>

@@ -22,7 +22,7 @@ angular.module('app')
       efforts.forEach(function (effort) {
         totalamount = totalamount + effort.amount;
       });
-      return $scope.efforts.totalamount = totalamount;
+      $scope.efforts.totalamount = totalamount;
     };
 
     if (!$scope.efforts) {$scope.noEfforts = true;} else $scope.noEfforts = false;
@@ -38,13 +38,16 @@ angular.module('app')
       if ($scope.efforts) $scope.noEfforts=false;
       if (!$scope.noEfforts) {
         EffortService.efforts = $scope.efforts;
+        $scope.getTotal($scope.efforts);
       }
-      $scope.getTotal($scope.efforts);
+
     };
 
     $scope.removeItem = function(index){
+      var effort_to_delete = $scope.efforts[index];
       $scope.efforts.splice(index, 1);
-      Efforts.delete($scope.efforts[index]._id);
+      Efforts.delete(effort_to_delete._id);
+      $scope.getTotal($scope.efforts);
     };
 
   });
