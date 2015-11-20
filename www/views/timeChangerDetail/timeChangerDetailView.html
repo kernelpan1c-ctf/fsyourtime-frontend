@@ -1,6 +1,6 @@
 <ion-view title="Change Effort">
   <ion-nav-buttons side="secondary">
-    <button class="button button-clear" ng-click="save(amount)">Save
+    <button class="button button-clear" ng-click="save(amount.hour, amount.minute)">Save
     </button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
@@ -9,18 +9,18 @@
       <div class="item item-text-wrap">
         Module
         <div class="right">{{userseffort.module.name}}</div>
-        </label>
       </div>
 
       <ion-item class="item">
-        Date & Time
-        <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd HH:mm' }}</div>
+        Date
+        <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd' }}</div>
       </ion-item>
 
       <div class="ion-list">
-        <label class="item item-input">
-          Amount <input ng-model="amount" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh mmm':false}}"
-                        class="right">
+        <label class="item item-input item-text-wrap">
+          Amount
+          <input ng-model="amount.hour" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh':false}}" class="right">
+          <input ng-model="amount.minute" type="text" placeholder="{{userseffort.amount | time:'mm':'mmm':false}}" class="right">
         </label>
       </div>
 

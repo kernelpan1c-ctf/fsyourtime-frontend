@@ -43,10 +43,11 @@ angular.module('app')
 
     };
 
-    $scope.removeItem = function(index){
-      var effort_to_delete = $scope.efforts[index];
-      $scope.efforts.splice(index, 1);
-      Efforts.delete(effort_to_delete._id);
+    $scope.removeItem = function(effort){
+      var idx = $scope.efforts.indexOf(effort);
+      var efft = $scope.efforts[idx];
+      $scope.efforts.splice(idx,1)
+      Efforts.delete(efft._id);
       $scope.getTotal($scope.efforts);
     };
 

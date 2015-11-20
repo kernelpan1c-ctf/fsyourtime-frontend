@@ -55,7 +55,7 @@ angular.module('app')
 
         self.reset = function () {
           startTime = new Date();
-          totalElapsedMs = elapsedMs = 0;
+         // totalElapsedMs = elapsedMs = 0;
         };
 
         self.getTime = function () {

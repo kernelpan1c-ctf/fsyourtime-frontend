@@ -10,7 +10,8 @@ angular.module('app')
     $scope.efforts = EffortTypes.query();
     $scope.efforttype = $scope.userseffort.type.name;
 
-    $scope.save = function (amount) {
+    $scope.save = function (hours, minutes) {
+      var amount = hours * 60 + minutes;
       Efforts.update($stateParams.id, amount, $scope.efforttype);
     };
 
