@@ -110,6 +110,7 @@ angular.module('app')
     }
 
     today = yyyy + '-' + mm + '-' + dd;
+    today.toJSON();
 
 
 
