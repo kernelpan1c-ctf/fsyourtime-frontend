@@ -13,7 +13,7 @@ angular.module('app')
       var hours = hours * 60;
       var amount = parseInt(hours) + parseInt(minutes);
       if (amount<=600){
-      Efforts.update($stateParams.id, amount, $scope.efforttype._id).success(function(){
+      Efforts.update($stateParams.id, amount, $scope.efforttype._id, $scope.userseffort.performancedate).success(function(){
        $rootScope.notify("Effort successfully updated") ;
         $ionicHistory.goBack();
       })}else $rootScope.notify("Maximum 10h allowed")

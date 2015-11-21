@@ -27,12 +27,13 @@ angular.module('app')
         }).query();
       },
 
-      update: function (effortid, amount, efforttypeid) {
+      update: function (effortid, amount, efforttypeid, date) {
         return $http({
           url: options.api.base_url + 'api/efforts/' + effortid,
           method: "PUT",
           data: {amount: amount, efforttypeid: efforttypeid},
-          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
+          headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
+          performancedate: date
         })
       },
 
