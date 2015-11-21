@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeChangerDetailController', function ($rootScope, $location, $window, EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform, effort) {
+  .controller('timeChangerDetailController', function ($rootScope, $location, $window,$ionicHistory, EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform, effort) {
 
     $scope.select = {};
     $scope.userseffort = effort;
@@ -12,10 +12,11 @@ angular.module('app')
     $scope.save = function (hours, minutes) {
       var hours = hours * 60;
       var amount = parseInt(hours) + parseInt(minutes);
+      if (amount<=600){
       Efforts.update($stateParams.id, amount, $scope.efforttype._id).success(function(){
-       $rootScope.notify("Effort successfully updated!") ;
-        //$location.path('/timeChanger');
-      })
+       $rootScope.notify("Effort successfully updated") ;
+        $ionicHistory.goBack();
+      })}else $rootScope.notify("Maximum 10h allowed")
     };
 
     //Picker only testable in emulator/on device

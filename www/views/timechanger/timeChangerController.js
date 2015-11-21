@@ -7,15 +7,15 @@ angular.module('app')
 
     $scope.totalamount = 0;
     $scope.shouldShowDelete = false;
-    $scope.listCanSwipe = true
+    $scope.listCanSwipe = true;
     $scope.select = {};
-    $scope.doRefresh = function () {
-      $http.get('/#/app/timeChanger').finally(function () {
-        // Stop the ion-refresher from spinning
-        $scope.$broadcast('scroll.refreshComplete');
-      });
-    };
+    $scope.modules = Modules.query();
+    $scope.noEfforts = (!$scope.efforts);
 
+    $scope.doRefresh = function () {
+      $scope.effortquery($scope.select.module);
+      $scope.$broadcast('scroll.refreshComplete');
+    };
 
     $scope.getTotal = function (efforts) {
       var totalamount = 0;
@@ -24,12 +24,6 @@ angular.module('app')
       });
       $scope.efforts.totalamount = totalamount;
     };
-
-    if (!$scope.efforts) {
-      $scope.noEfforts = true;
-    } else $scope.noEfforts = false;
-
-    $scope.modules = Modules.query();
 
     $scope.goBack = function () {
       $ionicHistory.goBack();
@@ -41,9 +35,11 @@ angular.module('app')
       if (!$scope.noEfforts) {
         EffortService.efforts = $scope.efforts;
       }
-      $timeout(function(){$scope.getTotal($scope.efforts)},350);
-    //.success(function(){$scope.getTotal($scope.efforts)
-      };
+      $timeout(function () {
+        $scope.getTotal($scope.efforts)
+      }, 350);
+      //.success(function(){$scope.getTotal($scope.efforts)
+    };
 
     $scope.removeItem = function (effort) {
       var idx = $scope.efforts.indexOf(effort);
