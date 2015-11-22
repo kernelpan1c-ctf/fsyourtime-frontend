@@ -2,11 +2,10 @@ angular.module('app')
 
   .factory('UserService', function ($http, $window) {
     return {
-      signIn: function (username, password, syncdata) {   //service executed by controller function singIn
-        return $http.post(options.api.base_url + 'login', {   //connection with backend
+      signIn: function (username, password) {
+        return $http.post(options.api.base_url + 'login', {
           username: username,
-          password: password,
-          syncdata: syncdata
+          password: password
         });
       },
 

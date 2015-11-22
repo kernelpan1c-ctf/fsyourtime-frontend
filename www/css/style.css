@@ -18,8 +18,5 @@ body {
   vertical-align: top;
 }
 
-.privacytext{
-  align: center;
-  width: auto;
-  height: auto;
-}
+.one, .two {display:inline-block;}
+

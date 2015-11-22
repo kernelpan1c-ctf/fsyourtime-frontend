@@ -2,27 +2,24 @@ angular.module('app')
 
   .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
 
-    $scope.signIn = function (username, password, syncdata) {   //function executed by button Login in View
+    $scope.signIn = function (username, password) {
 
       $rootScope.show("Authenticating..");
 
-      // syncdata checkbox = undefined workaround
-      if (syncdata)syncdata = false;
-
-      UserService.signIn(username, password, syncdata).success(function (data) {    //executes service signIn in loginService
-        $window.sessionStorage.mySessionId = data.mySessionId;    //store returning data from function signIn in sessionStorage
+      UserService.signIn(username, password).success(function (data) {
+        $window.sessionStorage.mySessionId = data.token;
         $window.sessionStorage.userid = data.userid;
         $window.sessionStorage.matricularnr = data.matricularnr;
-        $window.sessionStorage.privacy = data.privacy;
+        $window.sessionStorage.privacyFlag = data.privacyFlag;
 
-        if(sessionStorage.privacy == 'false') {   //check if user accepted privacy == true
+        if (sessionStorage.privacyFlag == 'false') {
           $rootScope.hide();
           $location.path('/privacy');
-        }else{    //privacy == false
+        } else {
           $rootScope.hide();
           $location.path('/app/timer');
         }
-      }).error(function (status, data) {    //in case of error from service loginService
+      }).error(function (status, data) {
         $rootScope.hide();
         $rootScope.notify(status);
 

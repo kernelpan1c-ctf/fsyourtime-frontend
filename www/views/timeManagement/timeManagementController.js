@@ -68,15 +68,15 @@ angular.module('app')
     };
 
 
-     function getDuration (start, end) {
+    function getDuration(start, end) {
       start.getTime();
       end.getTime();
-       var Difference = end - start;
+      var Difference = end - start;
       //Minutes
       return Math.floor(Difference / (1000 * 60));
     }
 
-    function transformDate (date) {
+    function transformDate(date) {
       var dd = date.getDate();
       var mm = date.getMonth() + 1;//January is 0!
       var yyyy = date.getFullYear();
@@ -88,7 +88,7 @@ angular.module('app')
         mm = '0' + mm
       }
 
-      date =  yyyy + '-' + mm + '-' + dd;
+      date = yyyy + '-' + mm + '-' + dd;
       return date;
     }
 
@@ -98,14 +98,14 @@ angular.module('app')
 
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
-          $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
+          $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function (status, data) {
             $rootScope.notify(status);
           }).error(function (status, data) {
             console.log(status);
             console.log(data);
           });
-      }else {
+      } else {
         $rootScope.notify('Maximum 10h per booking');
       }
-    };
+    }
   });

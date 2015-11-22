@@ -2,15 +2,16 @@
   <ion-content class="padding">
     <div class="list list-inset">
       <label class="item item-input">
-        <input type="text" placeholder="Username" ng-model="user.username" required>  <!-- Textarea Username required -->
+        <input type="text" placeholder="Username" ng-model="user.username" required>
       </label>
       <label class="item item-input">
-        <input type="password" placeholder="Password" ng-model="user.password" required>  <!-- Textare Password required -->
+        <input type="password" placeholder="Password" ng-model="user.password" required>
       </label>
     </div>
-      <!--<ion-checkbox ng-model="user.credentials"> Save credentials?</ion-checkbox>-->
-      <ion-checkbox ng-model="user.syncdata"> Sync modules with Campus</ion-checkbox>  <!-- True/False checkbox -->
-    <button class="button button-block button-positive" ng-click="signIn(user.username, user.password, user.syncdata)">Login</button>  <!-- Button sending username, password, syncdata to controller function signIn -->
-       <a href="https://campus.frankfurt-school.de/clicnetclm/sendUserData.do#position" class="button button-positive button-clear button-block ">Forgot matricularnumber or password? Click here</a>
+    <!--<ion-checkbox ng-model="user.credentials"> Save credentials?</ion-checkbox>-->
+   <button class="button button-block button-positive" ng-click="signIn(user.username, user.password)">
+      Login
+    </button>
+    Forgot your username or password? Click <a href="https://campus.frankfurt-school.de/clicnetclm/sendUserData.do#position">here</a>
   </ion-content>
 </ion-view>

@@ -1,37 +1,57 @@
 <ion-view title="Change Effort">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ng-click="save(select.hours, select.minutes)">Save
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-content padding="true" class="has-header">
     <ion-list>
 
-          <div class="item item-text-wrap">
-            Module
-          <div class="right">{{userseffort.module.name}}</div>
-        </label>
+      <div class="item item-text-wrap">
+        Module
+        <div class="right">{{userseffort.module.name}}</div>
       </div>
 
       <ion-item class="item">
         Date
-        <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd HH:mm' }}</div>
+        <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd' }}</div>
       </ion-item>
 
-
-
-        <div class="ion-list">
-          <label class="item item-input">
-          Amount  <input  ng-model="amount" type="text" placeholder="{{userseffort.amount}}" class="right">
-          </label>
-        </div>
+      <div class="ion-list">
+        <label class="item item-input item-text-wrap">
+          Amount
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper">
+                <input ng-model="select.hours" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh':false}}" class="one">
+              </label>
+              </div>
+            </div>
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper" class="right">
+                <input ng-model="select.minutes" type="text" placeholder="{{userseffort.amount | time:'mm':'mmm':false}}" class="two">
+              </label>
+              </div>
+            </div>
+        </label>
+      </div>
 
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-           Effort Type:
+            Effort Type:
           </div>
-          <select ng-model="select.effort" ng-options="effort._id as effort.name for effort in efforts">
+          <select ng-model="efforttype">
+            <option ng-selected="{{effort.name == efforttype}}" ng-repeat="effort in efforts">{{effort.name}}</option>
           </select>
         </label>
       </div>
 
-    <button class="button button-block button-positive" ng-click="save(amount)">Save</button>
   </ion-content>
 </ion-view>
 

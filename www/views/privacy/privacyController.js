@@ -4,6 +4,7 @@ angular.module('app')
     $scope.privacy = function () {    //function executed by button privacy in View
       PrivacyService.acceptPrivacy(sessionStorage.mySessionId, sessionStorage.userid).success(function () {   //executes service acceptPrivacy in privacyService
         $rootScope.hide();
+        sessionStorage.privacyFlag = true;
         $location.path('/app/timer');
       }).error(function (data) {
         //set privacy = true failed

@@ -20,21 +20,19 @@ angular.module('app')
           }
         }
         start()
-        $scope.timerRunning = true;
       }, SW_DELAY);
     };
-
 
     var stop = function () {
       $timeout.cancel(stopwatch);
       stopwatch = null;
-      $scope.timerRunning = false;
-      $scope.amount = data;
     };
 
     var reset = function () {
-      stop()
+      stop();
       data.seconds = 0;
+      data.minutes = 0;
+      data.hours = 0 ;
     };
 
     return {
@@ -43,6 +41,6 @@ angular.module('app')
       stop: stop,
       reset: reset
     };
-  })
+  });
 
 

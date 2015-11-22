@@ -6,23 +6,19 @@ angular.module('app')
   .controller('timeChangerDetailController', function (EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform, effort) {
 
     $scope.select = {};
-
     $scope.userseffort = effort;
-    $scope.efforts = EffortTypes.query(function () {
+    $scope.efforts = EffortTypes.query();
+    $scope.efforttype = $scope.userseffort.type.name;
 
-      $scope.efforts.forEach(function (searchEffort) {
-        if (searchEffort._id === effort._id) $scope.select.effort = searchEffort._id;
-      });
-    });
-
-    $scope.save = function (amount) {
-      Efforts.update($stateParams.id, amount, $scope.select.effort);
+    $scope.save = function (hours, minutes) {
+      var amount = hours * 60 + minutes;
+      Efforts.update($stateParams.id, amount, $scope.efforttype);
     };
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function () {
 
-      minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      //minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
         date: $scope.userseffort.performancedate,
         mode: 'date', // or 'time'
@@ -37,40 +33,47 @@ angular.module('app')
 
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
-          alert(date);
+          $scope.date = date;
         });
       });
+    };
+  })
+
+  .filter('time', function () {
+
+    var conversions = {
+      'ss': angular.identity,
+      'mm': function (value) {
+        return value * 60;
+      },
+      'hh': function (value) {
+        return value * 3600;
+      }
     };
 
-    $scope.showStartTime = function () {
-      var timeOptions = {
-        date: new Date(),
-        mode: 'time',
-        doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
-        cancelButtonLabel: 'CANCEL',
-        cancelButtonColor: '#000000'
-      };
-      $ionicPlatform.ready(function () {
-        $cordovaDatePicker.show(timeOptions).then(function (date) {
-          //alert(date);
-        });
-      });
+    var padding = function (value, length) {
+      var zeroes = length - ('' + (value)).length,
+        pad = '';
+      while (zeroes-- > 0) pad += '0';
+      return pad + value;
     };
 
-    $scope.showEndTime = function () {
-      var timeOptions = {
-        date: new Date(),
-        mode: 'time',
-        doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
-        cancelButtonLabel: 'CANCEL',
-        cancelButtonColor: '#000000'
-      };
-      $ionicPlatform.ready(function () {
-        $cordovaDatePicker.show(timeOptions).then(function (date) {
-          //alert(date);
-        });
-      });
-    };
+    return function (value, unit, format, isPadded) {
+      var totalSeconds = conversions[unit || 'ss'](value),
+        hh = Math.floor(totalSeconds / 3600),
+        mm = Math.floor((totalSeconds % 3600) / 60),
+        ss = totalSeconds % 60,
+        hours = (hh != 1) ? 's' : '',
+        mins = (mm != 1) ? 's' : '',
+        secs = (ss != 1) ? 's' : '';
+
+      format = format || 'hh:mm:ss';
+      isPadded = angular.isDefined(isPadded) ? isPadded : true;
+      hh = isPadded ? padding(hh, 2) : hh;
+      mm = isPadded ? padding(mm, 2) : mm;
+      ss = isPadded ? padding(ss, 2) : ss;
+
+      return format.replace(/hh/, hh).replace(/mm/, mm).replace(/ss/, ss)
+        .replace(/our\(s\)/, 'our' + hours).replace(/inute\(s\)/, 'inute' + mins).replace(/econd\(s\)/, 'econd' + secs);
+    }
   });
