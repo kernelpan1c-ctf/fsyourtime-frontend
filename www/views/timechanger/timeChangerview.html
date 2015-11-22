@@ -15,8 +15,8 @@ Alle anzeigen, aber nur von <14 Tage bearbeiten
         </label>
       </div>
     </ion-list>
-    <ion-item ng-hide="true" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
-    <!--Farbe wechseln bei 100%?--><progress max="8400" value="{{efforts.totalamount}}"></progress>
+    <ion-item ng-hide="hide" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
+    <!--Farbe wechseln bei 100%?--><progress ng-hide="hide" max="8400" value="{{efforts.totalamount}}"></progress>
     <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
