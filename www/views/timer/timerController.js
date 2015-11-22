@@ -136,5 +136,6 @@ angular.module('app')
       $scope.myStopwatch.stop();
       $scope.timerRunning = false;
     };
+
   });
 
