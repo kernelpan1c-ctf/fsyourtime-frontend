@@ -118,7 +118,11 @@ angular.module('app')
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
-        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
+          console.log(status);
+          console.log(data);
+          $scope.myStopwatch.reset();
+        }).error(function (status, data) {
           console.log(status);
           console.log(data);
         })
