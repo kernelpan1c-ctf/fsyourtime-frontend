@@ -6,6 +6,7 @@ angular.module('app')
   .controller('timeChangerController', function ($timeout, $rootScope, $http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory) {
 
     $scope.totalamount = 0;
+    $scope.hide = true;
     $scope.shouldShowDelete = false;
     $scope.listCanSwipe = true;
     $scope.select = {};
@@ -23,6 +24,7 @@ angular.module('app')
         totalamount = totalamount + effort.amount;
       });
       $scope.efforts.totalamount = totalamount;
+      $scope.hide = false;
     };
 
     $scope.goBack = function () {
