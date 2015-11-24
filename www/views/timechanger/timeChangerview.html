@@ -13,10 +13,8 @@ Alle anzeigen, aber nur von <14 Tage bearbeiten
           <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
           </select>
         </label>
-      </div>
     </ion-list>
-    <ion-item ng-hide="true" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
-    <!--Farbe wechseln bei 100%?--><progress max="8400" value="{{efforts.totalamount}}"></progress>
+    <!--Farbe wechseln bei 100%?--><progress max="6000" value="{{efforts.totalamount}}" ng-hide="hideBar"></progress>
     <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
@@ -26,16 +24,19 @@ Alle anzeigen, aber nur von <14 Tage bearbeiten
                            ui-sref="app.timeChangerDetail({id:effort._id})">
           Edit
         </ion-option-button>
-        <ion-option-button class="button-info" ng-click="removeItem(effort)" ng-confirm-click="Do you really want to delete this effort?">
+        <ion-option-button class="button-info" ng-click="removeItem(effort)" ng-hide="noDelete">
           Delete
         </ion-option-button>
                 <span>
-                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}}
-                </span>
-                <br>
-        <span>Type: {{effort.type.name}}</span>
-      </ion-item>
-    </ion-list>
+                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}} <br>
 
+                </span>
+        <span>Type: {{effort.type.name}}</span>
+      <span> <br>  Booking Date: {{effort.bookingDate | date:'dd.MM.yyyy'}}</span>
+    </ion-list>
+    <br><div class="card">
+    <div class="item item-text-wrap">You do not have any efforts yet. Go to 'New Effort' if you want to create one.
+    </div>
+    </div>
   </ion-content>
 </ion-view>

@@ -16,7 +16,7 @@ angular.module('app')
       Efforts.update($stateParams.id, amount, $scope.efforttype._id, $scope.userseffort.performancedate).success(function(){
        $rootScope.notify("Effort successfully updated") ;
         $ionicHistory.goBack();
-      })}else $rootScope.notify("Maximum 10h allowed")
+      })}//else $rootScope.notify("Maximum 10h allowed")
     };
 
     //Picker only testable in emulator/on device
