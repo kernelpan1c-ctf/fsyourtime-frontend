@@ -24,14 +24,13 @@ angular.module('app')
       }, SW_DELAY);
     };
 
-
     var stop = function () {
       $timeout.cancel(stopwatch);
       stopwatch = null;
     };
 
     var reset = function () {
-      stop()
+      stop();
       data.seconds = 0;
     };
 
@@ -41,6 +40,6 @@ angular.module('app')
       stop: stop,
       reset: reset,
     };
-  })
+  });
 
 

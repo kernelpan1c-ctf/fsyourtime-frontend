@@ -109,17 +109,14 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '-' + dd + '-' + yyyy;
+    today = yyyy + '-' + mm + '-' + dd;
+
 
 
     //Submit Data
     $scope.submit = function () {
-      //data.seconds = 0;
-      var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      //alert($scope.select.effort);
-      //alert($scope.select.module);
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).error(function (status, data) {
           console.log(status);

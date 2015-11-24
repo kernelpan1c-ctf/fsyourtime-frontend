@@ -31,6 +31,8 @@ angular.module('app')
     var reset = function () {
       stop();
       data.seconds = 0;
+      data.minutes = 0;
+      data.hours = 0 ;
     };
 
     return {

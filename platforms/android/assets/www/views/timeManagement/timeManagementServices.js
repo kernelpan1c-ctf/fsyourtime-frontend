@@ -28,13 +28,6 @@ angular.module('app')
       },
 
       update: function (effortid, amount, efforttypeid) {
-        /* return $http.put('http://backend-dev.kevinott.de/api/efforts/' + effortid , {}, {
-         headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid},
-         amount: amount,
-         efforttypeid: efforttypeid
-         });
-         },*/
-
         return $http({
           url: options.api.base_url + 'api/efforts/' + effortid,
           method: "PUT",
@@ -52,15 +45,13 @@ angular.module('app')
           }
         })
       },
-      delete: function (effortid){
-        //alert("test");
+      delete: function (effortid) {
         return $http({
           url: options.api.base_url + 'api/efforts/' + effortid,
           method: "DELETE",
           headers: {'x-session': sessionStorage.mySessionId, 'x-key': sessionStorage.userid}
         })
-      },
-
+      }
     }
   })
 

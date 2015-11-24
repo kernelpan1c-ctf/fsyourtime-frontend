@@ -8,7 +8,6 @@ angular.module('app')
       },
       stopwatch = null;
 
-
     var start = function () {
       stopwatch = $timeout(function () {
         data.seconds++;
@@ -24,14 +23,13 @@ angular.module('app')
       }, SW_DELAY);
     };
 
-
     var stop = function () {
       $timeout.cancel(stopwatch);
       stopwatch = null;
     };
 
     var reset = function () {
-      stop()
+      stop();
       data.seconds = 0;
     };
 
@@ -39,8 +37,8 @@ angular.module('app')
       data: data,
       start: start,
       stop: stop,
-      reset: reset,
+      reset: reset
     };
-  })
+  });
 
 

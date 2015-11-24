@@ -1,9 +1,9 @@
 <ion-view title="Live Tracking">
-  <!--
+
   <ion-nav-buttons side="secondary">
     <button class="button button-clear" ng-click="submit()">Submit
     </button>
-  </ion-nav-buttons>-->
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
 
     <ion-list>
@@ -11,7 +11,7 @@
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-            Class:
+            Module:
           </div>
           <select ng-model="select.module" ng-options="module._id as module.name for module in modules">
           </select>
@@ -40,7 +40,8 @@
     <button class="button button-block button-balanced"  ng-hide="timerRunning" ng-click='timerstart()'>Start</button>
     <button class="button button-block button-assertive"  ng-hide="!timerRunning" ng-click='timerstop()'>Stop</button>
     <button class="button button-block button-energized" ng-click='myStopwatch.reset()'>Reset</button>
-    <button class="button button-block button-positive" ng-click='submit()'>Submit</button>
+
+    <!--<button class="button button-block button-positive" ng-click='submit()'>Submit</button>-->
 
   </ion-content>
 </ion-view>

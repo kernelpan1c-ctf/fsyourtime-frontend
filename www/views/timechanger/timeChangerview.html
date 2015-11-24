@@ -1,3 +1,4 @@
+Alle anzeigen, aber nur von <14 Tage bearbeiten
 <ion-view title="Change Efforts">
   <ion-content padding="true" class="has-header">
     <ion-refresher
@@ -5,19 +6,18 @@
       on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list  show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-      <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
             Module:
           </div>
-          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)" ng-change="getTotal(efforts)">
+          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
           </select>
         </label>
       </div>
     </ion-list>
     <ion-item ng-hide="true" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
-    <progress max="8400" value="{{efforts.totalamount}}"></progress>
-    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts">
+    <!--Farbe wechseln bei 100%?--><progress max="8400" value="{{efforts.totalamount}}"></progress>
+    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
       </div>
@@ -26,7 +26,7 @@
                            ui-sref="app.timeChangerDetail({id:effort._id})">
           Edit
         </ion-option-button>
-        <ion-option-button class="button-info" ng-click="removeItem($index)" ng-confirm-click="Do you really want to delete this effort?">
+        <ion-option-button class="button-info" ng-click="removeItem(effort)" ng-confirm-click="Do you really want to delete this effort?">
           Delete
         </ion-option-button>
                 <span>

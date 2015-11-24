@@ -17,3 +17,6 @@ body {
   text-align:right !important;
   vertical-align: top;
 }
+
+.one, .two {display:inline-block;}
+
