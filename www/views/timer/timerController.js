@@ -122,9 +122,11 @@ angular.module('app')
           console.log(status);
           console.log(data);
           $scope.myStopwatch.reset();
+          alert("Successfully submitted!");
         }).error(function (status, data) {
           console.log(status);
           console.log(data);
+          alert("An error occurred. Please submit again!");
         })
       };
 
