@@ -1,27 +1,29 @@
 angular.module('app')
 
-    .controller('privacyController', function($scope, UserService, $location, $rootScope, $window){
-    $scope.eror_message = '';
+  .controller('privacyController', function ($scope, PrivacyService, $location, $rootScope) {
+    $scope.privacy = function () {
+      PrivacyService.acceptPrivacy(sessionStorage.mySessionId, sessionStorage.userid).success(function () {
+        $rootScope.hide();
+        sessionStorage.privacyFlag = true;
+        $location.path('/app/timer');
+      }).error(function (data) {
+        //set privacy = true failed
+        PrivacyService.logOut(sessionStorage.mySessionId).success(function (data) {
+          $rootScope.hide();
+          $location.path('/login');
+        }).error(function (data) {
+          $rootScope.notify(data);
+        });
+      });
+    };
 
-    $scope.privacy = function(){
-
+    $scope.decline = function () {
       $rootScope.hide();
-      //$rootScope.show("Authenticating..");
-      //UserService.accept().success(function(data) {
-      //  $location.path('/app/settings');
-      //}).error(function(data){
-      //  $rootScope.notify('Server unavailable');  //set privacy statement true failed
-      //  $location.path('/login');
-
-      //});
-      $location.path('/app/timer');
+      PrivacyService.logOut(sessionStorage.mySessionId).success(function (data) {
+        $rootScope.hide();
+        $location.path('/login');
+      }).error(function (data) {
+        $rootScope.notify(data);
+      });
     };
-
-    $scope.decline = function() {
-      $location.path('/login');
-    };
-    //TODO: Weiterleitung auf eine Fehler/Infoseite
-    //$scope.decline = function(){
-        //$location.path('/');
-
-});
+  });

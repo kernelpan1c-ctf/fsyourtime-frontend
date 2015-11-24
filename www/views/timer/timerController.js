@@ -12,7 +12,7 @@ angular.module('app')
   .directive('stopwatch', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'views/timer/timerViewTEST.html',
+      templateUrl: 'views/timer/timerView.html',
       scope: {
         // Set title in the isolate scope from the title attribute on the directive's element.
         title: '@title',
@@ -33,7 +33,6 @@ angular.module('app')
         //var time;
         var startTime;
         var timerPromise;
-
         self.start = function () {
           if (!timerPromise) {
             startTime = new Date();
@@ -56,7 +55,7 @@ angular.module('app')
 
         self.reset = function () {
           startTime = new Date();
-          totalElapsedMs = elapsedMs = 0;
+         // totalElapsedMs = elapsedMs = 0;
         };
 
         self.getTime = function () {
@@ -87,27 +86,12 @@ angular.module('app')
 
   .constant('SW_DELAY', 1000)
 
-
-  .controller('MainCtrl', function ($scope, $state, stepwatch, Modules, Efforts, $window) {
+  .controller('MainCtrl', function ($rootScope, $scope, $state, stepwatch, Modules, Efforts, $window, EffortTypes) {
     $scope.myStopwatch = stepwatch;
-
+    $scope.timerRunning = false;
     $scope.select = {};
 
-    $scope.efforts = [
-      {
-        id: "1",
-        name: "Lesen"
-      },
-      {
-        id: "2",
-        name: "Assignment"
-      },
-      {
-        id: "3",
-        name: "Vorbereitung Präsentation"
-      }
-    ];
-
+    $scope.efforts = EffortTypes.query();
     $scope.modules = Modules.query();
 
 
@@ -125,18 +109,32 @@ angular.module('app')
       mm = '0' + mm
     }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = yyyy + '-' + mm + '-' + dd;
+
 
 
     //Submit Data
     $scope.submit = function () {
-      //data.seconds = 0;
-      var sessionId = $window.sessionStorage.mySessionId;
       var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
-      Efforts.save(sessionId, sessionStorage.userid, amount, $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today);
+      Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
+        $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
+          console.log(status);
+          console.log(data);
+          $scope.myStopwatch.reset();
+        }).error(function (status, data) {
+          console.log(status);
+          console.log(data);
+        })
+      };
+
+    $scope.timerstart = function () {
+      $scope.myStopwatch.start();
+      $scope.timerRunning = true;
+    };
+    $scope.timerstop = function() {
+      $scope.myStopwatch.stop();
+      $scope.timerRunning = false;
     };
   });
-
-
 

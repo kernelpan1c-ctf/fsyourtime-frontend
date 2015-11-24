@@ -60,7 +60,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'views/menu.html'
+    templateUrl: 'views/menu/menu.html',
+    controller: 'menuController'
   })
 
   .state('app.settings', {
@@ -77,7 +78,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'views/timer/timerView.html',
-          controller: 'timerController'
+          controller: 'MainCtrl'
         }
       }
     })
@@ -85,8 +86,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timeManagement',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeManagement/timeMView.html',
-          controller: 'timeMController'
+          templateUrl: 'views/timeManagement/timeManagementView.html',
+          controller: 'timeManagementController'
         }
       }
     })
@@ -94,7 +95,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       url: '/timeChanger',
       views: {
         'menuContent': {
-          templateUrl: 'views/timeChanger/timeChangerView.html',
+          templateUrl: 'views/timechanger/timeChangerview.html',
           controller: 'timeChangerController'
         }
       }
@@ -104,13 +105,47 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'views/timeChangerDetail/timeChangerDetailView.html',
-          controller: 'timeChangerDetailController'
+          controller: 'timeChangerDetailController',
+          resolve: {
+            effort: function($stateParams, EffortService) {
+              return EffortService.getEffort($stateParams.id)
+            }
+          }
         }
       }
     })
-
+    .state('app.help', {
+      url: '/help',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/help/helpView.html',
+          controller: 'timeChangerController'
+        }
+      }
+    })
+    .state('app.contact', {
+      url: '/contact',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/contact/contactView.html',
+          controller: ''
+        }
+      }
+    })
+    .state('app.privacy', {
+      url: '/privacy',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/privacyInfo/privacyInfoView.html'
+        }
+      }
+    })
 
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });
+
+var options = {};
+options.api = {};
+options.api.base_url = "http://backend-dev.kevinott.de/";

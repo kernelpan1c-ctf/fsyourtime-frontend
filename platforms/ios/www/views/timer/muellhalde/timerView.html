@@ -1,0 +1,44 @@
+<ion-view title="Timer">
+  <ion-content padding="true" class="has-header">
+    <ion-list>
+
+      <div class="class">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Class:
+          </div>
+          <select>
+            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="effort">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Effort type:
+          </div>
+          <select>
+            <option ng-repeat="effort in efforts" value="{{effort.id}}">{{effort.name}}</option>
+          </select>
+        </label>
+      </div>
+    </ion-list>
+
+  <div class="timer" ng-controller="MainCtrl" >
+    <script type="text/ng-template" id="timerView.html">
+      <div><strong>Current Time: </strong>{{currentTime | date:'h:mm:ss a'}}</div>
+      <div><strong>Elapsed Time: </strong>{{swctrl.getElapsedMs()}} ms</div>
+      <button id="start" class="btn btn-success" ng-click="swctrl.start()" ng-hide="!timerRunning">Start</button>
+      <button id="stop" class="btn btn-danger" ng-click="swctrl.stop()" ng-hide="timerRunning">Stop</button>
+      <button id="reset" class="btn btn-default" ng-click="swctrl.reset()">Reset</button>
+    </script>
+  </div>
+
+    <button class="button button-block button-positive" ng-click="save()">save</button>
+  </ion-content>
+</ion-view>
+
+
+
+

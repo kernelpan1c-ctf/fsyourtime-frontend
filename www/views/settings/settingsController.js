@@ -1,19 +1,21 @@
 angular.module('app')
 
-    .controller('settingsController', function ($scope, UserService, $location) {
+    .controller('settingsController', function ($scope, SettingsService, $location, $rootScope) {
 
         $scope.deleteAccount = function () {
           $rootScope.hide();
 
-          UserService.deleteAccount().success(function(data){
-            UserService.logOut().success(function(data){
+          SettingsService.deleteAccount(sessionStorage.mySessionId, sessionStorage.userid).success(function(){
+            SettingsService.logOut(sessionStorage.mySessionId).success(function(){
               $location.path('/login');
-            }).error(function(data){
-              $rootScope.show("Logout failed! - Deletion was completed!");
+            }).error(function(status, data){
+              $rootScope.show(status);
             });
-          }).error(function(data){
+          }).error(function(status, data){
             $rootScope.hide();
-            $rootScope.show("Server is not available - Deletion could not be completed!");
+            $rootScope.show(status);
+            console.log(status);
+            console.log(data);
           });
         };
 

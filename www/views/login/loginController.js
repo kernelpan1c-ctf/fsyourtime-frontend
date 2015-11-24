@@ -2,45 +2,29 @@ angular.module('app')
 
   .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
 
-
-    $scope.signIn = function (username, password, syncdata) {
+    $scope.signIn = function (username, password) {
 
       $rootScope.show("Authenticating..");
-      $window.sessionStorage.userID = username;
 
-      if (!syncdata)syncdata = false;
-      //alert(syncdata);
-
-      UserService.signIn(username, password, syncdata).success(function (data) {
-
-        $window.sessionStorage.mySessionId = data.mySessionId;
+      UserService.signIn(username, password).success(function (data) {
+        $window.sessionStorage.mySessionId = data.token;
         $window.sessionStorage.userid = data.userid;
         $window.sessionStorage.matricularnr = data.matricularnr;
-        $window.sessionStorage.privacy = data.privacy;
+        $window.sessionStorage.privacyFlag = data.privacyFlag;
 
-        //alert(sessionStorage.privacy);
-        UserService.getModules(sessionStorage.mySessionId, sessionStorage.userid).success(function(data){
-          alert(data);
-          $window.sessionStorage.modulesArray = data;
-          //alert(sessionStorage.modulesArray);
-
+        if (sessionStorage.privacyFlag == 'false') {
           $rootScope.hide();
-          if(sessionStorage.privacy = 'false') {  //Check if privacy was accepted == true
-            $location.path('/privacy');
-          }else{
-            $location.path('/app/timer');
-          }
-        }).error(function(data){
-          $rootScope.notify('Could not fetch data from backend');
-          $location.path('/login');
-        });
+          $location.path('/privacy');
+        } else {
+          $rootScope.hide();
+          $location.path('/app/timer');
+        }
       }).error(function (status, data) {
-        // $rootScope.hide();
-        $rootScope.notify('Invalid Credentials');
+        $rootScope.hide();
+        $rootScope.notify(status);
 
         console.log(status);
         console.log(data);
-
       });
     };
   });

@@ -1,35 +1,57 @@
-<ion-view title="TimeChanger">
+<ion-view title="Change Effort">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear" ng-click="save(select.hours, select.minutes)">Save
+    </button>
+  </ion-nav-buttons>
+  </ion-nav-bar>
   <ion-content padding="true" class="has-header">
     <ion-list>
+
+      <div class="item item-text-wrap">
+        Module
+        <div class="right">{{userseffort.module.name}}</div>
+      </div>
+
+      <ion-item class="item">
+        Date
+        <div class="right">{{userseffort.performanceDate | date:'yyyy-MM-dd' }}</div>
+      </ion-item>
+
+      <div class="ion-list">
+        <label class="item item-input item-text-wrap">
+          Amount
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper">
+                <input ng-model="select.hours" type="text" placeholder="{{userseffort.amount | time:'mm':'hhh':false}}" class="one" required>
+              </label>
+              </div>
+            </div>
+          <div class="col">
+            <div class="item-input-inset">
+              <label class="item-input-wrapper" class="right">
+                <input ng-model="select.minutes" type="text" placeholder="{{userseffort.amount | time:'mm':'mmm':false}}" class="two" required>
+              </label>
+              </div>
+            </div>
+        </label>
+      </div>
 
       <div class="class">
         <label class="item item-input item-select">
           <div class="input-label">
-            Choose Booked Effort
+            Effort Type:
           </div>
-          <select>
-            <option ng-repeat="course in courses" value="{{course.id}}">{{course.name}}</option>
+          <select ng-model="efforttype">
+            <option ng-selected="{{effort.name == efforttype}}" ng-repeat="effort in efforts">{{effort.name}}</option>
           </select>
         </label>
       </div>
 
-      <ion-item class="item-icon-right">
-        Date
-        <label ng-model="Date" type="text" ng-click="showDatePicker()" class="icon ion-ios-calendar-outline"></label>
-      </ion-item>
-
-      <ion-item class="item-icon-right">
-        Start
-        <label type="text" ng-click="showStartTime()" class="icon ion-ios-clock-outline" ng-model="StartTime"></label>
-      </ion-item>
-
-      <ion-item class="item-icon-right">
-        End
-        <label type="text" ng-click="showEndTime()" class="icon ion-ios-clock-outline" ng-model="EndTime"></label>
-      </ion-item>
-    </ion-list>
-
-    <button class="button button-block button-positive" ng-click="save()">save</button>
   </ion-content>
 </ion-view>
 

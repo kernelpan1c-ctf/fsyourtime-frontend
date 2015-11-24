@@ -3,14 +3,24 @@
  */
 angular.module('app')
 
-  .controller('timeChangerDetailController', function ($scope, $cordovaDatePicker, $ionicPlatform)   {
+  .controller('timeChangerDetailController', function (EffortTypes, $stateParams, Efforts, $scope, $cordovaDatePicker, $ionicPlatform, effort) {
+
+    $scope.select = {};
+    $scope.userseffort = effort;
+    $scope.efforts = EffortTypes.query();
+    $scope.efforttype = $scope.userseffort.type.name;
+
+    $scope.save = function (hours, minutes) {
+      var amount = hours * 60 + minutes;
+      Efforts.update($stateParams.id, amount, $scope.efforttype);
+    };
 
     //Picker only testable in emulator/on device
-    $scope.showDatePicker = function() {
+    $scope.showDatePicker = function () {
 
-      minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      //minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
-        date: new Date(),
+        date: $scope.userseffort.performancedate,
         mode: 'date', // or 'time'
         minDate: minDate,
         allowOldDates: true,
@@ -21,74 +31,49 @@ angular.module('app')
         cancelButtonColor: '#000000'
       };
 
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(options).then(function(date){
-          alert(date);
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(options).then(function (date) {
+          $scope.date = date;
         });
       });
     };
+  })
 
-    $scope.showStartTime = function(){
-      var timeOptions = {
-        date: new Date(),
-        mode: 'time',
-        doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
-        cancelButtonLabel: 'CANCEL',
-        cancelButtonColor: '#000000'
-      };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
-          //alert(date);
-        });
-      });
-    };
+  .filter('time', function () {
 
-    $scope.showEndTime = function(){
-      var timeOptions = {
-        date: new Date(),
-        mode: 'time',
-        doneButtonLabel: 'DONE',
-        doneButtonColor: '#F2F3F4',
-        cancelButtonLabel: 'CANCEL',
-        cancelButtonColor: '#000000'
-      };
-      $ionicPlatform.ready(function() {
-        $cordovaDatePicker.show(timeOptions).then(function(date){
-          //alert(date);
-        });
-      });
-    };
-
-    // Dropdown
-    var coursearray = [
-      {
-        id: "1",
-        name: localStorage.getItem('Class')
+    var conversions = {
+      'ss': angular.identity,
+      'mm': function (value) {
+        return value * 60;
+      },
+      'hh': function (value) {
+        return value * 3600;
       }
-
-    ];
-    $scope.courses = coursearray;
-
-    $scope.load = function() {
-      var StartTime = localStorage.getItem('StartTime');
-      var EndTime = localStorage.getItem('EndTime');
-      var Date = localStorage.getItem('Date');
-      element(by.model('StartTime')).value=StartTime;
-      element(by.model('EndTime')).value=EndTime;
-      element(by.model('Date')).value=Date;
-
     };
 
-    $scope.save = function() {
-      var StartTime = element(by.model('StartTime')).value;
-      var EndTime = element(by.model('EndTime')).value;
-      var Class = element(by.model('Class')).value;
-      var Date = element(by.model('Date')).value;
-      localStorage.setItem('StartTime', $scope.StartTime);
-      localStorage.setItem('EndTime', $scope.EndTime);
-      localStorage.setItem('Class', $scope.Class);
-      localStorage.setItem('Date', $scope.Date);
+    var padding = function (value, length) {
+      var zeroes = length - ('' + (value)).length,
+        pad = '';
+      while (zeroes-- > 0) pad += '0';
+      return pad + value;
     };
 
+    return function (value, unit, format, isPadded) {
+      var totalSeconds = conversions[unit || 'ss'](value),
+        hh = Math.floor(totalSeconds / 3600),
+        mm = Math.floor((totalSeconds % 3600) / 60),
+        ss = totalSeconds % 60,
+        hours = (hh != 1) ? 's' : '',
+        mins = (mm != 1) ? 's' : '',
+        secs = (ss != 1) ? 's' : '';
+
+      format = format || 'hh:mm:ss';
+      isPadded = angular.isDefined(isPadded) ? isPadded : true;
+      hh = isPadded ? padding(hh, 2) : hh;
+      mm = isPadded ? padding(mm, 2) : mm;
+      ss = isPadded ? padding(ss, 2) : ss;
+
+      return format.replace(/hh/, hh).replace(/mm/, mm).replace(/ss/, ss)
+        .replace(/our\(s\)/, 'our' + hours).replace(/inute\(s\)/, 'inute' + mins).replace(/econd\(s\)/, 'econd' + secs);
+    }
   });

@@ -1,9 +1,7 @@
 <ion-view title="Privacy">
-  <ion-content class="padding">
+  <ion-content class="padding" overflow-scroll="true">
 
-    <label class="item item-stacked-label">
-
-	<textarea disabled rows="20" cols="50" style="width:100%;">
+	<textarea readonly rows="20" cols="50" style="width:100%;">
 
         1 Datenschutzerklärung V.1
 
@@ -143,14 +141,13 @@ info@frankfurt-school.de
 
 www.frankfurt-school.de
   </textarea>
-    </label>
   <div class="row">
+    <div class="col">
+      <button class="button button-block button-positive" ng-click="privacy()">Accept</button>
+    </div>
     <div class="col">
       <button class="button button-block button-assertive" ng-click="decline()">Decline</button>
     </div>
-    <div class="col">
-    <button class="button button-block button-positive" ng-click="privacy()">Accept</button>
-      </div>
   </div>
     <div class="row">
       <div class="col">Note: If you decline the privacy policy, the usage of the app is prohibited.</div>
