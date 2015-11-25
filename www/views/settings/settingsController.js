@@ -1,12 +1,12 @@
 angular.module('app')
 
-    .controller('settingsController', function ($scope, UserService, $location) {
+    .controller('settingsController', function ($scope, SettingsService, $location, $rootScope) {
 
         $scope.deleteAccount = function () {
           $rootScope.hide();
 
-          UserService.deleteAccount().success(function(){
-            UserService.logOut().success(function(){
+          SettingsService.deleteAccount(sessionStorage.mySessionId, sessionStorage.userid).success(function(){
+            SettingsService.logOut(sessionStorage.mySessionId).success(function(){
               $location.path('/login');
             }).error(function(status, data){
               $rootScope.show(status);
