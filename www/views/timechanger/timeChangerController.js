@@ -27,9 +27,9 @@ angular.module('app')
       });
       $scope.efforts.totalamount = totalamount;
       if (totalamount >0) {
-        $scope.hideBar = false;} else
+        $scope.hideBar = false;} else{
         $scope.noEfforts = true;
-      $scope.hideBar = true;
+      $scope.hideBar = true;}
     };
 
     $scope.goBack = function () {
