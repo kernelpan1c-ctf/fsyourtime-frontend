@@ -11,7 +11,10 @@ angular.module('app')
     $scope.efforttype = $scope.userseffort.type.name;
     $scope.save = function (hours, minutes) {
       var hours = hours * 60;
-      var amount = parseInt(hours) + parseInt(minutes);
+      if (!minutes) {
+        var amount= hours;
+      } else var amount = parseInt(hours) + parseInt(minutes);
+      //alert (amount);
       if (amount<=600){
       Efforts.update($stateParams.id, amount, $scope.efforttype._id, $scope.userseffort.performancedate).success(function(){
        $rootScope.notify("Effort successfully updated") ;
