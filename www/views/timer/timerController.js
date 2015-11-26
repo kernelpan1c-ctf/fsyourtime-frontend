@@ -163,9 +163,7 @@ angular.module('app')
         min= min % 60;
         var hrs = 0;
         var intDiffMin = parseInt(differenceMin);
-        alert(intDiffMin);
         var hrs = (intDiffMin - min) / 60;
-        alert(hrs);
       }
 
 
@@ -176,10 +174,6 @@ angular.module('app')
 
       var booking = hrs + ":" + min;
 
-      alert(differenceMin);
-      alert(min);
-      alert(hrs);
-      alert(booking);
       $scope.timetobook = booking;
 
       bookingtime = differenceMin;
