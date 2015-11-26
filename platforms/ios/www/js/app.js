@@ -40,7 +40,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       }, 1999);
     };
   });
-})
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
