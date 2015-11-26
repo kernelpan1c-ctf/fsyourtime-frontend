@@ -40,7 +40,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       }, 1999);
     };
   });
-})
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -143,7 +143,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/timer');
+  $urlRouterProvider.otherwise('/login');
 });
 
 var options = {};

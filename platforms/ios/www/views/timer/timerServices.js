@@ -8,7 +8,6 @@ angular.module('app')
       },
       stopwatch = null;
 
-
     var start = function () {
       stopwatch = $timeout(function () {
         data.seconds++;
@@ -32,13 +31,15 @@ angular.module('app')
     var reset = function () {
       stop();
       data.seconds = 0;
+      data.minutes = 0;
+      data.hours = 0 ;
     };
 
     return {
       data: data,
       start: start,
       stop: stop,
-      reset: reset,
+      reset: reset
     };
   });
 

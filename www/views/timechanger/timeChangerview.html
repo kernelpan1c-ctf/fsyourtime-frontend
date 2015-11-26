@@ -33,8 +33,8 @@
       <span>Type: {{effort.type.name}}</span>
       <span> <br>  Booking Date: {{effort.bookingDate | date:'dd.MM.yyyy'}}</span>
     </ion-list>
-    <br><div class="card">
-    <div class="item item-text-wrap">You do not have any efforts yet. Go to 'New Effort' if you want to create one.
+    <br><div class="card" ng-show="noEfforts">
+    <div class="item item-text-wrap" >You do not have any efforts yet. Go to 'New Effort' if you want to create one.
     </div>
   </div>
   </ion-content>
