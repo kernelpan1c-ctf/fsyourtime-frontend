@@ -1,6 +1,6 @@
 angular.module('app')
 
-  .controller('menuController', function ($scope, PrivacyService, $location) {
+  .controller('menuController', function ($rootScope, $scope, PrivacyService, $location) {
     $scope.logout = function () {
       PrivacyService.logOut(sessionStorage.mySessionId).success(function () {
         sessionStorage.clear();

@@ -3,15 +3,17 @@
  */
 angular.module('app')
 
-  .controller('timeChangerController', function ($timeout, $rootScope, $http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory) {
+  .controller('timeChangerController', function ($ionicPopup, $timeout, $rotScope, $http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory) {
 
     $scope.totalamount = 0;
-    $scope.hide = true;
     $scope.shouldShowDelete = false;
     $scope.listCanSwipe = true;
     $scope.select = {};
     $scope.modules = Modules.query();
-    $scope.noEfforts = (!$scope.efforts);
+    $scope.noEfforts = true;
+    $scope.hideBar = true;
+
+    var today = new Date();
 
     $scope.doRefresh = function () {
       $scope.effortquery($scope.select.module);
@@ -24,7 +26,10 @@ angular.module('app')
         totalamount = totalamount + effort.amount;
       });
       $scope.efforts.totalamount = totalamount;
-      $scope.hide = false;
+      if (totalamount >0) {
+        $scope.hideBar = false;} else{
+        $scope.noEfforts = true;
+      $scope.hideBar = true;}
     };
 
     $scope.goBack = function () {
@@ -39,16 +44,24 @@ angular.module('app')
       }
       $timeout(function () {
         $scope.getTotal($scope.efforts)
-      }, 350);
+      }, 500);
       //.success(function(){$scope.getTotal($scope.efforts)
     };
 
-    $scope.removeItem = function (effort) {
-      var idx = $scope.efforts.indexOf(effort);
-      var efft = $scope.efforts[idx];
-      $scope.efforts.splice(idx, 1);
-      Efforts.delete(efft._id);
-      $scope.getTotal($scope.efforts);
-    }
 
-  });
+    $scope.removeItem = function (effort) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Delete Effort',
+        template: 'Are you sure you want to delete this effort?'});
+      confirmPopup.then(function (res) {
+        if (res) {
+          var idx = $scope.efforts.indexOf(effort);
+          var efft = $scope.efforts[idx];
+          $scope.efforts.splice(idx, 1);
+          Efforts.delete(efft._id).success(function () {
+            $rotScope.notify('Effort successfully deleted')
+          });
+          $scope.getTotal($scope.efforts)
+        }
+      })
+    }});

@@ -1,17 +1,16 @@
 <ion-view title="Sign-In">
   <ion-content class="padding">
     <div class="list list-inset">
-      <label class="item item-input">
-        <input type="text" placeholder="Username" ng-model="user.username" required>
-      </label>
-      <label class="item item-input">
-        <input type="password" placeholder="Password" ng-model="user.password" required>
-      </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Username" ng-model="user.username" required>
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Password" ng-model="user.password" required>
+        </label>
+
+      <!--<ion-checkbox ng-model="user.credentials"> Save credentials?</ion-checkbox>-->
+      <button class="button button-block button-positive" ng-click="login(user.username, user.password)"> Login</button>
+      Forgot your username or password? Click <a href="https://campus.frankfurt-school.de/clicnetclm/sendUserData.do#position">here</a>
     </div>
-    <!--<ion-checkbox ng-model="user.credentials"> Save credentials?</ion-checkbox>-->
-   <button class="button button-block button-positive" ng-click="signIn(user.username, user.password)">
-      Login
-    </button>
-    Forgot your username or password? Click <a href="https://campus.frankfurt-school.de/clicnetclm/sendUserData.do#position">here</a>
   </ion-content>
 </ion-view>

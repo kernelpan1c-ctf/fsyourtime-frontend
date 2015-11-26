@@ -1,4 +1,3 @@
-Alle anzeigen, aber nur von <14 Tage bearbeiten
 <ion-view title="Change Efforts">
   <ion-content padding="true" class="has-header">
     <ion-refresher
@@ -6,36 +5,37 @@ Alle anzeigen, aber nur von <14 Tage bearbeiten
       on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list  show-delete="shouldShowDelete" can-swipe="listCanSwipe">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Module:
-          </div>
-          <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
-          </select>
-        </label>
-      </div>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Module:
+        </div>
+        <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortquery(select.module)">
+        </select>
+      </label>
     </ion-list>
-    <ion-item ng-hide="hide" class="label" ng-click="getTotal(efforts)">{{efforts.totalamount | time:'mm':'hhh mmm':false}} / 140h</ion-item>
-    <!--Farbe wechseln bei 100%?--><progress ng-hide="hide" max="8400" value="{{efforts.totalamount}}"></progress>
+    <!--Farbe wechseln bei 100%?--><progress max="6000" value="{{efforts.totalamount}}" ng-hide="hideBar"></progress>
     <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
       </div>
       <ion-item class="item item-remove-animate"  "ui-sref="app.timeChangerDetail({id:effort._id})"">
-        <ion-option-button class="button-info"
-                           ui-sref="app.timeChangerDetail({id:effort._id})">
-          Edit
-        </ion-option-button>
-        <ion-option-button class="button-info" ng-click="removeItem(effort)" ng-confirm-click="Do you really want to delete this effort?">
-          Delete
-        </ion-option-button>
+      <ion-option-button class="button-info"
+                         ui-sref="app.timeChangerDetail({id:effort._id})">
+        Edit
+      </ion-option-button>
+      <ion-option-button class="button-info" ng-click="removeItem(effort)" ng-hide="noDelete">
+        Delete
+      </ion-option-button>
                 <span>
-                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}}
-                </span>
-                <br>
-        <span>Type: {{effort.type.name}}</span>
-      </ion-item>
-    </ion-list>
+                Booked Time: {{effort.amount | time:'mm':'hhh mmm':false}} <br>
 
+                </span>
+      <span>Type: {{effort.type.name}}</span>
+      <span> <br>  Booking Date: {{effort.bookingDate | date:'dd.MM.yyyy'}}</span>
+    </ion-list>
+    <br><div class="card" ng-show="noEfforts">
+    <div class="item item-text-wrap" >You do not have any efforts yet. Go to 'New Effort' if you want to create one.
+    </div>
+  </div>
   </ion-content>
 </ion-view>
