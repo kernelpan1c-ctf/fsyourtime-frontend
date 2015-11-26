@@ -3,8 +3,8 @@
  */
 angular.module('app')
 
-  .controller('timeManagementController', function ($filter, $http, $window, $scope, $cordovaDatePicker,
-                                                    $ionicPlatform, Efforts, Modules, EffortTypes, $rootScope) {
+  .controller('timeManagementController', function ($rootScope, $filter, $http, $scope, $cordovaDatePicker,
+                                                    $ionicPlatform, Efforts, Modules, EffortTypes) {
 
     $scope.select = {};
     $scope.efforts = EffortTypes.query();
@@ -29,6 +29,7 @@ angular.module('app')
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
           $scope.date = date;
+          alert(date);
         });
       });
     };

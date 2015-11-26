@@ -1,9 +1,9 @@
 angular.module('app')
 
-  .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
+  .controller('loginController', function ( $rootScope, $scope, $location, UserService, $window) {
 
     $scope.login = function (username, password) {
-      //$rootScope.show("Authenticating..");
+      $rootScope.show("Authenticating..");
       UserService.signIn(username, password).success(function (data) {
         $window.sessionStorage.mySessionId = data.token;
         $window.sessionStorage.userid = data.userid;
@@ -14,7 +14,7 @@ angular.module('app')
           $rootScope.hide();
           $location.path('/privacy');
         } else {
-          //$rootScope.hide();
+          $rootScope.hide();
           $location.path('/app/timer');
         }
       }).error(function (status, data) {
