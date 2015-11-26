@@ -99,7 +99,9 @@ angular.module('app')
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function (status, data) {
-            $rootScope.notify(status);
+            //$rootScope.notify(status);
+            $scope.select.module = null;
+            $scope.select.effort = null;
           }).error(function (status, data) {
             console.log(status);
             console.log(data);
