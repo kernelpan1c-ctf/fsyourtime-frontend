@@ -6,19 +6,19 @@
 // 'starter.controllers' is found in controller_beispiele.js
 angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading, $window) {
+.run(function($rootScope, $ionicPlatform, $ionicLoading, $window) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+  });
     $rootScope.show = function (text) {
       $rootScope.loading = $ionicLoading.show({
         template: text ? text : 'Loading..',
@@ -39,8 +39,8 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         $rootScope.hide();
       }, 1999);
     };
-  });
-})
+  })
+
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
