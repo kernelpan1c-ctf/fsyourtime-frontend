@@ -3,8 +3,8 @@
  */
 angular.module('app')
 
-  .controller('timeManagementController', function ($filter, $http, $window, $scope, $cordovaDatePicker,
-                                                    $ionicPlatform, Efforts, Modules, EffortTypes, $rootScope) {
+  .controller('timeManagementController', function ($rootScope, $filter, $http, $window, $scope, $cordovaDatePicker,
+                                                    $ionicPlatform, Efforts, Modules, EffortTypes) {
 
     $scope.select = {};
     $scope.efforts = EffortTypes.query();
