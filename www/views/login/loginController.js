@@ -9,6 +9,8 @@ angular.module('app')
       }else{
       $rootScope.show("Authenticating..");
        UserService.signIn(username, password).success(function (data) {
+          $rootScope.hide();
+
           $window.sessionStorage.mySessionId = data.token;
           $window.sessionStorage.userid = data.userid;
           $window.sessionStorage.matricularnr = data.matricularnr;
