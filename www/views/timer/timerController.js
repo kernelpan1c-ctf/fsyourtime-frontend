@@ -116,23 +116,26 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
-      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
+      //var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
 
       //SCHARF SCHALTEN WENN TIMER RAUSGENOMMEN WERDEN SOLL!!!
-      //var amount = bookingtime;
+      var amount = bookingtime;
 
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
           console.log(status);
           console.log(data);
           $scope.myStopwatch.reset();
+          alert("Successfully submitted!");
         }).error(function (status, data) {
           console.log(status);
           console.log(data);
+          alert("An error occurred. Please submit again!");
         })
       };
 
+    
 
 
     var starttime = null;
@@ -186,7 +189,6 @@ angular.module('app')
 
       $scope.timetobook = booking;
       bookingtime = parseInt(differenceMin);
-      alert(bookingtime);
     };
 
     $scope.timerreset = function () {
