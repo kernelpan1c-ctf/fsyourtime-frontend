@@ -1,11 +1,9 @@
 angular.module('app')
 
-  .controller('loginController', function ($scope, $location, UserService, $rootScope, $window) {
+  .controller('loginController', function ( $rootScope, $scope, $location, UserService, $window) {
 
-    $scope.signIn = function (username, password) {
-
+    $scope.login = function (username, password) {
       $rootScope.show("Authenticating..");
-
       UserService.signIn(username, password).success(function (data) {
         $window.sessionStorage.mySessionId = data.token;
         $window.sessionStorage.userid = data.userid;
@@ -22,7 +20,6 @@ angular.module('app')
       }).error(function (status, data) {
         $rootScope.hide();
         $rootScope.notify(status);
-
         console.log(status);
         console.log(data);
       });

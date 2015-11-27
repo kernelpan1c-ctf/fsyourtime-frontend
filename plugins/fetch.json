@@ -41,8 +41,9 @@
     },
     "cordova-plugin-datepicker": {
         "source": {
-            "type": "registry",
-            "id": "cordova-plugin-datepicker"
+            "type": "git",
+            "url": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker.git",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

@@ -3,8 +3,8 @@
  */
 angular.module('app')
 
-  .controller('timeManagementController', function ($filter, $http, $window, $scope, $cordovaDatePicker,
-                                                    $ionicPlatform, Efforts, Modules, EffortTypes, $rootScope) {
+  .controller('timeManagementController', function ($rootScope, $filter, $http, $scope, $cordovaDatePicker,
+                                                    $ionicPlatform, Efforts, Modules, EffortTypes) {
 
     $scope.select = {};
     $scope.efforts = EffortTypes.query();
@@ -94,18 +94,19 @@ angular.module('app')
 
     $scope.save = function () {
       var amount = getDuration($scope.startTime, $scope.endTime);
-      var today = transformDate(new Date());
+      if (amount <= 0){ $rootScope.notify('Please check submitted data')} else{
+      var date = $scope.date;
 
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
-          $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function (status, data) {
-            $rootScope.notify(status);
+          $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, date).success(function (status, data) {
+            $rootScope.notify('Effort succesfully submitted');
           }).error(function (status, data) {
             console.log(status);
             console.log(data);
           });
       } else {
         $rootScope.notify('Maximum 10h per booking');
-      }
-    };
+      }}
+    }
   });
