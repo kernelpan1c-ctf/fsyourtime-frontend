@@ -14,7 +14,7 @@
       </label>
     </ion-list>
     <!--Farbe wechseln bei 100%?--><progress max="6000" value="{{efforts.totalamount}}" ng-hide="hideBar"></progress>
-    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '+' : true">
+    <ion-list type="card" ng-hide="noEfforts"  ng-repeat="effort in efforts | orderBy: '-' : true">
       <div class="item item-divider">
         {{(effort.performanceDate) | date:'dd.MM.yyyy'}}
       </div>

@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('timeChangerController', function ($ionicPopup, $timeout, $rotScope, $http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory) {
+  .controller('timeChangerController', function ($ionicPopup, $timeout, $rootScope, $http, Modules, Efforts, $window, $scope, EffortService, $ionicHistory) {
 
     $scope.totalamount = 0;
     $scope.shouldShowDelete = false;
@@ -59,7 +59,7 @@ angular.module('app')
           var efft = $scope.efforts[idx];
           $scope.efforts.splice(idx, 1);
           Efforts.delete(efft._id).success(function () {
-            $rotScope.notify('Effort successfully deleted')
+            $rootScope.notify('Effort successfully deleted')
           });
           $scope.getTotal($scope.efforts)
         }
