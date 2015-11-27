@@ -116,11 +116,11 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
-      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
+      //var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
 
       //SCHARF SCHALTEN WENN TIMER RAUSGENOMMEN WERDEN SOLL!!!
-      //var amount = bookingtime;
+      var amount = bookingtime;
 
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
@@ -186,7 +186,6 @@ angular.module('app')
 
       $scope.timetobook = booking;
       bookingtime = parseInt(differenceMin);
-      alert(bookingtime);
     };
 
     $scope.timerreset = function () {
