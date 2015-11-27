@@ -3,7 +3,7 @@ angular.module('app')
   .controller('loginController', function ( $rootScope, $scope, $location, UserService, $window) {
 
     $scope.login = function (username, password) {
-      //$rootScope.show("Authenticating..");
+
       if(username == undefined || password  == undefined){
         alert("Please check your Username/Password");
       }else{
