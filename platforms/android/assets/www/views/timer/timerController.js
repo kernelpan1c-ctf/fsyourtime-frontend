@@ -116,35 +116,48 @@ angular.module('app')
 
     //Submit Data
     $scope.submit = function () {
-      var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
+      //var amount = stepwatch.data.hours * 60 + stepwatch.data.minutes;
 
 
       //SCHARF SCHALTEN WENN TIMER RAUSGENOMMEN WERDEN SOLL!!!
-      //var amount = bookingtime;
+      var amount = bookingtime;
 
       Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
           console.log(status);
           console.log(data);
-          $scope.myStopwatch.reset();
+          $scope.timerreset();
+          alert("Successfully submitted!");
         }).error(function (status, data) {
           console.log(status);
           console.log(data);
+          alert("An error occurred. Please submit again!");
         })
       };
 
 
 
+
     var starttime = null;
     var endtime = null;
+    var booking = null;
 
     $scope.timerstart = function () {
-      $scope.myStopwatch.start();
-      $scope.timerRunning = true;
-      $scope.timeend = null;
-      endtime = null;
-      starttime = new Date().getTime();
-      $scope.timestart = starttime;
+      if (starttime == null) {
+        $scope.myStopwatch.start();
+        $scope.timerRunning = true;
+        $scope.timeend = null;
+        endtime = null;
+        starttime = new Date().getTime();
+        $scope.timestart = starttime;
+      }
+      else{
+        $scope.myStopwatch.start();
+        $scope.timerRunning = true;
+        $scope.timeend = null;
+        $scope.timetobook = null;
+        endtime = null;
+      }
     };
     $scope.timerstop = function() {
       $scope.myStopwatch.stop();
@@ -172,10 +185,20 @@ angular.module('app')
         min = "0" + min;
       }
 
-      var booking = hrs + ":" + min;
-      $scope.timetobook = booking;
+      booking = hrs + ":" + min;
 
-      bookingtime = differenceMin;
+      $scope.timetobook = booking;
+      bookingtime = parseInt(differenceMin);
+    };
+
+    $scope.timerreset = function () {
+      $scope.myStopwatch.reset();
+      endtime = null;
+      starttime = null;
+      booking = null;
+      $scope.timeend = null;
+      $scope.timestart = null;
+      $scope.timetobook = null;
     };
   });
 

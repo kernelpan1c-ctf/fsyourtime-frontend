@@ -126,7 +126,7 @@ angular.module('app')
         $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, today).success(function(status, data){
           console.log(status);
           console.log(data);
-          $scope.myStopwatch.reset();
+          $scope.timerreset();
           alert("Successfully submitted!");
         }).error(function (status, data) {
           console.log(status);
@@ -135,7 +135,7 @@ angular.module('app')
         })
       };
 
-    
+
 
 
     var starttime = null;

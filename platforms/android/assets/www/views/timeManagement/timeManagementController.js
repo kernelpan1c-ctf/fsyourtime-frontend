@@ -11,7 +11,7 @@ angular.module('app')
     $scope.modules = Modules.query();
 
     //Picker only testable in emulator/on device
-    $scope.showDatePicker = function () {
+    $scope.showstartDatePicker = function () {
 
       // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
       var options = {
@@ -28,7 +28,29 @@ angular.module('app')
 
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
-          $scope.date = date;
+          $scope.startDate = date;
+        });
+      });
+    };
+
+    $scope.showendDatePicker = function () {
+
+      // minDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+      var options = {
+        date: new Date(),
+        mode: 'date', // or 'time'
+        allowOldDates: true,
+        allowFutureDates: false,
+        minDate: new Date(+new Date - 12096e5),
+        doneButtonLabel: 'Select',
+        doneButtonColor: '#000000',
+        cancelButtonLabel: 'Cancel',
+        cancelButtonColor: '#000000'
+      };
+
+      $ionicPlatform.ready(function () {
+        $cordovaDatePicker.show(options).then(function (date) {
+          $scope.endDate = date;
         });
       });
     };
@@ -68,12 +90,19 @@ angular.module('app')
     };
 
 
-    function getDuration(start, end) {
-      start.getTime();
-      end.getTime();
-      var Difference = end - start;
-      //Minutes
-      return Math.floor(Difference / (1000 * 60));
+    function getDuration(starttime, startdate, endtime, enddate) {
+      eh= endtime.getHours();
+      em=endtime.getMinutes();
+      enddate.setHours(eh);
+      enddate.setMinutes(em);
+      sh=starttime.getHours();
+      sm=starttime.getMinutes();
+      startdate.setHours(sh);
+      startdate.setMinutes(sm);
+      var timeDiff = (enddate.getTime() - startdate.getTime());
+      var diffMins = Math.ceil(timeDiff / (1000 * 60));
+      //alert(diffMins);
+      return (diffMins);
     }
 
     function transformDate(date) {
@@ -93,10 +122,9 @@ angular.module('app')
     }
 
     $scope.save = function () {
-      var amount = getDuration($scope.startTime, $scope.endTime);
+      var amount = getDuration($scope.startTime, $scope.startDate, $scope.endTime, $scope.endDate);
       if (amount <= 0){ $rootScope.notify('Please check submitted data')} else{
-      var date = $scope.date;
-
+      var date = $scope.startDate;
       if (amount <= 600) {
         Efforts.save(sessionStorage.mySessionId, sessionStorage.userid, amount,
           $scope.select.module, sessionStorage.matricularnr, $scope.select.effort, date).success(function (status, data) {

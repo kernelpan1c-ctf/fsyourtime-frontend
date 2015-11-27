@@ -11,7 +11,6 @@ angular.module('app')
     $scope.efforttype = $scope.userseffort.type.name;
     $scope.save = function (hours, minutes) {
       var hours = hours * 60;
-
       if (!minutes) {
         var amount= hours;
       } else if (!hours){ var amount = minutes} else {var amount = parseInt(hours) + parseInt(minutes)}

@@ -18,7 +18,6 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-  });
     $rootScope.show = function (text) {
       $rootScope.loading = $ionicLoading.show({
         template: text ? text : 'Loading..',
@@ -41,6 +40,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
     };
   })
 
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

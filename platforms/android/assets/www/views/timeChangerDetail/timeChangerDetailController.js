@@ -13,14 +13,15 @@ angular.module('app')
       var hours = hours * 60;
       if (!minutes) {
         var amount= hours;
-      } else var amount = parseInt(hours) + parseInt(minutes);
-      //alert (amount);
-      if (amount<=600){
-      Efforts.update($stateParams.id, amount, $scope.efforttype._id, $scope.userseffort.performancedate).success(function(){
-       $rootScope.notify("Effort successfully updated") ;
-        $ionicHistory.goBack();
-      })}//else $rootScope.notify("Maximum 10h allowed")
-    };
+      } else if (!hours){ var amount = minutes} else {var amount = parseInt(hours) + parseInt(minutes)}
+      if (minutes > 59) $rootScope.notify("Please check submitted minutes"); else {
+        if (amount > 600){$rootScope.notify("Max 10h allowed")}else{
+          Efforts.update($stateParams.id, amount, $scope.efforttype._id, $scope.userseffort.performancedate).success(function () {
+            $rootScope.notify("Effort successfully updated");
+            $ionicHistory.goBack();
+          })}
+        //else $rootScope.notify("Maximum 10h allowed")
+      }};
 
     //Picker only testable in emulator/on device
     $scope.showDatePicker = function () {
