@@ -137,14 +137,24 @@ angular.module('app')
 
     var starttime = null;
     var endtime = null;
+    var booking = null;
 
     $scope.timerstart = function () {
-      $scope.myStopwatch.start();
-      $scope.timerRunning = true;
-      $scope.timeend = null;
-      endtime = null;
-      starttime = new Date().getTime();
-      $scope.timestart = starttime;
+      if (starttime == null) {
+        $scope.myStopwatch.start();
+        $scope.timerRunning = true;
+        $scope.timeend = null;
+        endtime = null;
+        starttime = new Date().getTime();
+        $scope.timestart = starttime;
+      }
+      else{
+        $scope.myStopwatch.start();
+        $scope.timerRunning = true;
+        $scope.timeend = null;
+        $scope.timetobook = null;
+        endtime = null;
+      }
     };
     $scope.timerstop = function() {
       $scope.myStopwatch.stop();
@@ -172,10 +182,21 @@ angular.module('app')
         min = "0" + min;
       }
 
-      var booking = hrs + ":" + min;
-      $scope.timetobook = booking;
+      booking = hrs + ":" + min;
 
-      bookingtime = differenceMin;
+      $scope.timetobook = booking;
+      bookingtime = parseInt(differenceMin);
+      alert(bookingtime);
+    };
+
+    $scope.timerreset = function () {
+      $scope.myStopwatch.reset();
+      endtime = null;
+      starttime = null;
+      booking = null;
+      $scope.timeend = null;
+      $scope.timestart = null;
+      $scope.timetobook = null;
     };
   });
 
