@@ -28,6 +28,7 @@ angular.module('app')
       stopwatch = null;
     };
 
+    
     var reset = function () {
       stop();
       data.seconds = 0;
