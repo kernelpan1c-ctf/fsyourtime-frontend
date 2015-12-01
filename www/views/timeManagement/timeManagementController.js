@@ -29,6 +29,7 @@ angular.module('app')
       $ionicPlatform.ready(function () {
         $cordovaDatePicker.show(options).then(function (date) {
           $scope.startDate = date;
+          //$scope.endDate = date;
         });
       });
     };

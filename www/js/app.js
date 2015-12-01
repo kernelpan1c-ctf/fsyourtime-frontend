@@ -140,6 +140,15 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
+    .state('app.compareEffort', {
+      url: '/compareEffort',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/compareEffort/compareEffortView.html',
+          controller: 'comparedEffortController'
+        }
+      }
+    })
 
   ;
   // if none of the above states are matched, use this as the fallback
