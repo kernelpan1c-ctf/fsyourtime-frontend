@@ -1,0 +1,50 @@
+<ion-view title="Compare Effort">
+  <ion-content padding="true" class="has-header">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Module:
+        </div>
+        <select ng-model="select.module" ng-options="module._id as module.name for module in modules" ng-change="effortcomparison(select.module)">
+        </select>
+      </label>
+    </ion-list>
+    <io-list>
+      <div ng-hide="noEfforts" class="item item-divider">
+        Your effort: {{comparisonarray.me[0].sum}}
+      </div>
+      <br>
+      <div ng-hide="noEfforts" class="item item-divider">
+        Average effort: {{comparisonarray.average[0].average}}
+      </div>
+      <br>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (1) Top effort: {{comparisonarray.topthree[0].sum}}
+      </div>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (2) Top effort: {{comparisonarray.topthree[1].sum}}
+      </div>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (3) Top effort: {{comparisonarray.topthree[2].sum}}
+      </div>
+      <br>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (1) Bottom effort: {{comparisonarray.bottomthree[0].sum}}
+      </div>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (2) Bottom effort: {{comparisonarray.bottomthree[1].sum}}
+      </div>
+      <div ng-hide="noEfforts" class="item item-divider">
+        (3) Bottom effort: {{comparisonarray.bottomthree[2].sum}}
+      </div>
+    </io-list>
+    <br><div class="card" ng-show="noEfforts">
+    <div class="item item-text-wrap" >You do not have any efforts yet. Go to 'New Effort' if you want to create one.
+    </div>
+  </div>
+  </ion-content>
+</ion-view>
