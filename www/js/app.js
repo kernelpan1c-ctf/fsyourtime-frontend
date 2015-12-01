@@ -145,7 +145,7 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'views/compareEffort/compareEffortView.html',
-          controller: 'comparedEffortController'
+          controller: 'compareEffortController'
         }
       }
     })

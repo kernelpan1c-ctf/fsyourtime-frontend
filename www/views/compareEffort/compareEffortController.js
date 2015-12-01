@@ -3,7 +3,7 @@
  */
 angular.module('app')
 
-  .controller('comparedEffortController', function ($ionicPopup, $timeout, $rootScope, $http, Modules, Efforts, $window, $scope, compareServices, $ionicHistory) {
+  .controller('compareEffortController', function ($ionicPopup, $timeout, $rootScope, $http, Modules, Efforts, $window, $scope, compareServices, $ionicHistory) {
 
     $scope.totalamount = 0;
     $scope.topthreeamount = 0;
@@ -13,6 +13,11 @@ angular.module('app')
     $scope.modules = Modules.query();
     $scope.noEfforts = true;
     $scope.hideBar = true;
+
+    $scope.doRefresh = function () {
+      $scope.effortcomparison($scope.select.module);
+      $scope.$broadcast('scroll.refreshComplete');
+    };
 
     $scope.goBack = function () {
       $ionicHistory.goBack();
