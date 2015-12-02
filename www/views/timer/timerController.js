@@ -135,7 +135,7 @@ angular.module('app')
         })
       };
 
-    
+
 
 
     var starttime = null;
@@ -192,6 +192,7 @@ angular.module('app')
     };
 
     $scope.timerreset = function () {
+      $scope.timerstop();
       $scope.myStopwatch.reset();
       endtime = null;
       starttime = null;
