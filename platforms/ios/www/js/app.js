@@ -114,6 +114,15 @@ angular.module('app', ['ionic', 'ngRoute', 'ngResource', 'ngCordova'])
         }
       }
     })
+    .state('app.compare', {
+      url: '/compare',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/compareEffort/compareEffortView.html',
+          controller: 'compareEffortController'
+        }
+      }
+    })
     .state('app.help', {
       url: '/help',
       views: {
